@@ -62,10 +62,8 @@ public class All {
     @Produces(MediaType.APPLICATION_JSON)
     public String createPerson(String content)
     {
-
         UserHelper uh = gson.fromJson(content, UserHelper.class);
         IUser newUser = uf.addUser(uh.getUsername(), uh.getPassword());
-        System.out.println("virk forhelvede" + newUser.getUserName());
         return gson.toJson(newUser.getUserName());
     }
 

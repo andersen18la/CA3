@@ -17,19 +17,19 @@ import security.IUser;
 import security.PasswordStorage;
 
 public class UserFacade implements IUserFacade {
-
+    
     EntityManagerFactory emf;
-
+    
     public UserFacade(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
-
+    
     private EntityManager getEntityManager()
     {
         return emf.createEntityManager();
     }
-
+    
     public List<IUser> getAllUsers()
     {
         EntityManager em = getEntityManager();
@@ -47,7 +47,7 @@ public class UserFacade implements IUserFacade {
             em.close();
         }
     }
-
+    
     @Override
     public IUser getUserByUserId(String id)
     {
@@ -60,22 +60,21 @@ public class UserFacade implements IUserFacade {
             em.close();
         }
     }
-
+    
     public IUser addUser(String username, String password)
     {
         EntityManager em = getEntityManager();
         try
         {
             User user = new User(username, password);
-            Role userRole = new Role("User");
-            user.addRole(userRole);
+            Role role = em.find(Role.class, "User");
+            user.addRole(role);
             em.getTransaction().begin();
             em.persist(user);
-            em.getTransaction().commit();
+            em.getTransaction().commit();            
             return user;
         } catch (PasswordStorage.CannotPerformOperationException e)
         {
-            System.out.println("røv");
             return null;
         } finally
         {
@@ -100,5 +99,5 @@ public class UserFacade implements IUserFacade {
             throw new NotAuthorizedException("Invalid username or password", Response.Status.FORBIDDEN);
         }
     }
-
+    
 }

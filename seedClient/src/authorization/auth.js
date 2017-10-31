@@ -81,9 +81,44 @@ class AuthenticationHandler {
     }
   }
   //call on backend code
-CreateUser = (user,pas,cb)=> {
+  createUser = (username, password, cb) => {
+    this._errorMessage = "";
+    if (this._token != null) {
+      this._userWasLoggenIn(cb);
+    }
 
-}
+    var user = { username, password };
+
+    var options = {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }
+    let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
+    fetch(URL + "api/register", options)
+      .then(res => {
+        resFromFirstPromise = res;
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        errorChecker(resFromFirstPromise, data);
+        this.setToken(data.token);
+        if (this._token != null) {
+          this._userWasLoggenIn(cb);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        if (cb) {
+          cb({ errorMessage: fetchHelper.addJustErrorMessage(err) });
+        }
+      })
+    return;
+  }
+
   login = (username, password, cb) => {
     this._errorMessage = "";
     if (this._token != null) {
