@@ -8,14 +8,18 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import facades.UserFacade;
+import helpers.UserHelper;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import security.IUser;
 
 /**
  * REST Web Service
@@ -50,6 +54,19 @@ public class All {
     public String getText()
     {
         return " {\"message\" : \"result for all\"}";
+    }
+
+    @POST
+    @Path("add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String createPerson(String content)
+    {
+
+        UserHelper uh = gson.fromJson(content, UserHelper.class);
+        IUser newUser = uf.addUser(uh.getUsername(), uh.getPassword());
+        System.out.println("virk forhelvede" + newUser.getUserName());
+        return gson.toJson(newUser.getUserName());
     }
 
 }
