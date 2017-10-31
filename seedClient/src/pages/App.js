@@ -8,6 +8,7 @@ import AdminPage from "./AdminPage";
 import TopMenu from "./TopMenu";
 import RandomNumber from "./RandomNumber";
 import AllUsers from "./AllUsers";
+import Register from "./Register";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/admin" component={AdminPage} />
         <Route path="/random" component={RandomNumber} />
         <Route path="/users" component={AllUsers} />
+        <Route path="/register" component={Register}/>
       </Switch>
     </div>
   )

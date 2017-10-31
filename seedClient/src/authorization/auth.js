@@ -80,7 +80,10 @@ class AuthenticationHandler {
       return;
     }
   }
+  //call on backend code
+CreateUser = (user,pas,cb)=> {
 
+}
   login = (username, password, cb) => {
     this._errorMessage = "";
     if (this._token != null) {

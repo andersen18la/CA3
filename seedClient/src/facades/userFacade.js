@@ -7,6 +7,28 @@ class UserStore {
     this._errorMessage = "";
   }
 
+  addUser(user, cb){
+    this._errorMessage = "";
+    this._messageFromServer = "";
+    let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
+    const options = fetchHelper.makeOptions("Post", false, user);
+    fetch(URL + "api/demoall/add", options)
+      .then((res) => {
+        resFromFirstPromise = res;
+        return res.json();
+      }).then((data) => {
+        errorChecker(resFromFirstPromise, data);
+        if (cb) {
+          cb(null, data.message)
+        }
+      }).catch(err => {
+        console.log(JSON.stringify(err))
+        if (cb) {
+          cb({ err: fetchHelper.addJustErrorMessage(err) })
+        }
+      })
+  }
+
   getData = (cb) => {
     this._errorMessage = "";
     this._messageFromServer = "";
