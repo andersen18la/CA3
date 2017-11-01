@@ -65,12 +65,11 @@ public class All {
     @Produces(MediaType.APPLICATION_JSON)
     public String Edit(String names) throws PasswordStorage.CannotPerformOperationException {
         JsonObject json = new JsonParser().parse(names).getAsJsonObject();
-//        String olduser= json.get("oldUser").getAsString();
-//        String newuser= json.get("newUser").getAsString();
+        String targetUser = json.get("user").getAsString();
+        String role = json.get("role").getAsString();
         
-        User newusertest = new User("hallur","123");
         
-//        uf.Edit(n, "mo");
+        uf.edit(role, targetUser);
         
         return new Gson().toJson("wqpoeqowejopq");
 
