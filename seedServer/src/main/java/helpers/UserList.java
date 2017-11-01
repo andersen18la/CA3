@@ -6,25 +6,30 @@ import security.IUser;
 
 public class UserList {
 
-    private List<String> names;
+    private List<UserHelper> users;
 
     public UserList()
     {
-        this.names = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
 
     public UserList(List<IUser> users)
     {
-        this.names = new ArrayList<>();
+        this.users = new ArrayList<>();
         for (IUser user : users)
         {
-            this.names.add(user.getUserName());
+            this.users.add(new UserHelper(user.getUserName(), user.getRolesAsStrings()));
         }
     }
 
-    public List<String> getUsers()
+    public List<UserHelper> getUsers()
     {
-        return names;
+        return users;
+    }
+
+    public void setUsers(List<UserHelper> users)
+    {
+        this.users = users;
     }
 
 }

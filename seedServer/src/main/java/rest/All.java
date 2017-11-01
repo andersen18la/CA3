@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import facades.UserFacade;
 import helpers.UserHelper;
+import helpers.UserList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -54,6 +56,16 @@ public class All {
     public String getText()
     {
         return " {\"message\" : \"result for all\"}";
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("users")
+    public String getAllUsers()
+    {
+        List<IUser> ul = uf.getAllUsers();
+        UserList myUl = new UserList(ul);
+        return gson.toJson(myUl);
     }
 
 }

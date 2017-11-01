@@ -1,15 +1,16 @@
-
 package helpers;
 
-public class UserHelper {
-    
-    String username;
-    String password;
+import java.util.List;
 
-    public UserHelper(String username, String password)
+public class UserHelper {
+
+    private String username;
+    private List<String> roles;
+
+    public UserHelper(String username, List<String> roles)
     {
         this.username = username;
-        this.password = password;
+        this.roles = roles;
     }
 
     public String getUsername()
@@ -22,15 +23,14 @@ public class UserHelper {
         this.username = username;
     }
 
-    public String getPassword()
+    public List<String> getRoles()
     {
-        return password;
+        return roles;
     }
 
-    public void setPassword(String password)
+    public void setRoles(List<String> roles)
     {
-        this.password = password;
+        this.roles = roles;
     }
-    
-    
+
 }

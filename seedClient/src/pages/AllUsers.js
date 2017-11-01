@@ -21,19 +21,38 @@ class AllUsers extends Component {
         });
     }
 
+
     genList = () => {
-        return this.state.data.map(name => <li key={name}>{name}</li>)
+        let users = this.state.data;
+        console.log("bobbyffors:::" + users.map(user => user.username + user.roles.map(role => role).join('!')).join(','));
+        return users.map(user => <li key={user.username}>{user.username + ", roles: " + user.roles.map(role => role).join(', ')}</li>);
     }
+
+    genUserList = () => {
+        let users = this.state.data;
+
+        return (
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map(user => <tr key={user.username}><td>{user.username}</td><td>{user.roles.map(role => role).join(", ")}</td></tr>)}
+                </tbody>
+            </table>
+        )
+    }
+
 
     render() {
         console.log(this.state.data);
         return (
             <div>
-                <h2>Admins</h2>
-                <p>This message is fetched from the server if you were properly logged in</p>
-                <div className="msgFromServer">
-                    {this.genList()}
-                </div>
+                <h2>Users:</h2>
+                {this.genUserList()}
                 {this.state.err && (
                     <div className="alert alert-danger errmsg-left" role="alert">
                         {this.state.err}
