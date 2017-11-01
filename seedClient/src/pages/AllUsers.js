@@ -20,7 +20,15 @@ class AllUsers extends Component {
             this.setState({ err: "", data });
         });
     }
+    onclickHandler = (e) => {
+        adminData.deleteUser(e.target.value);
+        console.log(e.target.value);
+        document.getElementById(e.target.value).remove();
+    }
 
+    onDeleteBook = () => {
+        this.forceUpdate();
+    }
 
     genList = () => {
         let users = this.state.data;
@@ -40,7 +48,8 @@ class AllUsers extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => <tr key={user.username}><td>{user.username}</td><td>{user.roles.map(role => role).join(", ")}</td></tr>)}
+                    {users.map(user => <tr id={user.username} key={user.username}><td>{user.username}</td><td>{user.roles.map(role => role).join(", ")}</td>
+                        <td><button value={user.username} onClick={this.onclickHandler}>delete this user</button></td></tr>)}
                 </tbody>
             </table>
         )

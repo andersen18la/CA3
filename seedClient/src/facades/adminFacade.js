@@ -29,6 +29,40 @@ class AdminStore {
       })
   }
 
+  deleteUser = (userName, cb) => {
+    this._errorMessage = "";
+    this._messageFromServer = "";
+    let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
+    let headers = {
+      "Content-type": "Application/json"
+    };
+    headers.Authorization = `Bearer ${sessionStorage.token}`;
+    var options = {
+      method: "DELETE",
+      body: JSON.stringify({ userName: userName }),
+      headers: headers
+
+    }
+
+
+
+    fetch(URL + "api/demoadmin/delete", options)
+      .then((res) => {
+        resFromFirstPromise = res;
+        return res.json();
+      }).then((data) => {
+        errorChecker(resFromFirstPromise, data);
+        if (cb) {
+          cb();
+        }
+      }).catch(err => {
+        if (cb) {
+          cb({ err: fetchHelper.addJustErrorMessage(err) })
+        }
+      })
+  }
+
+
   getUsers = cb => {
     this._errorMessage = "";
     this._messageFromServer = "";
