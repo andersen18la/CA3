@@ -30,14 +30,16 @@ public class Admin {
     private UserFacade uf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public Admin() {
+    public Admin()
+    {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         uf = new UserFacade(emf);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getSomething() {
+    public String getSomething()
+    {
         String now = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss").format(new Date());
         return "{\"message\" : \"Hello Admin from server (call accesible by only authenticated ADMINS)\",\n" + "\"serverTime\": \"" + now + "\"}";
     }
@@ -45,7 +47,8 @@ public class Admin {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("users")
-    public Response getAllUsers() {
+    public Response getAllUsers()
+    {
         List<IUser> ul = uf.getAllUsers();
         UserList myUl = new UserList(ul);
         return Response.ok(gson.toJson(myUl)).build();
@@ -55,14 +58,15 @@ public class Admin {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("delete")
-    public String delete(String name) {
+    public String delete(String name)
+    {
         JsonObject json = new JsonParser().parse(name).getAsJsonObject();
         String anotherName = json.get("userName").getAsString();
 
         System.out.println(anotherName);
 
         uf.deleteUser(anotherName);
-
+        //ville nok være smart at sender noget tilbage, som i det mindste er forståeligt -j
         return new Gson().toJson("qwoijejqwjoie");
     }
 
@@ -70,13 +74,14 @@ public class Admin {
     @Path("edit")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String Edit(String names) throws PasswordStorage.CannotPerformOperationException {
+    public String Edit(String names) throws PasswordStorage.CannotPerformOperationException
+    {
         JsonObject json = new JsonParser().parse(names).getAsJsonObject();
         String targetUser = json.get("user").getAsString();
         String role = json.get("role").getAsString();
 
         uf.edit(role, targetUser);
-
+        //ville nok være smart at sender noget tilbage, som i det mindste er forståeligt -j
         return new Gson().toJson("wqpoeqowejopq");
 
     }

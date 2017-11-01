@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
 
-export default class About extends Component {
+export default class Places extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [], err: "" }
@@ -32,7 +32,6 @@ export default class About extends Component {
             <th>STREET</th>
             <th>ZIP</th>
             <th>DESCRIPTION</th>
-            
             <th>IMAGE-URI</th>
             <th>RATING</th>
 
@@ -45,11 +44,11 @@ export default class About extends Component {
                 <td>{place.id}</td>
                 <td>{place.city}</td>
                 <td>{place.street}</td>
-                
-                
+
+
                 <td>{place.zip}</td>
                 <td>{place.description}</td>
-                <td><img src={place.imageUri} alt={place.imageUri}/></td>
+                <td><img src={place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
                 <td>{place.rating}</td>
               </tr>
             )

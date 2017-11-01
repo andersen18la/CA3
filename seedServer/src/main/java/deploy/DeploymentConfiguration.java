@@ -1,7 +1,9 @@
 package deploy;
 
+import entity.Place;
 import entity.Role;
 import entity.User;
+import facades.PlaceFacade;
 import facades.UserFacade;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +13,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -55,7 +58,8 @@ public class DeploymentConfiguration implements ServletContextListener {
         boolean makeTestUser = context.getInitParameter("makeTestUser").toLowerCase().equals("true");
         if (makeTestUser)
         {
-            EntityManager em = Persistence.createEntityManagerFactory("pu_development").createEntityManager();
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+            EntityManager em = emf.createEntityManager();
             try
             {
                 System.out.println("Creating TEST Users");

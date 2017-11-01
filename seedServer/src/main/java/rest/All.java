@@ -58,37 +58,4 @@ public class All {
     public String getText() {
         return " {\"message\" : \"result for all\"}";
     }
-
-    @PUT
-    @Path("edit")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String Edit(String names) throws PasswordStorage.CannotPerformOperationException {
-        JsonObject json = new JsonParser().parse(names).getAsJsonObject();
-        String targetUser = json.get("user").getAsString();
-        String role = json.get("role").getAsString();
-        
-        
-        uf.edit(role, targetUser);
-        
-        return new Gson().toJson("wqpoeqowejopq");
-
-    }
-    
-        @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("delete")
-    public String delete(String name){
-        JsonObject json = new JsonParser().parse(name).getAsJsonObject();
-        String anotherName = json.get("userName").getAsString();
-        
-        System.out.println(anotherName);
-        
-        uf.deleteUser(anotherName);
-        
-        return new Gson().toJson("qwoijejqwjoie");
-    }    
-
-
 }

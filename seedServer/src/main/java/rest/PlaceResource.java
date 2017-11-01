@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import entity.Place;
 import facades.PlaceFacade;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Produces;
