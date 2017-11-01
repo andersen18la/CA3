@@ -14,6 +14,7 @@ import facades.UserFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
@@ -74,5 +75,21 @@ public class All {
         return new Gson().toJson("wqpoeqowejopq");
 
     }
+    
+        @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("delete")
+    public String delete(String name){
+        JsonObject json = new JsonParser().parse(name).getAsJsonObject();
+        String anotherName = json.get("userName").getAsString();
+        
+        System.out.println(anotherName);
+        
+        uf.deleteUser(anotherName);
+        
+        return new Gson().toJson("qwoijejqwjoie");
+    }    
+
 
 }

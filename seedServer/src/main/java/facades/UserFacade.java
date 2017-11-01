@@ -89,11 +89,29 @@ public class UserFacade implements IUserFacade {
         }
         return null;
     }
+    
+    public User deleteUser(String name)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            em.getTransaction().begin();
+            User p = em.find(User.class, name);
+            em.remove(p);
+            em.getTransaction().commit();
+            return p;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         UserFacade uf = new UserFacade(emf);
-        uf.edit("User", "mo");
+        uf.edit("Admin", "hallur");
     }
 
     /*
