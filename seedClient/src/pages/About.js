@@ -30,8 +30,9 @@ export default class About extends Component {
             <th>ID</th>
             <th>CITY</th>
             <th>STREET</th>
-            <th>DESCRIPTION</th>
             <th>ZIP</th>
+            <th>DESCRIPTION</th>
+            
             <th>IMAGE-URI</th>
             <th>RATING</th>
 
@@ -42,11 +43,13 @@ export default class About extends Component {
             return (
               <tr key={place.id}>
                 <td>{place.id}</td>
-                <td>{place.street}</td>
                 <td>{place.city}</td>
+                <td>{place.street}</td>
+                
+                
                 <td>{place.zip}</td>
                 <td>{place.description}</td>
-                <td>{place.imageUri}</td>
+                <td><img src={place.imageUri} alt={place.imageUri}/></td>
                 <td>{place.rating}</td>
               </tr>
             )
