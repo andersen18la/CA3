@@ -7,10 +7,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import entity.User;
 import facades.UserFacade;
-import helpers.UserHelper;
-import helpers.UserList;
-import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -18,10 +18,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import static javax.ws.rs.HttpMethod.PUT;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import security.IUser;
+import net.minidev.json.JSONObject;
+import security.PasswordStorage;
 
 /**
  * REST Web Service
@@ -40,8 +42,7 @@ public class All {
     /**
      * Creates a new instance of A
      */
-    public All()
-    {
+    public All() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         uf = new UserFacade(emf);
     }
@@ -53,9 +54,25 @@ public class All {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getText()
-    {
+    public String getText() {
         return " {\"message\" : \"result for all\"}";
+    }
+
+    @PUT
+    @Path("edit")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String Edit(String names) throws PasswordStorage.CannotPerformOperationException {
+        JsonObject json = new JsonParser().parse(names).getAsJsonObject();
+//        String olduser= json.get("oldUser").getAsString();
+//        String newuser= json.get("newUser").getAsString();
+        
+        User newusertest = new User("hallur","123");
+        
+//        uf.Edit(n, "mo");
+        
+        return new Gson().toJson("wqpoeqowejopq");
+
     }
 
 }

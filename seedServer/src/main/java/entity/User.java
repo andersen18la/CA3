@@ -23,69 +23,68 @@ public class User implements IUser, Serializable {
     //You will need to change this to save a Hashed/salted password 
     @Column(length = 255, name = "PASSWORD_HASH", nullable = false)
     private String passwordHash;
-
+    
     @Id
     @Column(length = 35, name = "USER_NAME", nullable = false)
     private String userName;
-
+    
     @ManyToMany
     List<Role> roles;
-
-    public User()
-    {
+    
+    public User() {
     }
-
-    public User(String userName, String password) throws PasswordStorage.CannotPerformOperationException
-    {
+    
+    public User(String userName, String password) throws PasswordStorage.CannotPerformOperationException {
         this.userName = userName;
         this.passwordHash = PasswordStorage.createHash(password);
     }
-
-    public void addRole(Role role)
-    {
-        if (roles == null)
-        {
+    
+    public void addRole(Role role) {
+        if (roles == null) {
             roles = new ArrayList();
         }
         roles.add(role);
         role.addUser(this);
     }
-
-    public List<Role> getRoles()
-    {
+    
+    public void addSingleRole(Role role) {
+        roles = new ArrayList();
+        roles.add(role);
+        role.addUser(this);
+    }
+    
+    public List<Role> getRoles() {
         return roles;
     }
-
+    
     @Override
-    public List<String> getRolesAsStrings()
-    {
-        if (roles.isEmpty())
-        {
+    public List<String> getRolesAsStrings() {
+        if (roles.isEmpty()) {
             return null;
         }
         List<String> rolesAsStrings = new ArrayList();
-        for (Role role : roles)
-        {
+        for (Role role : roles) {
             rolesAsStrings.add(role.getRoleName());
         }
         return rolesAsStrings;
     }
-
+    
     @Override
-    public String getPasswordHash()
-    {
+    public String getPasswordHash() {
         return passwordHash;
     }
-
-    public void setPassword(String password) throws PasswordStorage.CannotPerformOperationException
-    {
+    
+    public void setPassword(String password) throws PasswordStorage.CannotPerformOperationException {
         this.passwordHash = PasswordStorage.createHash(password);
     }
-
+    
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    
     @Override
-    public String getUserName()
-    {
+    public String getUserName() {
         return userName;
     }
-
+    
 }
