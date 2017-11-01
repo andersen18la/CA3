@@ -20,21 +20,24 @@ public class PlaceResource {
     private EntityManagerFactory emf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public PlaceResource() {
+    public PlaceResource()
+    {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
         this.pf = new PlaceFacade(emf);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
+    public String getJson()
+    {
         return "{\"bob\" : \"TEST\"}";
     }
 
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPlaces() {
+    public String getPlaces()
+    {
         List<Place> places = pf.getAllPlaces();
         String result = gson.toJson(places);
         return result;
