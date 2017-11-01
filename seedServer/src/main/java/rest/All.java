@@ -56,15 +56,4 @@ public class All {
         return " {\"message\" : \"result for all\"}";
     }
 
-    @POST
-    @Path("add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String createPerson(String content)
-    {
-        UserHelper uh = gson.fromJson(content, UserHelper.class);
-        IUser newUser = uf.addUser(uh.getUsername(), uh.getPassword());
-        return gson.toJson(newUser.getUserName());
-    }
-
 }
