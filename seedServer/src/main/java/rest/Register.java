@@ -64,10 +64,12 @@ public class Register {
     {
         try
         {
+            //this could be replaced with a mapper
             JsonObject json = new JsonParser().parse(entity).getAsJsonObject();
             String username = json.get("username").getAsString();
             String password = json.get("password").getAsString();
-
+            
+            //add user to database. 
             IUser user = uf.addUser(username, password);
             if (user == null)
             {
