@@ -18,8 +18,7 @@ public class UserResource {
 
     UserFacade uf;
 
-    public UserResource()
-    {
+    public UserResource() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         this.uf = new UserFacade(emf);
     }
@@ -28,16 +27,14 @@ public class UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getSomething()
-    {
+    public String getSomething() {
         return "{\"message\" : \"Hello User from Server (Accesible by only authenticated USERS)\"}";
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("random")
-    public String getRandomNumber()
-    {
+    public String getRandomNumber() {
         int number = rand.nextInt(40);
         return "{\"number\" : \"" + number + "\"}";
     }

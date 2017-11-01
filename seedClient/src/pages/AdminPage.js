@@ -5,7 +5,7 @@ class AdminPage extends Component {
 
   constructor() {
     super();
-    this.state = { data: "", err: "" }
+    this.state = { data: [], err: "" }
   }
 
   componentWillMount() {

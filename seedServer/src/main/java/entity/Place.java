@@ -22,7 +22,7 @@ public class Place implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String city;
-    private String address;
+    private String street;
     private String zip;
     private String description;
     private String imageUri;
@@ -34,10 +34,10 @@ public class Place implements Serializable {
     {
     }
 
-    public Place(String city, String address, String zip, String geo, String description, String imageUri, int rating)
+    public Place(String city, String street, String zip, String geo, String description, String imageUri, int rating)
     {
         this.city = city;
-        this.address = address;
+        this.street = street;
         this.zip = zip;
         this.description = description;
         this.imageUri = imageUri;
@@ -65,15 +65,14 @@ public class Place implements Serializable {
         this.city = city;
     }
 
-    public String getAddress()
-    {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
-    public void setAddress(String address)
-    {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
     }
+
 
     public String getZip()
     {
