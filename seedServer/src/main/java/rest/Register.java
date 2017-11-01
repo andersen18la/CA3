@@ -14,8 +14,6 @@ import com.nimbusds.jwt.SignedJWT;
 import facades.UserFacade;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -73,7 +71,7 @@ public class Register {
             IUser user = uf.addUser(username, password);
             if (user == null)
             {
-                //throw new error
+                //make a new error and throw it and remember to not catch it in here, but with a exceptionmapper?
                 System.out.println("!!!!!!!!********!!!!!!!!");
                 return Response.status(Response.Status.CONFLICT).entity(gson.toJson("roev")).build();
             }

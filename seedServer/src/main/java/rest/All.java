@@ -58,14 +58,4 @@ public class All {
         return " {\"message\" : \"result for all\"}";
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("users")
-    public String getAllUsers()
-    {
-        List<IUser> ul = uf.getAllUsers();
-        UserList myUl = new UserList(ul);
-        return gson.toJson(myUl);
-    }
-
 }
