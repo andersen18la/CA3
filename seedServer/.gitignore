@@ -1,6 +1,7 @@
 target/
 
 /src/main/resources/META-INF/persistence.xml
+/src/main/resources/config.properties
 
 pom.xml.tag
 pom.xml.releaseBackup
