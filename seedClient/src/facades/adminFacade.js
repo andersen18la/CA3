@@ -41,7 +41,7 @@ class AdminStore {
       }).then((data) => {
         errorChecker(resFromFirstPromise, data);
         if (cb) {
-          cb(null, data.names)
+          cb(null, data.users)
         }
       }).catch(err => {
         if (cb) {

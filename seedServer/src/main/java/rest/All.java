@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import facades.UserFacade;
 import helpers.UserHelper;
+import helpers.UserList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -54,17 +56,6 @@ public class All {
     public String getText()
     {
         return " {\"message\" : \"result for all\"}";
-    }
-
-    @POST
-    @Path("add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String createPerson(String content)
-    {
-        UserHelper uh = gson.fromJson(content, UserHelper.class);
-        IUser newUser = uf.addUser(uh.getUsername(), uh.getPassword());
-        return gson.toJson(newUser.getUserName());
     }
 
 }
