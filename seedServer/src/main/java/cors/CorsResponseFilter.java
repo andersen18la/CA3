@@ -26,3 +26,6 @@ public class CorsResponseFilter implements ContainerResponseFilter {
         res.getHeaders().add("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, Authorization");
     }
 }
+
+
+

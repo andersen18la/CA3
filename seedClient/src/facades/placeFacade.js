@@ -29,6 +29,21 @@ class AdminStore {
                 }
             })
     }
+    createData(place){
+        this._errorMessage = "";
+        this._messageFromServer = "";
+        let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
+        const options = fetchHelper.makeOptions("Post", false, place);
+        fetch(URL + "api/places/add", options)
+          .then((res) => {
+            resFromFirstPromise = res;
+            return res.json();
+          }).then((data) => {
+            errorChecker(resFromFirstPromise, data);
+          }).catch(err => {
+            console.log(JSON.stringify(err))
+          })
+      }
 }
 
 let adminStore = new AdminStore();
