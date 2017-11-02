@@ -54,6 +54,8 @@ public class PlaceFacade {
             em.close();
         }
     }
+    
+    
 
     public Place addPlace(Place place)
     {
@@ -73,5 +75,6 @@ public class PlaceFacade {
             em.close();
         }
     }
+    
 
 }
