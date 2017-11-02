@@ -5,6 +5,7 @@ export default class Places extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [], err: "" }
+    this.testing = this.testing.bind(this);
   }
 
   componentWillMount() {
@@ -48,7 +49,10 @@ export default class Places extends Component {
       }
 
       placeData.createData(place);
-      window.location.reload(true);
+      var data = this.state.data.slice()
+      data.push({id: data.length+1, city: city, street: street, zip: zip, description: description, imageUri: url, rating: rating});
+      this.setState({ data: data })
+      
     } else {
       alert('you did not upload a picture');
     }
@@ -97,7 +101,7 @@ export default class Places extends Component {
     return (
 
       <div><h1>Fetch data from Rest endpoint with all the places</h1><input id="pic" type="file" /><button onClick={this.testing}>add a new place</button>
-        {this.genPlaceList()}
+        <div id="places">{this.genPlaceList()}</div>
       </div>
     )
 
