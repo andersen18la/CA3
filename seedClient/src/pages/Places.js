@@ -21,6 +21,34 @@ export default class Places extends Component {
 
   }
 
+  testing(){
+    if(document.getElementById('pic').value != ""){
+
+    
+    var city = prompt('enter a city name');
+    var street = prompt('enter street name and number');
+    var zip = prompt('enter your zip code');
+    var description = prompt('descripe your location');
+    var url = document.getElementById('pic').value;
+    var geo = "this_location : 112314125";
+    var rating = 4;
+
+var place = {
+  city: city,
+  street: street,
+  zip: zip,
+  description: description,
+  url: url,
+  geo: geo,
+  rating: rating
+  }
+
+    placeData.createData(place);
+    window.location.reload(true);
+  } else {
+alert('you did not upload a picture');
+  }}
+
   genPlaceList = () => {
     let places = this.state.data;
     return (
@@ -63,7 +91,7 @@ export default class Places extends Component {
     console.log(this.state.data);
     return (
 
-      <div><h1>Fetch data from Rest endpoint with all the places</h1>
+      <div><h1>Fetch data from Rest endpoint with all the places</h1><input id="pic" type="file"/><button onClick={this.testing}>add a new place</button>
         {this.genPlaceList()}
       </div>
     )
