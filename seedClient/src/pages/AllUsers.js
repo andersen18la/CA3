@@ -25,7 +25,13 @@ class AllUsers extends Component {
         console.log(e.target.value);
         document.getElementById(e.target.value).remove();
     }
-
+    onclickHandlerRol = (e) => {
+        var name = e.target.value + "sel";
+        alert(document.getElementById(name).value);
+        adminData.editRole(e.target.value, document.getElementById(name).value);
+window.location.reload(true)
+    }
+    
     onDeleteBook = () => {
         this.forceUpdate();
     }
@@ -48,8 +54,20 @@ class AllUsers extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => <tr id={user.username} key={user.username}><td>{user.username}</td><td>{user.roles.map(role => role).join(", ")}</td>
-                        <td><button value={user.username} onClick={this.onclickHandler}>delete this user</button></td></tr>)}
+                    {users.map(user => <tr id={user.username} key={user.username}>
+                        <td>{user.username}</td>
+                        <td>{user.roles.map(role => role).join(", ")}</td>
+
+                        <td> <select id={user.username + "sel"}>
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                            <option value="User_Admin">User&Admin</option>
+
+                        </select>
+                            <br></br>
+                            <button value={user.username}onClick={this.onclickHandlerRol} >Change Role</button></td>
+                        <td><button value={user.username} onClick={this.onclickHandler}>delete this user</button></td>
+                    </tr>)}
                 </tbody>
             </table>
         )
