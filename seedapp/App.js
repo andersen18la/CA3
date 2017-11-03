@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, StyleSheet, Text, View, ScrollView, Button, Alert} from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 const URL = 'https://jdbh.dk/backend/CA3Group4Server/';
+console.ignoredYellowBox = ['Remote debugger'];
 export default class App extends React.Component {
 
   constructor(){
