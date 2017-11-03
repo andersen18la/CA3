@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert} from 'react-native';
+import { Header, StyleSheet, Text, View, ScrollView, Button, Alert} from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 const URL = 'https://jdbh.dk/backend/CA3Group4Server/';
 export default class App extends React.Component {
@@ -8,6 +8,7 @@ export default class App extends React.Component {
     super();
     this.state = {data : []};
     this.getAll = this.getAll.bind(this);
+    this.getAll();
   }
 
   getAll() {
@@ -32,18 +33,13 @@ export default class App extends React.Component {
 
     return (
 
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <Button  onPress={this.getAll} title="getinfo" />
-        <Text>Open up App.js to start working on your app!</Text>
-       
- 
+      <ScrollView contentContainerStyle={{flex: 1, justifyContent: 'center'}}>
+      <Text style={{textAlign: 'center'}}>Places-data from the server:</Text>
         <Table>
           <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={mapped} style={styles.row} textStyle={styles.text}/>
-          
+          <Rows data={mapped} style={styles.row} textStyle={styles.text}/>      
         </Table>
- 
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -51,6 +47,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
  
   head: { height: 40, backgroundColor: '#f1f8ff' },
-  text: { marginLeft: 1 },
-  row: { height: 30 }
+  text: { textAlign: 'center', fontSize : 10},
+  row: { height: 70 }
 });
