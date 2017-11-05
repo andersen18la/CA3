@@ -17,9 +17,9 @@ What we have implemented so far for this CA.
 
 For Sprint 1 we have implemented:
 Backend:
-●	Let new users Register
-●	Let Admins see all system users, and possibly delete and add/edit users and their roles
-●	Let all (non-authenticated) users see info about “places”. Information, should as a minimum include:
+*	Let new users Register
+*	Let Admins see all system users, and possibly delete and add/edit users and their roles
+*	Let all (non-authenticated) users see info about “places”. Information, should as a minimum include:
 ○	Address (city, zip, street) (just keep in one Class/Table, no need to normalize)
 ○	Gps-location (make it nullable, only meant for uploads via an App)
 ○	A description of the place and why it´s amazing.
@@ -28,9 +28,9 @@ Backend:
 
 
 Web:
-●	Let new users Register
-●	Let Admins see all system users, and possibly delete and add/edit users and their roles
-●	Let all (non-authenticated) users see info about “places”. Information, should as a minimum include:
+*	Let new users Register
+*	Let Admins see all system users, and possibly delete and add/edit users and their roles
+*	Let all (non-authenticated) users see info about “places”. Information, should as a minimum include:
 ○	Address (city, zip, street) (just keep in one Class/Table, no need to normalize)
 ○	Gps-location (make it nullable, only meant for uploads via an App)
 ○	A description of the place and why it´s amazing.
@@ -41,13 +41,13 @@ Web:
 
 For Sprint 2 we have implemented: 
 Backend: 
-●	Add capability via the Rest endpoints to upload images and other information
+*	Add capability via the Rest endpoints to upload images and other information
 
 Web:
-●	Registered users must be able to create new locations with picture, address, description
+*	Registered users must be able to create new locations with picture, address, description
 
 App: 
-●	View a list of existing locations
+*	View a list of existing locations
 
 Link to Expo published app:
 -	Ddd
@@ -62,11 +62,5 @@ The Web-App:
 
 The Mobile-App:
 
-●	All users can see existing places and their ratings. Search for specific locations, filter/sort in list of locations (10 hours)
-●	Users can add new places (image, GPS-location, address, description, rating)(10 hours)
-Holiday Home System
-This is the part of the app where users can rent a holliday home: 
-●	Initially this system should only handle weekly rentals given by a week-number (
-●	Include a way to add houses/available periods
-●	Ability to search for and rent via a REST API from: 1) the Web-client, 2) the App-client
-●	Must have a “fixed” JSON/REST interface that will allow other apps to use/reserve houses through the Rest endpoints
+*	All users can see existing places and their ratings. Search for specific locations, filter/sort in list of locations (10 hours)
+*	Users can add new places (image, GPS-location, address, description, rating)(10 hours)
