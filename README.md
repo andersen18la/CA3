@@ -32,10 +32,10 @@ Web:
 *	Let Admins see all system users, and possibly delete and add/edit users and their roles
 *	Let all (non-authenticated) users see info about “places”. Information, should as a minimum include:
   *	Address (city, zip, street) (just keep in one Class/Table, no need to normalize)
-   -	Gps-location (make it nullable, only meant for uploads via an App)
-   -	A description of the place and why it´s amazing.
-   -	A rating on the experience from 1-5.
-   -	A uri to an image
+   Gps-location (make it nullable, only meant for uploads via an App)
+   A description of the place and why it´s amazing.
+   A rating on the experience from 1-5.
+   A uri to an image
 
 
 
