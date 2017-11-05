@@ -49,10 +49,10 @@ Web:
 App: 
 *	View a list of existing locations
 
-Link to Expo published app:
+### Link to Expo published app:
 -	Link Here:
 
-How far can we go with the Semester Project:
+### How far can we go with the Semester Project:
 The first user stories at the list is the highest priorities.
 The Web-App:
 -	Search for specific locations, filter/sort in list of locations etc.) (7 hours)
