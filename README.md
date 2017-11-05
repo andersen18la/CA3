@@ -65,7 +65,7 @@ The Mobile-App:
 *	All users can see existing places and their ratings. Search for specific locations, filter/sort in list of locations (10 hours)
 *	Users can add new places (image, GPS-location, address, description, rating)(10 hours)
 
-###How to test our system:
+### How to test our system:
 client:
 - Copy Paste : -> https://jdbh.dk/ 
 - Click on login and type either username: admin, password: test or username: user, password: test
