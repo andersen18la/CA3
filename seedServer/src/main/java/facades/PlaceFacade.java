@@ -1,7 +1,6 @@
 package facades;
 
 import entity.Place;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -54,8 +53,6 @@ public class PlaceFacade {
             em.close();
         }
     }
-    
-    
 
     public Place addPlace(Place place)
     {
@@ -75,6 +72,5 @@ public class PlaceFacade {
             em.close();
         }
     }
-    
 
 }

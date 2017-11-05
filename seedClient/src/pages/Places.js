@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
+import PlaceForm from "./PlaceForm";
 
 export default class Places extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [], err: "" }
-    this.testing = this.testing.bind(this);
   }
 
   componentWillMount() {
@@ -22,42 +22,11 @@ export default class Places extends Component {
 
   }
 
-  testing() {
-    if (document.getElementById('pic').value != "") {
-
-
-      var city = prompt('enter a city name');
-      var street = prompt('enter street name and number');
-      var zip = prompt('enter your zip code');
-      var description = prompt('descripe your location');
-      var url = document.getElementById('pic').value;
-      var geo = "this_location : 112314125";
-      var rating = prompt('give this place a rating 1 out of 5');
-      while (isNaN(rating) || ((!isNaN(rating) && rating < 1) ||
-        (!isNaN(rating) && rating > 5))) {
-        rating = prompt('either that was not a number or you did not rate 1-5, try again');
-      }
-
-      var place = {
-        city: city,
-        street: street,
-        zip: zip,
-        description: description,
-        url: url,
-        geo: geo,
-        rating: rating
-      }
-
-      placeData.createData(place);
-      var data = this.state.data.slice()
-      data.push({id: data.length+1, city: city, street: street, zip: zip, description: description, imageUri: url, rating: rating});
-      this.setState({ data: data })
-      
-    } else {
-      alert('you did not upload a picture');
-    }
+  onAddPlace = () => {
+    this.forceUpdate();
   }
 
+  //DET HER SKAL FLYTTES UD
   genPlaceList = () => {
     let places = this.state.data;
     return (
@@ -81,11 +50,9 @@ export default class Places extends Component {
                 <td>{place.id}</td>
                 <td>{place.city}</td>
                 <td>{place.street}</td>
-
-
                 <td>{place.zip}</td>
                 <td>{place.description}</td>
-                <td><img src={place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
+                <td><img src={"https://jdbh.dk/images/" + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
                 <td>{place.rating}</td>
               </tr>
             )
@@ -95,12 +62,17 @@ export default class Places extends Component {
     )
   }
 
-
+  /*
+          <input id="pic" type="file" />
+        <button onClick={this.testing}>add a new place</button>
+  */
   render() {
     console.log(this.state.data);
     return (
 
-      <div><h1>Fetch data from Rest endpoint with all the places</h1><input id="pic" type="file" /><button onClick={this.testing}>add a new place</button>
+      <div>
+        <h1>Fetch data from Rest endpoint with all the places</h1>
+        <PlaceForm onAddPlace={this.onAddPlace} />
         <div id="places">{this.genPlaceList()}</div>
       </div>
     )

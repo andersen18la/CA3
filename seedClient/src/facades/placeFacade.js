@@ -2,7 +2,7 @@ import fetchHelper, { errorChecker } from "./fetchHelpers"
 const URL = require("../../package.json").serverURL;
 
 
-class AdminStore {
+class PlaceStore {
     constructor() {
         this._data = "";
         this._errorMessage = "";
@@ -46,8 +46,8 @@ class AdminStore {
       }
 }
 
-let adminStore = new AdminStore();
+let placeStore = new PlaceStore();
 
 //Only for debugging
 //window.userStore = userStore;
-export default adminStore;
+export default placeStore;

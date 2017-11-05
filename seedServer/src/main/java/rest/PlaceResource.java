@@ -15,7 +15,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.name;
 
 @Path("places")
 public class PlaceResource {
@@ -24,21 +23,24 @@ public class PlaceResource {
     private EntityManagerFactory emf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public PlaceResource() {
+    public PlaceResource()
+    {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
         this.pf = new PlaceFacade(emf);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
+    public String getJson()
+    {
         return "{\"bob\" : \"TEST\"}";
     }
 
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPlaces() {
+    public String getPlaces()
+    {
         List<Place> places = pf.getAllPlaces();
         String result = gson.toJson(places);
         return result;
@@ -49,7 +51,8 @@ public class PlaceResource {
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String bla(String placeObject) {
+    public String bla(String placeObject)
+    {
         JsonObject json = new JsonParser().parse(placeObject).getAsJsonObject();
 
         String city = json.get("city").getAsString();
@@ -59,11 +62,11 @@ public class PlaceResource {
         String imageUri = json.get("url").getAsString();
         String geo = json.get("geo").getAsString();
         int rating = json.get("rating").getAsInt();
-
         Place place = new Place(city, street, zip, geo, description, imageUri, rating);
-        
-        Place placeReturn  = pf.addPlace(place);
+
+        Place placeReturn = pf.addPlace(place);
 
         return gson.toJson(placeReturn);
     }
+
 }
