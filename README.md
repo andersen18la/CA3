@@ -82,6 +82,6 @@ client:
 
 -both user and admin can add places, you just choose a file on your computer and type in the input fields and click "save the place" (if nothing shows up, you need to refresh).
 
-app:
--go to: https://expo.io/@hallur20/seedapp, download the expo app on your phone and scan the code.
--you should then see a table with the same info as in the 'see places' section on the client.
+App:
+-Go to: https://expo.io/@hallur20/seedapp, download the expo app on your phone and scan the code.
+-You should then see a table with the same info as in the 'see places' section on the client.
