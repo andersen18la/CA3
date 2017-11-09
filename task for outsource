@@ -1,0 +1,14 @@
+Your task
+
+You have to do this:
+•	Make a new section (react component) called ‘search places’ where you can search places
+o	In the page create an input field for week-number (you can minimum put week 1 and max 52 because there are 52 weeks in a year), and also make an input for a city (it is important that the city exists in the Danish kingdom, we have included all the info for this in this link: 
+
+https://github.com/andersen18la/CA3/blob/master/citySql
+
+), after this put a submit button beside the input fields (after pressing the submit button some data should be fetched from the mysql database).
+o	When you put a week-number in, a table should appear with the houses that are available according to the week-number . When you put a city-name in, a table should appear with houses according to the city-name.
+When you put both week-number and city, a table should appear with the houses that are available according to week-number and week-number.
+o	The tables should contain: city (string), description (string), street, (string)  zip (string), geo-location (string), imageuri (string), week-number, city and rating (integer).
+
+•	You have to know how to code in these areas: React, Rest API on java(objects are in json-format) and Mysql.
