@@ -1,5 +1,6 @@
 Your task
-
+Hello:
+https://www.freelancer.com/u/mavericTech
 You have to do this:
 •	Make a new section (react component) called ‘search places’ where you can search places
 o	In the page create an input field for week-number (you can minimum put week 1 and max 52 because there are 52 weeks in a year), and also make an input for a city (it is important that the city exists in the Danish kingdom, we have included all the info for this in this link: 
@@ -12,3 +13,7 @@ When you put both week-number and city, a table should appear with the houses th
 o	The tables should contain: city (string), description (string), street, (string)  zip (string), geo-location (string), imageuri (string), week-number, city and rating (integer).
 
 •	You have to know how to code in these areas: React, Rest API on java(objects are in json-format) and Mysql.
+•	You have this much time:
+o	Maximum 2 days
+•	You will get paid this way:
+o	By hour
