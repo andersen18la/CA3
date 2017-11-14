@@ -79,12 +79,14 @@ public class UserFacade implements IUserFacade {
         }
     }
 
-    public User edit(String newRole, String oldusername)
+    /*
+    solved: change user-role
+    */
+    public User editUser(String newRole, String oldusername)
     {
         EntityManager em = getEntityManager();
         try
         {
-
             User u = em.find(User.class, oldusername);
             System.out.println(u.getUserName());
             em.getTransaction().begin();

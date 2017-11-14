@@ -58,7 +58,7 @@ public class Admin {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("delete")
-    public String delete(String name)
+    public Response deleteUser(String name)
     {
         JsonObject json = new JsonParser().parse(name).getAsJsonObject();
         String anotherName = json.get("userName").getAsString();
@@ -66,24 +66,23 @@ public class Admin {
         System.out.println(anotherName);
 
         uf.deleteUser(anotherName);
-        //ville nok være smart at sender noget tilbage, som i det mindste er forståeligt -j
-        return new Gson().toJson("qwoijejqwjoie");
+        
+        return Response.ok(gson.toJson(json)).build();
     }
 
     @PUT
     @Path("edit")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String Edit(String names) throws PasswordStorage.CannotPerformOperationException
+    public Response editUser(String names) throws PasswordStorage.CannotPerformOperationException
     {
         JsonObject json = new JsonParser().parse(names).getAsJsonObject();
         String targetUser = json.get("user").getAsString();
         String role = json.get("role").getAsString();
 
-        uf.edit(role, targetUser);
-        //ville nok være smart at sender noget tilbage, som i det mindste er forståeligt -j
-        return new Gson().toJson("wqpoeqowejopq");
-
+        uf.editUser(role, targetUser);
+        
+        return Response.ok(gson.toJson(json)).build();
     }
 
 }
