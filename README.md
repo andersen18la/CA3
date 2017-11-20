@@ -1,7 +1,10 @@
 # CA3 Group 4 DAT
 
-### Link to Google Docs User-stories & Accept-critia:
+### Link to Google Docs - User-stories & Accept-critia:
 https://docs.google.com/document/d/1gM7d2LgobcbHhSCE1n3tAL3NOM_U4n2iyxwz7Cz4V5Y/edit#
+
+### Link to Google Docs - Logbog:
+https://docs.google.com/document/d/1krxJwYNn6CB8OuKHUEpwY3sk6HkUK6hKXpnOlgdAY_g/edit
 
 ### Members
 * Hallur Við Neyst 
