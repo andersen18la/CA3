@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import auth from '../authorization/auth'
+import auth from '../authorization/auth';
+import Places from "./Places";
 
 class TopMenu extends Component {
 
@@ -12,6 +13,7 @@ class TopMenu extends Component {
       isUser: false,
       isAdmin: false
     }
+
   }
 
   loginStatus = (status, userName, isUser, isAdmin) => {
@@ -34,7 +36,8 @@ class TopMenu extends Component {
               <a className="navbar-brand" href="/" style={{ pointerEvents: "none" }}>Semester Seed</a>
             </div>
             <ul className="nav navbar-nav">
-              <li><Link to="/places">See places</Link></li>
+         
+              {this.state.loggedIn && (<li><Link to="/places">See locations</Link></li>)}
               {!this.state.loggedIn && (<li><Link to="/register">Register User</Link></li>)}
               {this.state.isUser && (<li><Link to="/user">Page for Users </Link></li>)}
               {this.state.isUser && (<li><Link to="/random">Random Number for Users </Link></li>)}
@@ -58,7 +61,8 @@ class TopMenu extends Component {
         </nav>
 
       </div>
-    )
+    );  
+ 
   }
 }
 

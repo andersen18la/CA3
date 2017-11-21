@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import auth from "../authorization/auth";
+import PlacesHome from "./PlacesHome";
 
 export default class Logout extends Component{
   
@@ -8,6 +9,8 @@ export default class Logout extends Component{
   }
 
   render() {
-    return <p>You are now logged out</p>
+    return (<div><p>You are now logged out</p>
+    <PlacesHome/>
+    </div>)
   }
 }
