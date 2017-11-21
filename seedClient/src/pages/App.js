@@ -11,24 +11,21 @@ import RandomNumber from "./RandomNumber";
 import AllUsers from "./AllUsers";
 import Register from "./Register";
 import React, { Component } from 'react';
+import auth from '../authorization/auth';
 
 export default class App extends Component {
 
-  constructor(props) {
-    super(props);
-}
-  stuff() {
-    var arr = [];
-    if(document.URL == "http://localhost:3000/#/"){
-      arr.push(<PlacesHome/>);
-      return arr;
-    }
-  }
+
+
+
 
 
   render() {
-    var getText = this.stuff();
+
+
+  
     return (
+      
       <div>
         <TopMenu />
         <Switch>
@@ -41,7 +38,7 @@ export default class App extends Component {
           <Route path="/users" component={AllUsers} />
           <Route path="/register" component={Register} />
         </Switch>
-        {getText}
+
       </div>
     )
   }

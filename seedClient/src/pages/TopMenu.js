@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import auth from '../authorization/auth';
 import Places from "./Places";
+import PlacesHome from "./PlacesHome";
 
 class TopMenu extends Component {
 
@@ -13,8 +14,10 @@ class TopMenu extends Component {
       isUser: false,
       isAdmin: false
     }
+    this.removeTable = this.removeTable.bind(this);
 
   }
+
 
   loginStatus = (status, userName, isUser, isAdmin) => {
     this.setState({ loggedIn: status, userName, isUser, isAdmin });
@@ -23,12 +26,30 @@ class TopMenu extends Component {
   componentDidMount() {
     auth.setLoginObserver(this.loginStatus);
   }
+ ;
+  removeTable(){
+    var arr = [];
+    if(!this.state.loggedIn && document.URL == "http://localhost:3000/#/"){
+      arr.push(<PlacesHome/>);
+      return arr;
+    } 
+  }
 
+  again(){
+    var arr = [];
+    if(this.state.loggedIn && document.URL == "http://localhost:3000/#/"){
+      arr.push(<Places/>);
+      return arr;
+    }
+  }
   render() {
-
+this.removeTable();
     const logInStatus = this.state.loggedIn ? "Logged in as: " + this.state.userName : "";
+    var arr = this.removeTable();
+    var arr2 = this.again();
     //console.log("RENDERING - REMOVE ME",JSON.stringify(this.state));
     return (
+
       <div>
         <nav className="navbar navbar-default" >
           <div className="container-fluid">
@@ -49,7 +70,8 @@ class TopMenu extends Component {
               <li>
                 {this.state.loggedIn ?
                   (
-                    <Link to="/logout"><span className="glyphicon glyphicon-log-in"></span> Logout</Link>
+                    <Link to="/logout">
+                    <span className="glyphicon glyphicon-log-in"></span> Logout</Link>
                   ) :
                   (
                     <Link to="/login">
@@ -59,7 +81,8 @@ class TopMenu extends Component {
             </ul>
           </div>
         </nav>
-
+        {arr}
+        {arr2}
       </div>
     );  
  
