@@ -57,8 +57,9 @@ this.removeTable();
               <a className="navbar-brand" href="/" style={{ pointerEvents: "none" }}>Semester Seed</a>
             </div>
             <ul className="nav navbar-nav">
-         
-              {this.state.loggedIn && (<li><Link to="/places">See locations</Link></li>)}
+    
+              {this.state.loggedIn && (<li><Link to="/Places">See locations</Link></li>)}
+              {!this.state.loggedIn && (<li><Link to="/">See locations</Link></li>)}
               {!this.state.loggedIn && (<li><Link to="/register">Register User</Link></li>)}
               {this.state.isUser && (<li><Link to="/user">Page for Users </Link></li>)}
               {this.state.isUser && (<li><Link to="/random">Random Number for Users </Link></li>)}
