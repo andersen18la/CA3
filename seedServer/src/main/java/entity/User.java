@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import security.IUser;
 import security.PasswordStorage;
 
@@ -30,6 +31,8 @@ public class User implements IUser, Serializable {
 
     @ManyToMany
     List<Role> roles;
+    @OneToOne(mappedBy = "user")
+    private Rating rating;
 
     public User()
     {

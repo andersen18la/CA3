@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import security.IUser;
 
 @Entity(name = "PLACE")
 @NamedQueries(
@@ -28,21 +32,36 @@ public class Place implements Serializable {
     private String imageUri;
     @Column(nullable = true)
     private String geo;
-    private int rating;
+//    private int rating;
+
+    @OneToMany(mappedBy = "place")
+    private List<Rating> ratings;
 
     public Place()
     {
+        this.ratings = new ArrayList<>();
     }
 
-    public Place(String city, String street, String zip, String geo, String description, String imageUri, int rating)
+    public Place(String city, String street, String zip, String geo, String description, String imageUri)
     {
         this.city = city;
         this.street = street;
         this.zip = zip;
         this.description = description;
         this.imageUri = imageUri;
-        this.rating = rating;
+        this.ratings = new ArrayList<>();
         this.geo = geo;
+    }
+
+    public Place(String city, String street, String zip, String description, String imageUri, String geo, List<Rating> ratings)
+    {
+        this.city = city;
+        this.street = street;
+        this.zip = zip;
+        this.description = description;
+        this.imageUri = imageUri;
+        this.geo = geo;
+        this.ratings = ratings;
     }
 
     public String getGeo()
@@ -65,14 +84,74 @@ public class Place implements Serializable {
         this.city = city;
     }
 
-    public String getStreet() {
+    public List<Rating> getRatings()
+    {
+        return ratings;
+    }
+
+    public double getAverageRating()
+    {
+        double size = (double) this.ratings.size();
+        double sum = 0;
+
+        for (int i = 0; i < this.ratings.size(); i++)
+        {
+            sum += (double) this.ratings.get(i).getRatingValue();
+        }
+        double average = sum / size;
+        return average;
+    }
+
+    public boolean addRating(Rating rating)
+    {
+        if (hasUserRated(rating) == true)
+        {
+            return false;
+        }
+
+        return this.ratings.add(rating);
+
+    }
+
+    public boolean hasUserRated(IUser user)
+    {
+        for (Rating rating : ratings)
+        {
+            if (user.getUserName().equals(rating.getUser().getUserName()))
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private boolean hasUserRated(Rating rating)
+    {
+        for (Rating aRating : ratings)
+        {
+            if (rating.getUser().getUserName().equals(aRating.getUser().getUserName()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setRatings(List<Rating> ratings)
+    {
+        this.ratings = ratings;
+    }
+
+    public String getStreet()
+    {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(String street)
+    {
         this.street = street;
     }
-
 
     public String getZip()
     {
@@ -104,16 +183,6 @@ public class Place implements Serializable {
         this.imageUri = imageUri;
     }
 
-    public int getRating()
-    {
-        return rating;
-    }
-
-    public void setRating(int rating)
-    {
-        this.rating = rating;
-    }
-
     public Long getId()
     {
         return id;
@@ -123,30 +192,30 @@ public class Place implements Serializable {
     {
         this.id = id;
     }
-
-    @Override
-    public int hashCode()
-    {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object)
-    {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Place))
-        {
-            return false;
-        }
-        Place other = (Place) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
-        {
-            return false;
-        }
-        return true;
-    }
+//
+//    @Override
+//    public int hashCode()
+//    {
+//        int hash = 0;
+//        hash += (id != null ? id.hashCode() : 0);
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object object)
+//    {
+//        // TODO: Warning - this method won't work in the case the id fields are not set
+//        if (!(object instanceof Place))
+//        {
+//            return false;
+//        }
+//        Place other = (Place) object;
+//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+//        {
+//            return false;
+//        }
+//        return true;
+//    }
 
     @Override
     public String toString()

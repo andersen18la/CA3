@@ -48,10 +48,14 @@ public class UserFacade implements IUserFacade {
     @Override
     public IUser getUserByUserId(String id)
     {
+        System.out.println(id);
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(User.class, id);
+
+            IUser user = em.find(User.class, id);
+            System.out.println(user.getUserName());
+            return user;
         } finally
         {
             em.close();
@@ -81,7 +85,7 @@ public class UserFacade implements IUserFacade {
 
     /*
     solved: change user-role
-    */
+     */
     public User editUser(String newRole, String oldusername)
     {
         EntityManager em = getEntityManager();

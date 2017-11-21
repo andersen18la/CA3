@@ -23,11 +23,14 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources)
     {
+        resources.add(cors.CorsRequestFilter.class);
+        resources.add(cors.CorsResponseFilter.class);
         resources.add(httpErrors.GenericExceptionMapper.class);
         resources.add(httpErrors.NotFoundExceptionMapper.class);
         resources.add(rest.Admin.class);
         resources.add(rest.All.class);
         resources.add(rest.PlaceResource.class);
+        resources.add(rest.RatingResource.class);
         resources.add(rest.Register.class);
         resources.add(rest.UploadResource.class);
         resources.add(rest.UserResource.class);
