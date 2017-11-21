@@ -5,9 +5,8 @@ import PlaceForm from "./PlaceForm";
 export default class Places extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], err: "" }
+    this.state = { data: [], err: "", isOpen: false }
   }
-
   componentWillMount() {
     /*
     This will fetch data each time you navigate to this route
@@ -21,6 +20,7 @@ export default class Places extends Component {
     });
 
   }
+
 
   onAddPlace = () => {
     this.forceUpdate();
@@ -71,9 +71,11 @@ export default class Places extends Component {
     return (
 
       <div>
+
         <h1>Fetch data from Rest endpoint with all the places</h1>
         <PlaceForm onAddPlace={this.onAddPlace} />
         <div id="places">{this.genPlaceList()}</div>
+        
       </div>
     )
 
