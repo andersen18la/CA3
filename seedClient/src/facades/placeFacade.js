@@ -6,7 +6,7 @@ class PlaceStore {
     constructor() {
         this._data = "";
         this._errorMessage = "";
-     
+
     }
 
     getData = (cb) => {
@@ -30,21 +30,43 @@ class PlaceStore {
                 }
             })
     }
-    createData(place){
+    createData(place, cb) {
         this._errorMessage = "";
         this._messageFromServer = "";
         let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
         const options = fetchHelper.makeOptions("Post", false, place);
         fetch(URL + "api/places/add", options)
-          .then((res) => {
-            resFromFirstPromise = res;
-            return res.json();
-          }).then((data) => {
-            errorChecker(resFromFirstPromise, data);
-          }).catch(err => {
-            console.log(JSON.stringify(err))
-          })
-      }
+            .then((res) => {
+                resFromFirstPromise = res;
+                return res.json();
+            }).then((data) => {
+                errorChecker(resFromFirstPromise, data);
+                if (cb) {
+                    cb(null, data);
+                }
+            }).catch(err => {
+                console.log(JSON.stringify(err))
+            })
+    }
+
+    createRating(rating, cb) {
+        this._errorMessage = "";
+        this._messageFromServer = "";
+        let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
+        const options = fetchHelper.makeOptions("Post", false, rating);
+        fetch(URL + "api/rating", options)
+            .then((res) => {
+                resFromFirstPromise = res;
+                return res.json();
+            }).then((data) => {
+                errorChecker(resFromFirstPromise, data);
+                if (cb) {
+                    cb(null, data);
+                }
+            }).catch(err => {
+                console.log(JSON.stringify(err))
+            })
+    }
 }
 
 let placeStore = new PlaceStore();

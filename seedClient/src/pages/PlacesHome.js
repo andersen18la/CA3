@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
-import PlaceForm from "./PlaceForm";
 
 export default class PlacesHome extends Component {
   constructor(props) {

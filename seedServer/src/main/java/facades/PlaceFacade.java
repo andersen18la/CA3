@@ -73,4 +73,25 @@ public class PlaceFacade {
         }
     }
 
+    public Place editPlace(Place place)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            em.merge(place);
+            em.getTransaction().commit();
+            return place;
+
+        } catch (Exception e)
+        {
+            em.getTransaction().rollback();
+            return null;
+        } finally
+        {
+            em.close();
+        }
+
+    }
+
 }

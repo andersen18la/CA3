@@ -26,27 +26,28 @@ class TopMenu extends Component {
   componentDidMount() {
     auth.setLoginObserver(this.loginStatus);
   }
- ;
-  removeTable(){
+
+  //det her kommer sikkert til at drille når man skal deploye.
+  removeTable() {
     var arr = [];
-    if(!this.state.loggedIn && document.URL === "http://localhost:3000/#/"){
-      arr.push(<PlacesHome/>);
+    if (!this.state.loggedIn && document.URL === "http://localhost:3000/#/") {
+      arr.push(<PlacesHome />);
       return arr;
-    } 
+    }
   }
 
-  again(){
+  again() {
     var arr = [];
-    if(this.state.loggedIn && !this.state.isAdmin && document.URL === "http://localhost:3000/#/"){
-      arr.push(<Places/>);
+    if (this.state.loggedIn && !this.state.isAdmin && document.URL === "http://localhost:3000/#/") {
+      arr.push(<Places />);
       return arr;
-    } else if(this.state.loggedIn && this.state.isAdmin && document.URL === "http://localhost:3000/#/"){
-      arr.push(<PlacesHome/>);
+    } else if (this.state.loggedIn && this.state.isAdmin && document.URL === "http://localhost:3000/#/") {
+      arr.push(<PlacesHome />);
       return arr;
     }
   }
   render() {
-this.removeTable();
+    this.removeTable();
     const logInStatus = this.state.loggedIn ? "Logged in as: " + this.state.userName : "";
     var arr = this.removeTable();
     var arr2 = this.again();
@@ -60,7 +61,7 @@ this.removeTable();
               <a className="navbar-brand" href="/" style={{ pointerEvents: "none" }}>Semester Seed</a>
             </div>
             <ul className="nav navbar-nav">
-    
+
               {this.state.loggedIn && (<li><Link to="/Places">See locations</Link></li>)}
               {!this.state.loggedIn && (<li><Link to="/">See locations</Link></li>)}
               {!this.state.loggedIn && (<li><Link to="/register">Register User</Link></li>)}
@@ -75,7 +76,7 @@ this.removeTable();
                 {this.state.loggedIn ?
                   (
                     <Link to="/logout">
-                    <span className="glyphicon glyphicon-log-in"></span> Logout</Link>
+                      <span className="glyphicon glyphicon-log-in"></span> Logout</Link>
                   ) :
                   (
                     <Link to="/login">
@@ -88,8 +89,8 @@ this.removeTable();
         {arr}
         {arr2}
       </div>
-    );  
- 
+    );
+
   }
 }
 

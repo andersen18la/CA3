@@ -58,7 +58,6 @@ public class RatingResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String putJson(String content)
     {
-
         //hvad skal vi have ind:
         /*
             int user id?;
@@ -70,6 +69,7 @@ public class RatingResource {
         int ratingValue = json.get("ratingValue").getAsInt();
         int placeId = json.get("placeId").getAsInt();
         IUser user = uf.getUserByUserId(userId);
+        System.out.println("ratingResource " + userId);
         if (user == null)
         {
             return "{\"bob\" : \"Brugeren findes ikke\"}";
@@ -86,8 +86,9 @@ public class RatingResource {
         }
 
         Rating rating = new Rating(ratingValue, (User) user, place);
-        rf.addRating(rating);
-
+        //rating = rf.addRating(rating);
+        place.addRating(rating);
+        pf.editPlace(place);
         return "{\"bob\" : \"rating added\"}";
 
     }
