@@ -21,6 +21,7 @@ export default class Places extends Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    
   }
   openModal() {
     this.setState({modalIsOpen: true});
@@ -116,7 +117,7 @@ export default class Places extends Component {
  <div>
  <div className="modal-header"><h2 ref={subtitle => this.subtitle = subtitle}>Add Location</h2></div>
           <div className="modal-body">
-          <PlaceForm onAddPlace={this.onAddPlace} onCloseModal={this.closeModal} /></div>
+          <PlaceForm onAddPlace={this.onAddPlace} onCloseModal={this.closeModal}  /></div>
           <div className="modal-footer"><button className="btn btn-danger" onClick={this.closeModal}>close</button></div></div>
         </Modal></div></div></div>
       </div>

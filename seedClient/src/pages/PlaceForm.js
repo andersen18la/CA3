@@ -30,7 +30,8 @@ export default class PlaceForm extends Component {
         console.log(place);
         placeStore.createData(place);
         this.props.onCloseModal();
-        //this.closeModal;
+        
+        
     }
 
     onFileUpload = (data) => {

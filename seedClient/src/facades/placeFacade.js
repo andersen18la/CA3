@@ -6,6 +6,7 @@ class PlaceStore {
     constructor() {
         this._data = "";
         this._errorMessage = "";
+     
     }
 
     getData = (cb) => {
