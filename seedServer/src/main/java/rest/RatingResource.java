@@ -17,8 +17,6 @@ import facades.RatingFacade;
 import facades.UserFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -35,8 +33,6 @@ public class RatingResource {
     private PlaceFacade pf;
     private EntityManagerFactory emf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    @Context
-    private UriInfo context;
 
     public RatingResource()
     {

@@ -43,10 +43,9 @@ public class PlaceResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getPlaces()
     {
-       //pf.addPlace(new Place("Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bbobob"));
+        //pf.addPlace(new Place("Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
         List<Place> places = pf.getAllPlaces();
-        
-        
+
         List<PlaceMapper> jsonList = new ArrayList<>();
         for (Place place : places)
         {

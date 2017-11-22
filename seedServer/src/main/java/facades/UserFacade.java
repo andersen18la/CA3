@@ -53,8 +53,7 @@ public class UserFacade implements IUserFacade {
         try
         {
 
-            IUser user = em.find(User.class, id);
-            System.out.println(user.getUserName());
+            IUser user = em.find(User.class, id);            
             return user;
         } finally
         {

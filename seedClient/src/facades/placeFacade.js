@@ -42,6 +42,7 @@ class PlaceStore {
             }).then((data) => {
                 errorChecker(resFromFirstPromise, data);
                 if (cb) {
+                    console.log(data.data);
                     cb(null, data);
                 }
             }).catch(err => {
