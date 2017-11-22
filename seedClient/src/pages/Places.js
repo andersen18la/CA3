@@ -49,7 +49,7 @@ export default class Places extends Component {
 
 
   onAddPlace = () => {
-    this.forceUpdate();
+    //this.forceUpdate();
   }
 
   //DET HER SKAL FLYTTES UD
@@ -116,7 +116,7 @@ export default class Places extends Component {
  <div>
  <div className="modal-header"><h2 ref={subtitle => this.subtitle = subtitle}>Add Location</h2></div>
           <div className="modal-body">
-          <PlaceForm onAddPlace={this.onAddPlace} /></div>
+          <PlaceForm onAddPlace={this.onAddPlace} onCloseModal={this.closeModal} /></div>
           <div className="modal-footer"><button className="btn btn-danger" onClick={this.closeModal}>close</button></div></div>
         </Modal></div></div></div>
       </div>
