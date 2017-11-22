@@ -54,18 +54,17 @@ export default class PlaceForm extends Component {
     render() {
         console.log(this.state.place);
         return (
-            <div>
+            <div><center>
                 <FileUpload onFileUpload={this.onFileUpload} />
                 <form className="form-inline" onSubmit={this.onSubmitHandler}>
-                    City: <input name="city" type="text" onChange={this.onChangeHandler} value={this.state.place.city} required />
-                    Description: <input name="description" type="text" onChange={this.onChangeHandler} value={this.state.place.description} required />
-                    Street: <input name="street" type="text" onChange={this.onChangeHandler} value={this.state.place.street} required />
-                    Zip: <input name="zip" type="text" onChange={this.onChangeHandler} value={this.state.place.zip} required />
-                    Geo: <input name="geo" type="text" onChange={this.onChangeHandler} value={this.state.place.geo} required />
-                    ImageUri: <input name="url" type="text" onChange={this.onChangeHandler} value={this.state.place.url} required readOnly />
-                    Rating: <input name="rating" type="number" onChange={this.onChangeHandler} value={this.state.place.rating} min="0" max="5" required />
-                    <input type="submit" value="Save the place" />
-                </form>
+                    City:<br/> <input name="city" type="text" onChange={this.onChangeHandler} value={this.state.place.city} required /><br/>
+                    Description:<br/> <input name="description" type="text" onChange={this.onChangeHandler} value={this.state.place.description} required /><br/>
+                    Street:<br/> <input name="street" type="text" onChange={this.onChangeHandler} value={this.state.place.street} required /><br/>
+                    Zip:<br/> <input name="zip" type="text" onChange={this.onChangeHandler} value={this.state.place.zip} required /><br/>
+                    Geo:<br/> <input name="geo" type="text" onChange={this.onChangeHandler} value={this.state.place.geo} required /><br/>
+                    ImageUri:<br/> <input name="url" type="text" onChange={this.onChangeHandler} value={this.state.place.url} required readOnly /><br/><br/>
+                    <input className="btn btn-success" type="submit" value="Save the place" />
+                </form></center>
             </div >
         );
     }

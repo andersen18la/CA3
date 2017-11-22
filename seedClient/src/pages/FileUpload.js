@@ -38,7 +38,7 @@ export default class FileUpload extends Component {
         return (
             <div>
                 <input type="file" name="file" />
-                <button id="btn" onClick={this.onClickHandler}> upload image </button>
+                {/*<button id="btn" onClick={this.onClickHandler}> upload image </button>*/}
             </div>
 
         )

@@ -78,3 +78,5 @@ export default class PlacesHome extends Component {
 
   }
 }
+
+

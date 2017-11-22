@@ -100,8 +100,12 @@ export default class Places extends Component {
 
         <h1>Fetch data from Rest endpoint with all the places</h1>
         
-        <div>
-        <button onClick={this.openModal}>Add Location</button>
+        <div className="container">
+        <button className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"onClick={this.openModal}>Add Location</button>
+        <div className="modal fade" id="myModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+             
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -109,17 +113,16 @@ export default class Places extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
- 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Example Text For Add Location</h2> 
-          <p>Sub Text</p>
-          <PlaceForm onAddPlace={this.onAddPlace} />
-          <button onClick={this.closeModal}>close</button>
-        </Modal>
+ <div>
+ <div className="modal-header"><h2 ref={subtitle => this.subtitle = subtitle}>Example Text For Add Location</h2></div>
+          <div className="modal-body">
+          <PlaceForm onAddPlace={this.onAddPlace} /></div>
+          <div className="modal-footer"><button className="btn btn-danger" onClick={this.closeModal}>close</button></div></div>
+        </Modal></div></div></div>
       </div>
         <div id="places">{this.genPlaceList()}</div>
         
       </div>
     )
-
   }
 }
