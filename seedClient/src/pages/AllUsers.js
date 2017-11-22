@@ -27,9 +27,8 @@ class AllUsers extends Component {
     }
     onclickHandlerRol = (e) => {
         var name = e.target.value + "sel";
-        alert(document.getElementById(name).value);
         adminData.editRole(e.target.value, document.getElementById(name).value);
-window.location.reload(true)
+        document.getElementById(e.target.value + "rol").innerHTML = document.getElementById(name).value;
     }
     
     onDeleteBook = () => {
@@ -56,7 +55,7 @@ window.location.reload(true)
                 <tbody>
                     {users.map(user => <tr id={user.username} key={user.username}>
                         <td>{user.username}</td>
-                        <td>{user.roles.map(role => role).join(", ")}</td>
+                        <td id={user.username + "rol"}>{user.roles.map(role => role).join(", ")}</td>
 
                         <td> <select id={user.username + "sel"}>
                             <option value="Admin">Admin</option>

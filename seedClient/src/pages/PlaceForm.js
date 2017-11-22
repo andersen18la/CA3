@@ -42,6 +42,7 @@ export default class PlaceForm extends Component {
                 place: { ...prevState.place, url: data }
             }
         ))
+        document
     }
     
 
