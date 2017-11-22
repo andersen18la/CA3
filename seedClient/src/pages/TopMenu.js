@@ -29,7 +29,7 @@ class TopMenu extends Component {
  ;
   removeTable(){
     var arr = [];
-    if(!this.state.loggedIn && document.URL == "http://localhost:3000/#/"){
+    if(!this.state.loggedIn && document.URL === "http://localhost:3000/#/"){
       arr.push(<PlacesHome/>);
       return arr;
     } 
@@ -37,7 +37,7 @@ class TopMenu extends Component {
 
   again(){
     var arr = [];
-    if(this.state.loggedIn && document.URL == "http://localhost:3000/#/"){
+    if(this.state.loggedIn && document.URL === "http://localhost:3000/#/"){
       arr.push(<Places/>);
       return arr;
     }

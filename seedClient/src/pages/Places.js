@@ -99,7 +99,7 @@ export default class Places extends Component {
       <div>
 
         <h1>Fetch data from Rest endpoint with all the places</h1>
-        <PlaceForm onAddPlace={this.onAddPlace} />
+        
         <div>
         <button onClick={this.openModal}>Add Location</button>
         <Modal
@@ -112,6 +112,7 @@ export default class Places extends Component {
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Example Text For Add Location</h2> 
           <p>Sub Text</p>
+          <PlaceForm onAddPlace={this.onAddPlace} />
           <button onClick={this.closeModal}>close</button>
         </Modal>
       </div>
