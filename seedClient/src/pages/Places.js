@@ -114,7 +114,7 @@ export default class Places extends Component {
           contentLabel="Example Modal"
         >
  <div>
- <div className="modal-header"><h2 ref={subtitle => this.subtitle = subtitle}>Example Text For Add Location</h2></div>
+ <div className="modal-header"><h2 ref={subtitle => this.subtitle = subtitle}>Add Location</h2></div>
           <div className="modal-body">
           <PlaceForm onAddPlace={this.onAddPlace} /></div>
           <div className="modal-footer"><button className="btn btn-danger" onClick={this.closeModal}>close</button></div></div>
