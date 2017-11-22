@@ -32,11 +32,13 @@ public class PlaceMapper {
 
     public PlaceMapper(Place place)
     {
-        this.city = place.getCity();
-        this.description = place.getDescription();
-        this.geo = place.getGeo();
         this.id = place.getId();
+        this.city = place.getCity();
+        this.street = place.getStreet();
+        this.zip = place.getZip();
+        this.description = place.getDescription();
         this.imageUri = place.getImageUri();
+        this.geo = place.getGeo();
         this.ratings = new ArrayList<>();
         if (!place.getRatings().isEmpty())
         {
