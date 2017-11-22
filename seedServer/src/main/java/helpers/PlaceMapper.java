@@ -24,7 +24,7 @@ public class PlaceMapper {
     private String imageUri;
     private String geo;
     private List<Integer> ratings;
-    private double rating;
+    private double rating = 0;
 
     public PlaceMapper()
     {
@@ -38,11 +38,14 @@ public class PlaceMapper {
         this.id = place.getId();
         this.imageUri = place.getImageUri();
         this.ratings = new ArrayList<>();
-        for (Rating placeRating : place.getRatings())
+        if (!place.getRatings().isEmpty())
         {
-            this.ratings.add(placeRating.getRatingValue());
+            for (Rating placeRating : place.getRatings())
+            {
+                this.ratings.add(placeRating.getRatingValue());
+            }
+            this.rating = place.getAverageRating();
         }
-        this.rating = place.getAverageRating();
     }
 
     public Long getId()
