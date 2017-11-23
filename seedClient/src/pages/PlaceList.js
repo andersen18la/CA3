@@ -23,7 +23,7 @@ export default function PlaceList(props) {
                             <td>{place.street}</td>
                             <td>{place.zip}</td>
                             <td>{place.description}</td>
-                            <td><img src={"https://jdbh.dk/images/" + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
+                            <td><img src={"http://localhost:8084/seedMaven/imgs/" + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
                             <td>{place.rating}</td>
                             <td>
                                 <Rating placeId={place.id} userId={props.userId} updateTable={props.updateTable} />

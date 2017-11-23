@@ -22,7 +22,8 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 public class UploadResource {
     //IMPORTANT: Replace with a unix path when uploading to Droplet and set permissions on the folder
 
-    public static final String FILE_LOCATION = "/var/www/images/";
+    //public static final String FILE_LOCATION = "/var/www/images/";
+    public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Documents\\";
 
     @Context
     private UriInfo context;

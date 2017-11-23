@@ -20,7 +20,7 @@ export default class FileUpload extends Component {
             {
                 method: "POST",
                 body: data,
-                enctype: "multipart/form-data"
+                
             })
             .then((res) => {
                 return res.json();
