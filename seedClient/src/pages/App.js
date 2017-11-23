@@ -11,6 +11,7 @@ import AllUsers from "./AllUsers";
 import Register from "./Register";
 import React, { Component } from 'react';
 import auth from '../authorization/auth';
+import Map from './Map';
 
 export default class App extends Component {
 
@@ -36,6 +37,7 @@ export default class App extends Component {
           <Route path="/random" component={RandomNumber} />
           <Route path="/users" component={AllUsers} />
           <Route path="/register" component={Register} />
+          <Route path="/map" component={Map}  />
         </Switch>
 
       </div>
