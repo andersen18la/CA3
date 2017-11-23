@@ -85,7 +85,10 @@ export default class Places extends Component {
                     <div className="modal-body">
                       <PlaceForm onAddPlace={this.onAddPlace} onCloseModal={this.closeModal} updateTable={this.updateTable} /></div>
                     <div className="modal-footer"><button className="btn btn-danger" onClick={this.closeModal}>close</button></div></div>
-                </Modal></div></div></div>
+                </Modal>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="places">
           <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
