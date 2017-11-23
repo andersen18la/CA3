@@ -19,7 +19,7 @@ const customStyles = {
 export default class Places extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], err: "", isOpen: false, modalIsOpen: false, rating: { userId: "", ratingValue: "0", placeId: "" } }
+    this.state = { data: [], err: "", isOpen: false, modalIsOpen: false }
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
