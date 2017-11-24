@@ -6,7 +6,6 @@ import PlacesHome from "./PlacesHome";
 import UserPage from "./UserPage";
 import AdminPage from "./AdminPage";
 import TopMenu from "./TopMenu";
-import RandomNumber from "./RandomNumber";
 import AllUsers from "./AllUsers";
 import Register from "./Register";
 import React, { Component } from 'react';
@@ -34,7 +33,6 @@ export default class App extends Component {
           <Route path="/places" component={Places} />
           <Route path="/user" component={UserPage} />
           <Route path="/admin" component={AdminPage} />
-          <Route path="/random" component={RandomNumber} />
           <Route path="/users" component={AllUsers} />
           <Route path="/register" component={Register} />
           <Route path="/map" component={Map}  />

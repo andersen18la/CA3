@@ -57,7 +57,7 @@ export default class PlaceForm extends Component {
                 body: data,
             })
             .then(handleErrors)
-            .then(data => {                                
+            .then(data => {
                 console.log("hello from add place " + data);
                 this.props.onCloseModal();
                 this.props.updateTable();

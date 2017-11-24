@@ -27,7 +27,6 @@ class TopMenu extends Component {
     auth.setLoginObserver(this.loginStatus);
   }
 
-  //det her kommer sikkert til at drille når man skal deploye.
   removeTable() {
     var arr = [];
     if (!this.state.loggedIn && document.URL === "http://localhost:3000/#/") {
@@ -55,10 +54,10 @@ class TopMenu extends Component {
     return (
 
       <div>
-        <nav className="navbar navbar-default" >
+        <nav className="navbar navbar-default" style={{background:"pink"}} >
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="/" style={{ pointerEvents: "none" }}>Semester Seed</a>
+              <a className="navbar-brand" href="/" style={{ pointerEvents: "none", color: "orange" }}>Semester project</a>
             </div>
             <ul className="nav navbar-nav">
 
@@ -66,7 +65,6 @@ class TopMenu extends Component {
               {!this.state.loggedIn && (<li><Link to="/">See locations</Link></li>)}
               {!this.state.loggedIn && (<li><Link to="/register">Register User</Link></li>)}
               {this.state.isUser && (<li><Link to="/user">Page for Users </Link></li>)}
-              {this.state.isUser && (<li><Link to="/random">Random Number for Users </Link></li>)}
               {this.state.isAdmin && (<li><Link to="/admin">Page for Admins</Link></li>)}
               {this.state.isAdmin && (<li><Link to="/users">See all users</Link></li>)}
             </ul>
