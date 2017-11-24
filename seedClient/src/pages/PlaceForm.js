@@ -82,15 +82,16 @@ export default class PlaceForm extends Component {
         return (
             <div>
                 <center>
-                    <form className="form-inline" onSubmit={this.onSubmitHandler}>
+                    <form id="usrform" className="form-inline" onSubmit={this.onSubmitHandler}>
                         City:<br /> <input name="city" className="form-control" type="text" onChange={this.onChangeHandler} value={this.state.place.city} required /><br />
-                        Description:<br /> <input name="description" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.description} required /><br />
+                        Description:<br /><textarea className="form-control" style={{height: 200, width: 300}}onChange={this.onChangeHandler} name="description" form="usrform"></textarea><br />
                         Street:<br /> <input name="street" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.street} required /><br />
                         Zip:<br /> <input name="zip" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.zip} required /><br />
                         Geo:<br /> <input name="geo" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.geo} required /><br />
                         <br /><input type="file" className="form-control" accept=".jpg,.png" name="file" required /><br />
                         <input className="btn btn-success" type="submit" value="Save the place" />
                     </form>
+                    
                 </center>
             </div>
         );

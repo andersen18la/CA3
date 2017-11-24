@@ -59,11 +59,11 @@ export default class Rating extends Component {
             <div>
             <form key={this.props.placeId} className="form-inline" onSubmit={this.submitHandler}>
                 
-                <label><input className="form-inline" name="radio" type="radio" value="1" onClick={this.onClickHandler}/>1</label>           
-                <label><input className="form-inline" name="radio" type="radio" value="2" onClick={this.onClickHandler}/>2</label>           
-                <label><input className="form-inline" name="radio" type="radio" value="3" onClick={this.onClickHandler}/>3</label>           
-                <label><input className="form-inline" name="radio" type="radio" value="4" onClick={this.onClickHandler}/>4</label>           
-                <label><input className="form-inline" name="radio" type="radio" value="5" onClick={this.onClickHandler}/>5</label>           
+                <label><input className="form-inline" name="radio" type="radio" value="1" onClick={this.onClickHandler} required/>1</label>           
+                <label><input className="form-inline" name="radio" type="radio" value="2" onClick={this.onClickHandler} required/>2</label>           
+                <label><input className="form-inline" name="radio" type="radio" value="3" onClick={this.onClickHandler} required/>3</label>           
+                <label><input className="form-inline" name="radio" type="radio" value="4" onClick={this.onClickHandler} required/>4</label>           
+                <label><input className="form-inline" name="radio" type="radio" value="5" onClick={this.onClickHandler} required/>5</label>           
                 
 
                 <input type="submit" className="btn btn-default" id="btn" value="Save the rating" />

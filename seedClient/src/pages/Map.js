@@ -5,13 +5,15 @@ import geocoder from 'geocoder'
 
 
 
-const AnyReactComponent = ({ text }) => (
+const AnyReactComponent = ({ text, alerthis }) => (
 
 
     <div style={{
         position: 'relative', color: 'white', background: 'red',
         height: 30, width: 60, top: -20, left: -30,
+        
     }}>
+    {/*<button onClick={alerthis}>click here</button>*/}
         {text}
     </div>
 
@@ -23,6 +25,10 @@ export default class Map extends Component {
         this.state = { city: "null", lat: 0.0, lng: 0.0 }
         this.getCoords = this.getCoords.bind(this);
         this.goToPlace = this.goToPlace.bind(this);
+        this.alerthis = this.alerthis.bind(this);
+    }
+    alerthis(){
+        alert("qwewq");
     }
     static defaultProps = {
         center: { lat: 55.41904033, lng: 10.33593535 },
@@ -72,13 +78,15 @@ export default class Map extends Component {
                         lat={this.state.lat}
                         lng={this.state.lng}
                         text={this.state.city}
+                        alerthis={this.alerthis}
+
                     />
                 </GoogleMapReact>
                 {this.state.coords}
                 <input id="cityname" type="text" />
                 <input id="btn" type="button" onClick={this.getCoords} value="register location" />
                 <input id="lat" type="hidden" value="55.41904033" />
-                <input id="lng" type="hidden" value="55.41904033" />
+                <input id="lng" type="hidden" value="10.33593535" />
                 <input id="btn2" type="button" onClick={this.goToPlace} value="go to location" />
                 <p>coordinates: city: {this.state.city}, lat:{this.state.lat}, lng:{this.state.lng}</p>
             </div>
