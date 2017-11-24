@@ -32,7 +32,7 @@ public class PlaceResource {
     private PlaceFacade pf;
     private EntityManagerFactory emf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\imgs\\";
+    public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Desktop\\imgs\\";
 
     public PlaceResource()
     {
