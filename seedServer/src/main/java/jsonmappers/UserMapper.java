@@ -1,13 +1,13 @@
-package helpers;
+package jsonmappers;
 
 import java.util.List;
 
-public class UserHelper {
+public class UserMapper {
 
     private String username;
     private List<String> roles;
 
-    public UserHelper(String username, List<String> roles)
+    public UserMapper(String username, List<String> roles)
     {
         this.username = username;
         this.roles = roles;

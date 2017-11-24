@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import facades.UserFacade;
-import helpers.UserList;
+import jsonmappers.UserListMapper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +50,7 @@ public class Admin {
     public Response getAllUsers()
     {
         List<IUser> ul = uf.getAllUsers();
-        UserList myUl = new UserList(ul);
+        UserListMapper myUl = new UserListMapper(ul);
         return Response.ok(gson.toJson(myUl)).build();
     }
 

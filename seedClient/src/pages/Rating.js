@@ -3,9 +3,9 @@ import placeData from '../facades/placeFacade';
 
 //props: 
 /**
- * userid
- * placeid
- * updatetable
+ * userId
+ * placeId
+ * updateTable
  */
 
 
@@ -17,18 +17,9 @@ export default class Rating extends Component {
         };
 
     }
-
-    /*
-    alreadyRated = (data) => {
-        if(){
-
-        }
-    }
-*/
     submitHandler = e => {
         e.preventDefault();
-        let rating = this.state.rating;
-        console.log(rating);
+        let rating = this.state.rating;        
         placeData.createRating(rating, this.props.updateTable);
         this.setState({
             rating: { userId: this.props.userId, ratingValue: "0", placeId: this.props.placeId }

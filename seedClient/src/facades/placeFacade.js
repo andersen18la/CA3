@@ -18,8 +18,7 @@ class PlaceStore {
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
-            }).then((data) => {
-                console.log(data);
+            }).then((data) => {                
                 errorChecker(resFromFirstPromise, data);
                 if (cb) {
                     cb(null, data)
@@ -41,8 +40,7 @@ class PlaceStore {
                 return res.json();
             }).then((data) => {
                 errorChecker(resFromFirstPromise, data);
-                if (cb) {
-                    console.log(data.data);
+                if (cb) {                    
                     cb(null, data);
                 }
             }).catch(err => {
@@ -54,12 +52,12 @@ class PlaceStore {
         this._errorMessage = "";
         this._messageFromServer = "";
         let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
-        const options = fetchHelper.makeOptions("Post", false, rating);
+        const options = fetchHelper.makeOptions("Post", true, rating);
         fetch(URL + "api/rating", options)
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
-            }).then((data) => {
+            }).then((data) => {                
                 errorChecker(resFromFirstPromise, data);
                 if (cb) {
                     cb(null, data);

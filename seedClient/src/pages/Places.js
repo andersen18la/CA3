@@ -58,13 +58,8 @@ export default class Places extends Component {
       this.setState({ err: "", data, modalIsOpen: false });
     });
   }
-  /*
-          <input id="pic" type="file" />
-          <button onClick={this.testing}>add a new place</button>
-          */
 
   render() {
-    console.log(this.state.data);
     return (
       <div>
         <h1>Fetch data from Rest endpoint with all the places</h1>

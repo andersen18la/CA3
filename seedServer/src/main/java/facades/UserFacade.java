@@ -52,8 +52,7 @@ public class UserFacade implements IUserFacade {
         EntityManager em = getEntityManager();
         try
         {
-
-            IUser user = em.find(User.class, id);            
+            IUser user = em.find(User.class, id);
             return user;
         } finally
         {

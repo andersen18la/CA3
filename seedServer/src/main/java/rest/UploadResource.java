@@ -23,7 +23,8 @@ public class UploadResource {
     //IMPORTANT: Replace with a unix path when uploading to Droplet and set permissions on the folder
 
     //public static final String FILE_LOCATION = "/var/www/images/";
-    public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Documents\\";
+    //public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Documents\\";
+    public String file_location = "C:\\Users\\Bloch\\Desktop\\imgs\\";
 
     @Context
     private UriInfo context;
@@ -67,7 +68,7 @@ public class UploadResource {
 
     private void saveFile(InputStream is, String fileLocation) throws IOException
     {
-        String location = FILE_LOCATION + fileLocation;
+        String location = file_location + fileLocation;
         System.out.println(location);
         try (OutputStream os = new FileOutputStream(new File(location)))
         {

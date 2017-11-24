@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-public class PlaceFacade {
+public class PlaceFacade implements IPlaceFacade {
 
     private EntityManagerFactory emf;
 
@@ -20,6 +20,7 @@ public class PlaceFacade {
         return this.emf.createEntityManager();
     }
 
+    @Override
     public List<Place> getAllPlaces()
     {
         List<Place> places;
@@ -39,6 +40,7 @@ public class PlaceFacade {
         }
     }
 
+    @Override
     public Place getPlace(int id)
     {
         Long lid = (long) id;
@@ -54,6 +56,7 @@ public class PlaceFacade {
         }
     }
 
+    @Override
     public Place addPlace(Place place)
     {
         EntityManager em = getEntityManager();
@@ -73,6 +76,7 @@ public class PlaceFacade {
         }
     }
 
+    @Override
     public Place editPlace(Place place)
     {
         EntityManager em = getEntityManager();
@@ -91,7 +95,28 @@ public class PlaceFacade {
         {
             em.close();
         }
+    }
 
+    @Override
+    public boolean deletePlace(int id)
+    {
+        EntityManager em = getEntityManager();
+        long lid = (long) id;
+        try
+        {
+            Place place = em.find(Place.class, lid);
+            if (place != null)
+            {
+                em.getTransaction().begin();
+                em.remove(place);
+                em.getTransaction().commit();
+                return true;
+            }
+            return false;
+        } finally
+        {
+            em.close();
+        }
     }
 
 }

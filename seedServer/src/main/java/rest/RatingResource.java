@@ -12,9 +12,13 @@ import com.google.gson.JsonParser;
 import entity.Place;
 import entity.Rating;
 import entity.User;
+import exceptions.PlaceDoesNotExistsException;
+import exceptions.UserDoesNotExistException;
+import exceptions.UserHaveAlreadyRatedException;
 import facades.PlaceFacade;
 import facades.RatingFacade;
 import facades.UserFacade;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -23,6 +27,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import jsonmappers.RatingMapper;
 import security.IUser;
 
 @Path("rating")
@@ -49,10 +55,11 @@ public class RatingResource {
         return "{\"bob\" : \"TEST\"}";
     }
 
+    @RolesAllowed("User")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String putJson(String content)
+    public Response putJson(String content)
     {
         //hvad skal vi have ind:
         /*
@@ -67,25 +74,24 @@ public class RatingResource {
         IUser user = uf.getUserByUserId(userId);
         System.out.println("ratingResource " + userId);
         if (user == null)
-        {
-            return "{\"bob\" : \"Brugeren findes ikke\"}";
+        {            
+            throw new UserDoesNotExistException();
         }
         Place place = pf.getPlace(placeId);
         if (place == null)
         {
-            return "{\"bob\" : \"Place findes ikke\"}";
+            throw new PlaceDoesNotExistsException();
         }
 
         if (place.hasUserRated(user) == true)
         {
-            return "{\"User\" : \"Brugeren har allerede rated\"}";
+            throw new UserHaveAlreadyRatedException();
         }
 
-        Rating rating = new Rating(ratingValue, (User) user, place);
-        //rating = rf.addRating(rating);
+        Rating rating = new Rating(ratingValue, (User) user, place);        
         place.addRating(rating);
         pf.editPlace(place);
-        return "{\"bob\" : \"rating added\"}";
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(new RatingMapper(rating))).build();
 
     }
 

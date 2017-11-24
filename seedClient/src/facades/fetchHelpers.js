@@ -42,6 +42,9 @@ export const errorChecker = function (res, data) {
   if (res.status === 200 && res.ok) {
     return;
   }
+  if (res.status === 201 && res.ok) {
+    return;
+  }
   if (res.status === 400) {
     throw new Error(makeErrorMsg(data, "Server could not handle the Request"));
   }

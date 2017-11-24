@@ -1,4 +1,4 @@
-package helpers;
+package jsonmappers;
 
 import entity.Rating;
 
