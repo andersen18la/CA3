@@ -11,9 +11,9 @@ const AnyReactComponent = ({ text, alerthis }) => (
     <div style={{
         position: 'relative', color: 'white', background: 'red',
         height: 30, width: 60, top: -20, left: -30,
-        
+
     }}>
-    {/*<button onClick={alerthis}>click here</button>*/}
+        {/*<button onClick={alerthis}>click here</button>*/}
         {text}
     </div>
 
@@ -26,31 +26,39 @@ export default class Map extends Component {
         this.getCoords = this.getCoords.bind(this);
         this.goToPlace = this.goToPlace.bind(this);
         this.alerthis = this.alerthis.bind(this);
+        this.testing = this.testing.bind(this);
     }
-    alerthis(){
-        alert("qwewq");
-    }
+
     static defaultProps = {
         center: { lat: 55.41904033, lng: 10.33593535 },
         zoom: 6
     };
+    alerthis() {
+        alert("qwewq");
+    }
+    testing() {
+        this.getCoords();
+        setTimeout(() => {
+            this.goToPlace();
+          }, 1000);
+    }
 
     getCoords() {
-
-
-
         try {
 
             geocoder.geocode(document.getElementById("cityname").value + ", DK", function (err, data) {
                 console.log(data);
-                try{
-                document.getElementById("lat").value = data.results[0].geometry.location.lat;
-                document.getElementById("lng").value = data.results[0].geometry.location.lng;
-                alert("it worked! now click go to 'go location' to make the pinpoint appear");
-                } catch(e){
-                    alert("location doesn't exist, try again");
+                try {
+                    document.getElementById("lat").value = data.results[0].geometry.location.lat;
+                    document.getElementById("lng").value = data.results[0].geometry.location.lng;
+                    document.getElementById("msg").style.color = "green";
+                    document.getElementById("msg").innerHTML = "success!"
+                } catch (e) {
+                    document.getElementById("msg").style.color = "red";
+                    document.getElementById("msg").innerHTML = "failure...";
                 }
-            })
+            });
+
         } catch (e) {
             alert("error");
         }
@@ -83,11 +91,10 @@ export default class Map extends Component {
                     />
                 </GoogleMapReact>
                 {this.state.coords}
-                <input id="cityname" type="text" />
-                <input id="btn" type="button" onClick={this.getCoords} value="register location" />
+                <button onClick={this.testing}>go to destination</button>
+                <input id="cityname" type="text" /><span id="msg"></span>
                 <input id="lat" type="hidden" value="55.41904033" />
                 <input id="lng" type="hidden" value="10.33593535" />
-                <input id="btn2" type="button" onClick={this.goToPlace} value="go to location" />
                 <p>coordinates: city: {this.state.city}, lat:{this.state.lat}, lng:{this.state.lng}</p>
             </div>
         );
