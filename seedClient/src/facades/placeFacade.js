@@ -14,7 +14,7 @@ class PlaceStore {
         this._messageFromServer = "";
         let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
         const options = fetchHelper.makeOptions("GET", false);
-        fetch(URL + "api/places/all", options)
+        fetch(URL + "api/locations/all", options)
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
@@ -34,7 +34,7 @@ class PlaceStore {
         this._messageFromServer = "";
         let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
         const options = fetchHelper.makeOptions("Post", false, place);
-        fetch(URL + "api/places/add", options)
+        fetch(URL + "api/location/add", options)
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
