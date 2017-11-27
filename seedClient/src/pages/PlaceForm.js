@@ -53,7 +53,7 @@ export default class PlaceForm extends Component {
         data.append("user", 'WEB User');
         data.append('file', file.files[0]);
         console.log(data);
-        fetch(URL + "api/places/add",
+        fetch(URL + "api/location/add",
             {
                 method: "POST",
                 body: data,
