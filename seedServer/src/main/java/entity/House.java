@@ -11,10 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author Bloch
- */
+
 @Entity
 public class House implements Serializable {
 
@@ -22,6 +19,12 @@ public class House implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
+    private String city;
+    private String street;
+    private String zip;
+    private String description;
+    private String imageUri;
 
     public Long getId()
     {
