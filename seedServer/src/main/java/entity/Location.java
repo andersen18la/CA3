@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity(name = "LOCATION")
 @NamedQueries(
@@ -36,6 +38,8 @@ public class Location implements Serializable {
 
     @OneToMany(mappedBy = "location")
     private List<Rating> ratings;
+    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
+    private House house;
 
     public Location()
     {

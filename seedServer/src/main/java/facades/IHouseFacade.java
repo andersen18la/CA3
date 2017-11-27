@@ -13,6 +13,7 @@ import java.util.List;
  * @author Bloch
  */
 public interface IHouseFacade {
+    House addHouse(House house);
 
     House getHouse(int id);
 
