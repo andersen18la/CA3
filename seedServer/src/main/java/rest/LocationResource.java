@@ -61,7 +61,7 @@ public class LocationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getLocations()
     {
-        lf.addLocation(new Location("et navn eller titel på stedet","Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
+        //lf.addLocation(new Location("et navn eller titel på stedet","Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
         List<Location> locations = lf.getAllLocations();
 
         List<LocationMapper> jsonList = new ArrayList<>();

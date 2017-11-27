@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {GoogleMapReact, Marker} from 'google-map-react';
+import GoogleMapReact from 'google-map-react';
 import ReactDOM from 'react-dom';
 import geocoder from 'geocoder'
+import Places from './Places'
+import placeData from '../facades/placeFacade'
+const URL = require("../../package.json").serverURL;
 
 
 
 const AnyReactComponent = ({ text, alerthis }) => (
-
 
     <div style={{
         position: 'relative', color: 'white', background: 'red',
@@ -19,14 +21,16 @@ const AnyReactComponent = ({ text, alerthis }) => (
 
 );
 
+
 export default class Map extends Component {
     constructor(props) {
         super(props);
-        this.state = { city: "null", lat: 0.0, lng: 0.0 }
+        this.state = { city: "null", lat: 0.0, lng: 0.0}
         this.getCoords = this.getCoords.bind(this);
         this.goToPlace = this.goToPlace.bind(this);
         this.alerthis = this.alerthis.bind(this);
         this.testing = this.testing.bind(this);
+        this.dataStuff = this.dataStuff.bind(this);
     }
 
     static defaultProps = {
@@ -40,7 +44,7 @@ export default class Map extends Component {
         this.getCoords();
         setTimeout(() => {
             this.goToPlace();
-          }, 1000);
+        }, 1000);
     }
 
     getCoords() {
@@ -67,9 +71,30 @@ export default class Map extends Component {
         this.setState({ city: document.getElementById("cityname").value, lat: document.getElementById("lat").value, lng: document.getElementById("lng").value });
     }
 
+    dataStuff = () => {
+        
+        fetch(URL + "api/location/all").then(res => {
+                return res.json();
+            }).then(data => {
+                var fill = "";
+                
+                for(var i = 0; i < data.length; i++){
+                    if(i == data.length -1){
+                        fill+=data[i].city
+                    } else {
+                    fill+=data[i].city + ",";
+                    }
+                    document.getElementById("cities").innerHTML =fill;
+                }
+            })
+    }
+    splitTest(){
+        var arr = document.getElementById("cities").innerHTML.split(",");
+        var mapped = arr.map(function(element){ return <AnyReactComponent lat="0.0" lng="0.0" text={arr[0].city}/> })
+        document.getElementById("yo").innerHTML = mapped;
+    }
 
     render() {
-
 
 
         return (
@@ -89,6 +114,8 @@ export default class Map extends Component {
                         alerthis={this.alerthis}
 
                     />
+                    <div id="yo"></div>
+                  
                 </GoogleMapReact>
                 {this.state.coords}
                 <button onClick={this.testing}>go to destination</button>
@@ -96,6 +123,10 @@ export default class Map extends Component {
                 <input id="lat" type="hidden" value="55.41904033" />
                 <input id="lng" type="hidden" value="10.33593535" />
                 <p>coordinates: city: {this.state.city}, lat:{this.state.lat}, lng:{this.state.lng}</p>
+                <button onClick={this.dataStuff}>here</button>
+                <button onClick={this.splitTest}>after</button>
+                <p id="cities"></p>
+
             </div>
         );
     }
