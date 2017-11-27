@@ -26,7 +26,7 @@ public class UserHaveAlreadyRatedExceptionMapper implements ExceptionMapper<User
         int statusCode = 400;
         ex.printStackTrace();
         errorDetail.addProperty("code", statusCode);
-        errorDetail.addProperty("message", "User have already rated this place." + ex.getMessage());
+        errorDetail.addProperty("message", "User have already rated this location." + ex.getMessage());
         error.add("error", errorDetail);
         return Response.status(statusCode).entity(gson.toJson(error)).type(MediaType.APPLICATION_JSON).build();
     }

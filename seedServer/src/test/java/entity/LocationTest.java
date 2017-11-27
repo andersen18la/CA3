@@ -15,9 +15,9 @@ import security.PasswordStorage;
  *
  * @author Lasse Andersen
  */
-public class PlaceTest {
+public class LocationTest {
 
-    public PlaceTest() {
+    public LocationTest() {
     }
 
     @BeforeClass
@@ -29,13 +29,13 @@ public class PlaceTest {
     }
 
     /**
-     * Test of getGeo method, of class Place.
+     * Test of getGeo method, of class Location.
      */
     @Test
     public void testGetRatings() throws PasswordStorage.CannotPerformOperationException {
         System.out.println("getRatings");
         IUser user = new User("Bob", "test");
-        Place instance = new Place("En titel","Herlev", "herlevgade", "666", "En ulækker by", "Hejby", "drev.c");
+        Location instance = new Location("En titel","Herlev", "herlevgade", "666", "En ulækker by", "Hejby", "drev.c");
         Rating rating = new Rating(4, (User) user, instance);
         instance.addRating(rating);
         int expResult = 1;
@@ -48,7 +48,7 @@ public class PlaceTest {
     public void testGetAverageRating() throws PasswordStorage.CannotPerformOperationException {
         System.out.println("getAverageRating");
         User user = new User("bob", "test");
-        Place instance = new Place("En titel","fredensborg", "aalborggade", "3400", "43333,33333", "En flot en", "cd.dk.zip.nu.drev");
+        Location instance = new Location("En titel","fredensborg", "aalborggade", "3400", "43333,33333", "En flot en", "cd.dk.zip.nu.drev");
         Rating rating2 = new Rating(4, user, instance);
         Rating rating = new Rating(4, user, instance);
         instance.addRating(rating2);
@@ -63,7 +63,7 @@ public class PlaceTest {
     public void testAddRating() throws PasswordStorage.CannotPerformOperationException {
         System.out.println("addRating");
         IUser user = new User("bob", "test");
-        Place instance = new Place("En titel","Hilleroed", "hilleroed", "3400", "443,32", "hej byen", "drev.nu");
+        Location instance = new Location("En titel","Hilleroed", "hilleroed", "3400", "443,32", "hej byen", "drev.nu");
         Rating rating = new Rating(4, (User) user, instance);
         boolean expResult = true;
         boolean result = instance.addRating(rating);
@@ -75,7 +75,7 @@ public class PlaceTest {
     public void testHasUserRated() throws PasswordStorage.CannotPerformOperationException {
         System.out.println("hasUserRated");
         IUser user = new User("bob", "test");
-        Place instance = new Place("En titel","fredensborg", "hejgade", "3400", "erewr", "hej med dig", "343433");
+        Location instance = new Location("En titel","fredensborg", "hejgade", "3400", "erewr", "hej med dig", "343433");
         Rating rating = new Rating(3, (User) user, instance);
         instance.addRating(rating);
         boolean expResult = true;
@@ -88,13 +88,13 @@ public class PlaceTest {
     public void testAddingTwoDifferentRatings() throws PasswordStorage.CannotPerformOperationException {
         System.out.println("testAddingTwoDifferentRatings");
         IUser user = new User("bob", "test");
-        Place place = new Place("En titel","herlev", "hovedgade", "666", "gekko", "en grim by", "cd.dk");
-        Rating rate1 = new Rating(4, (User) user, place);
-        Rating rate2 = new Rating(2, (User) user, place);
-        place.addRating(rate1);
-        place.addRating(rate2);
+        Location location = new Location("En titel","herlev", "hovedgade", "666", "gekko", "en grim by", "cd.dk");
+        Rating rate1 = new Rating(4, (User) user, location);
+        Rating rate2 = new Rating(2, (User) user, location);
+        location.addRating(rate1);
+        location.addRating(rate2);
         int expResult = 1;
-        int actualResult = place.getRatings().size();
+        int actualResult = location.getRatings().size();
         assertEquals(expResult, actualResult);
 
     }
