@@ -9,23 +9,23 @@ package exceptions;
  *
  * @author Bloch
  */
-public class PlaceDoesNotExistsException extends RuntimeException {
+public class LocationDoesNotExistsException extends RuntimeException {
 
     /**
-     * Creates a new instance of <code>PlaceDoesNotExistsException</code>
+     * Creates a new instance of <code>LocationDoesNotExistsException</code>
      * without detail message.
      */
-    public PlaceDoesNotExistsException()
+    public LocationDoesNotExistsException()
     {
     }
 
     /**
-     * Constructs an instance of <code>PlaceDoesNotExistsException</code> with
+     * Constructs an instance of <code>LocationDoesNotExistsException</code> with
      * the specified detail message.
      *
      * @param msg the detail message.
      */
-    public PlaceDoesNotExistsException(String msg)
+    public LocationDoesNotExistsException(String msg)
     {
         super(msg);
     }

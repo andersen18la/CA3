@@ -1,16 +1,16 @@
 package facades;
 
-import entity.Place;
+import entity.Location;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-public class PlaceFacade implements IPlaceFacade {
+public class LocationFacade implements ILocationFacade {
 
     private EntityManagerFactory emf;
 
-    public PlaceFacade(EntityManagerFactory emf)
+    public LocationFacade(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -21,15 +21,15 @@ public class PlaceFacade implements IPlaceFacade {
     }
 
     @Override
-    public List<Place> getAllPlaces()
+    public List<Location> getAllLocations()
     {
-        List<Place> places;
+        List<Location> locations;
         EntityManager em = getEntityManager();
         try
         {
-            Query q = em.createNamedQuery("Place.findAllPlaces");
-            places = q.getResultList();
-            return places;
+            Query q = em.createNamedQuery("Location.findAllLocations");
+            locations = q.getResultList();
+            return locations;
 
         } catch (Exception e)
         {
@@ -41,15 +41,15 @@ public class PlaceFacade implements IPlaceFacade {
     }
 
     @Override
-    public Place getPlace(int id)
+    public Location getLocation(int id)
     {
         Long lid = (long) id;
         EntityManager em = getEntityManager();
-        Place place;
+        Location location;
         try
         {
-            place = em.find(Place.class, lid);
-            return place;
+            location = em.find(Location.class, lid);
+            return location;
         } finally
         {
             em.close();
@@ -57,15 +57,15 @@ public class PlaceFacade implements IPlaceFacade {
     }
 
     @Override
-    public Place addPlace(Place place)
+    public Location addLocation(Location location)
     {
         EntityManager em = getEntityManager();
         try
         {
             em.getTransaction().begin();
-            em.persist(place);
+            em.persist(location);
             em.getTransaction().commit();
-            return place;
+            return location;
         } catch (Exception e)
         {
             em.getTransaction().rollback();
@@ -77,15 +77,15 @@ public class PlaceFacade implements IPlaceFacade {
     }
 
     @Override
-    public Place editPlace(Place place)
+    public Location editLocation(Location location)
     {
         EntityManager em = getEntityManager();
         try
         {
             em.getTransaction().begin();
-            em.merge(place);
+            em.merge(location);
             em.getTransaction().commit();
-            return place;
+            return location;
 
         } catch (Exception e)
         {
@@ -98,17 +98,17 @@ public class PlaceFacade implements IPlaceFacade {
     }
 
     @Override
-    public boolean deletePlace(int id)
+    public boolean deleteLocation(int id)
     {
         EntityManager em = getEntityManager();
         long lid = (long) id;
         try
         {
-            Place place = em.find(Place.class, lid);
-            if (place != null)
+            Location location = em.find(Location.class, lid);
+            if (location != null)
             {
                 em.getTransaction().begin();
-                em.remove(place);
+                em.remove(location);
                 em.getTransaction().commit();
                 return true;
             }

@@ -1,9 +1,9 @@
 package deploy;
 
-import entity.Place;
+import entity.Location;
 import entity.Role;
 import entity.User;
-import facades.PlaceFacade;
+import facades.LocationFacade;
 import facades.UserFacade;
 import java.io.IOException;
 import java.io.InputStream;

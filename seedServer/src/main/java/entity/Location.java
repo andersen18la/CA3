@@ -12,13 +12,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@Entity(name = "PLACE")
+@Entity(name = "LOCATION")
 @NamedQueries(
         {
-            @NamedQuery(name = "Place.findAllPlaces", query = "SELECT p FROM PLACE p")
+            @NamedQuery(name = "Location.findAllLocations", query = "SELECT l FROM LOCATION l")
         }
 )
-public class Place implements Serializable {
+public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,15 +34,15 @@ public class Place implements Serializable {
     private String geo;
 //    private int rating;
 
-    @OneToMany(mappedBy = "place")
+    @OneToMany(mappedBy = "location")
     private List<Rating> ratings;
 
-    public Place()
+    public Location()
     {
         this.ratings = new ArrayList<>();
     }
 
-    public Place(String title, String city, String street, String zip, String geo, String description, String imageUri)
+    public Location(String title, String city, String street, String zip, String geo, String description, String imageUri)
     {
         this.city = city;
         this.street = street;
@@ -53,7 +53,7 @@ public class Place implements Serializable {
         this.geo = geo;
     }
 
-    public Place(String city, String street, String zip, String description, String imageUri, String geo, List<Rating> ratings)
+    public Location(String city, String street, String zip, String description, String imageUri, String geo, List<Rating> ratings)
     {
         this.city = city;
         this.street = street;
@@ -206,7 +206,7 @@ public class Place implements Serializable {
     @Override
     public String toString()
     {
-        return "entity.Place[ id=" + id + " ]";
+        return "entity.Location[ id=" + id + " ]";
     }
 
 }
