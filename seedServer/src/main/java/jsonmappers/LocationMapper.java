@@ -5,7 +5,7 @@
  */
 package jsonmappers;
 
-import entity.Place;
+import entity.Location;
 import entity.Rating;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Lasse Andersen
  */
-public class PlaceMapper {
+public class LocationMapper {
 
     private Long id;
     private String title;
@@ -27,28 +27,28 @@ public class PlaceMapper {
     private List<RatingMapper> ratings;
     private double rating = 0;
 
-    public PlaceMapper()
+    public LocationMapper()
     {
     }
 
-    public PlaceMapper(Place place)
+    public LocationMapper(Location location)
     {
-        this.title = place.getTitle();
-        this.id = place.getId();
-        this.city = place.getCity();
-        this.street = place.getStreet();
-        this.zip = place.getZip();
-        this.description = place.getDescription();
-        this.imageUri = place.getImageUri();
-        this.geo = place.getGeo();
+        this.title = location.getTitle();
+        this.id = location.getId();
+        this.city = location.getCity();
+        this.street = location.getStreet();
+        this.zip = location.getZip();
+        this.description = location.getDescription();
+        this.imageUri = location.getImageUri();
+        this.geo = location.getGeo();
         this.ratings = new ArrayList<>();
-        if (!place.getRatings().isEmpty())
+        if (!location.getRatings().isEmpty())
         {
-            for (Rating placeRating : place.getRatings())
+            for (Rating locationRating : location.getRatings())
             {
-                this.ratings.add(new RatingMapper(placeRating));
+                this.ratings.add(new RatingMapper(locationRating));
             }
-            this.rating = place.getAverageRating();
+            this.rating = location.getAverageRating();
         }
     }
 

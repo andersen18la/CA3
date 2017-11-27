@@ -2,10 +2,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entity.Place;
+import entity.Location;
 import exceptions.FileTypeNotValidException;
-import facades.PlaceFacade;
-import jsonmappers.PlaceMapper;
+import facades.LocationFacade;
+import jsonmappers.LocationMapper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,20 +26,22 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-@Path("places")
-public class PlaceResource {
+@Path("locations")
+public class LocationResource {
 
-    private PlaceFacade pf;
+    private LocationFacade lf;
     private EntityManagerFactory emf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     //public static final String FILE_LOCATION = "/var/www/images/";
     //public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-    public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\sem3projekt\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
+    //public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\sem3projekt\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
+    public static final String FILE_LOCATION = "C:\\Users\\Lasse Andersen\\Desktop\\imgs\\";
+    
 
-    public PlaceResource()
+    public LocationResource()
     {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
-        this.pf = new PlaceFacade(emf);
+        this.lf = new LocationFacade(emf);
     }
 
     @GET
@@ -52,15 +54,15 @@ public class PlaceResource {
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPlaces()
+    public String getLocations()
     {
-        //pf.addPlace(new Place("et navn eller titel på stedet","Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
-        List<Place> places = pf.getAllPlaces();
+        lf.addLocation(new Location("et navn eller titel på stedet","Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
+        List<Location> locations = lf.getAllLocations();
 
-        List<PlaceMapper> jsonList = new ArrayList<>();
-        for (Place place : places)
+        List<LocationMapper> jsonList = new ArrayList<>();
+        for (Location location : locations)
         {
-            jsonList.add(new PlaceMapper(place));
+            jsonList.add(new LocationMapper(location));
         }
         String result = gson.toJson(jsonList);
         return result;
@@ -92,12 +94,12 @@ public class PlaceResource {
         //vi burde måske binde filename til en user? /john
         String uri = fileName;
         //int rating = json.get("rating").getAsInt();
-        Place place = new Place(title, city, street, zip, geo, description, uri);
-        place = pf.addPlace(place);
+        Location location = new Location(title, city, street, zip, geo, description, uri);
+        location = lf.addLocation(location);
 
         return Response
                 .status(Response.Status.CREATED)
-                .entity(gson.toJson(new PlaceMapper(place)))
+                .entity(gson.toJson(new LocationMapper(location)))
                 .build();
     }
 

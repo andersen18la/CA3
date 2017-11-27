@@ -10,6 +10,6 @@
     -->
     <context-param>
         <param-name>makeTestUser</param-name>
-        <param-value>false</param-value>
+        <param-value>true</param-value>
     </context-param>
 </web-app>

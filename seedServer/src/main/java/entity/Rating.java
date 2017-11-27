@@ -23,27 +23,27 @@ public class Rating implements Serializable {
     @OneToOne
     private User user;
     @ManyToOne
-    private Place place;
+    private Location location;
 
     public Rating()
     {
     }
 
-    public Rating(int ratingValue, User user, Place place)
+    public Rating(int ratingValue, User user, Location location)
     {
         this.user = user;
         this.ratingValue = ratingValue;
-        this.place = place;
+        this.location = location;
     }
 
-    public Place getPlace()
+    public Location getLocation()
     {
-        return place;
+        return location;
     }
 
-    public void setPlace(Place place)
+    public void setLocation(Location location)
     {
-        this.place = place;
+        this.location = location;
     }
 
     public int getRatingValue()
