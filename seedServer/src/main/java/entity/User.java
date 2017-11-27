@@ -10,7 +10,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import security.IUser;
 import security.PasswordStorage;
 
 @Entity(name = "SEED_USER")
@@ -95,6 +94,16 @@ public class User implements IUser, Serializable {
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    public Rating getRating()
+    {
+        return rating;
+    }
+
+    public void setRating(Rating rating)
+    {
+        this.rating = rating;
     }
 
     @Override

@@ -30,7 +30,7 @@ class TopMenu extends Component {
   removeTable() {
     var arr = [];
     if (!this.state.loggedIn && document.URL === "http://localhost:3000/#/") {
-      arr.push(<PlacesHome />);
+      arr.push(<PlacesHome key={"hmm"} />);
       return arr;
     }
   }
@@ -38,10 +38,10 @@ class TopMenu extends Component {
   again() {
     var arr = [];
     if (this.state.loggedIn && !this.state.isAdmin && document.URL === "http://localhost:3000/#/") {
-      arr.push(<Places />);
+      arr.push(<Places key={"hmm1"} />);
       return arr;
     } else if (this.state.loggedIn && this.state.isAdmin && document.URL === "http://localhost:3000/#/") {
-      arr.push(<PlacesHome />);
+      arr.push(<PlacesHome key={"hmm2"} />);
       return arr;
     }
   }

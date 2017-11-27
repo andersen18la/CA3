@@ -1,5 +1,6 @@
-package httpErrors;
+package exceptionmappers;
 
+import javax.ws.rs.NotFoundException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -11,7 +12,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class GenericExceptionMapper implements ExceptionMapper<Exception> {
+public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -19,14 +20,13 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
     ServletContext context;
 
     @Override
-    public Response toResponse(Exception ex)
+    public Response toResponse(NotFoundException ex)
     {
         JsonObject error = new JsonObject();
         JsonObject errorDetail = new JsonObject();
-        int statusCode = 500;
-        ex.printStackTrace();
+        int statusCode = ex.getResponse().getStatus();
         errorDetail.addProperty("code", statusCode);
-        errorDetail.addProperty("message", "An unexpected problem occured on the server." + ex.getMessage());
+        errorDetail.addProperty("message", "The requested resource was not found on our server");
         error.add("error", errorDetail);
         return Response.status(statusCode).entity(gson.toJson(error)).type(MediaType.APPLICATION_JSON).build();
     }

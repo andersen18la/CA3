@@ -1,4 +1,4 @@
-package security;
+package exceptionmappers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

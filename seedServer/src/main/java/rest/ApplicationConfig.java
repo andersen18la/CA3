@@ -29,10 +29,9 @@ public class ApplicationConfig extends Application {
         resources.add(exceptionmappers.PlaceDoesNotExistExceptionMapper.class);
         resources.add(exceptionmappers.UserDoesNotExistExceptionMapper.class);
         resources.add(exceptionmappers.UserHaveAlreadyRatedExceptionMapper.class);
-        resources.add(httpErrors.GenericExceptionMapper.class);
-        resources.add(httpErrors.NotFoundExceptionMapper.class);
+        resources.add(exceptionmappers.GenericExceptionMapper.class);
+        resources.add(exceptionmappers.NotFoundExceptionMapper.class);
         resources.add(rest.Admin.class);
-        resources.add(rest.All.class);
         resources.add(rest.PlaceResource.class);
         resources.add(rest.RatingResource.class);
         resources.add(rest.Register.class);
@@ -40,7 +39,7 @@ public class ApplicationConfig extends Application {
         resources.add(rest.UserResource.class);
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.Login.class);
-        resources.add(security.NotAuthorizedExceptionMapper.class);
+        resources.add(exceptionmappers.NotAuthorizedExceptionMapper.class);
         resources.add(security.RolesAllowedFilter.class);
     }
 

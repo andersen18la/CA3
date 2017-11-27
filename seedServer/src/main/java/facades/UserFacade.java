@@ -1,7 +1,6 @@
 package facades;
 
 import entity.Role;
-import security.IUserFacade;
 import entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.core.Response;
-import security.IUser;
+import entity.IUser;
 import security.PasswordStorage;
 
 public class UserFacade implements IUserFacade {

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import security.IUser;
 
 @Entity(name = "PLACE")
 @NamedQueries(
@@ -25,6 +24,7 @@ public class Place implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String city;
     private String street;
     private String zip;
@@ -42,7 +42,7 @@ public class Place implements Serializable {
         this.ratings = new ArrayList<>();
     }
 
-    public Place(String city, String street, String zip, String geo, String description, String imageUri)
+    public Place(String title, String city, String street, String zip, String geo, String description, String imageUri)
     {
         this.city = city;
         this.street = street;
@@ -192,30 +192,16 @@ public class Place implements Serializable {
     {
         this.id = id;
     }
-//
-//    @Override
-//    public int hashCode()
-//    {
-//        int hash = 0;
-//        hash += (id != null ? id.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object)
-//    {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof Place))
-//        {
-//            return false;
-//        }
-//        Place other = (Place) object;
-//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
-//        {
-//            return false;
-//        }
-//        return true;
-//    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
 
     @Override
     public String toString()

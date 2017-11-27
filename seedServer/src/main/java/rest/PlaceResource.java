@@ -32,7 +32,9 @@ public class PlaceResource {
     private PlaceFacade pf;
     private EntityManagerFactory emf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
+    //public static final String FILE_LOCATION = "/var/www/images/";
+    //public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
+    public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\sem3projekt\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
     public PlaceResource()
     {
@@ -52,7 +54,7 @@ public class PlaceResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getPlaces()
     {
-        //pf.addPlace(new Place("Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
+        //pf.addPlace(new Place("et navn eller titel på stedet","Fredensborg", "dødens gade", "6633", "123123123,23423423", "En meeeeeget flot by", "bob.jpg"));
         List<Place> places = pf.getAllPlaces();
 
         List<PlaceMapper> jsonList = new ArrayList<>();
@@ -70,6 +72,7 @@ public class PlaceResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public Response bla(@DefaultValue("")
+            @FormDataParam("title") String title,
             @FormDataParam("city") String city,
             @FormDataParam("description") String description,
             @FormDataParam("street") String street,
@@ -79,7 +82,6 @@ public class PlaceResource {
             @FormDataParam("file") InputStream file,
             @FormDataParam("file") FormDataContentDisposition fileDisposition) throws IOException
     {
-
         String fileName = fileDisposition.getFileName();
         if (isFileTypeValid(fileName) == false)
         {
@@ -90,7 +92,7 @@ public class PlaceResource {
         //vi burde måske binde filename til en user? /john
         String uri = fileName;
         //int rating = json.get("rating").getAsInt();
-        Place place = new Place(city, street, zip, geo, description, uri);
+        Place place = new Place(title, city, street, zip, geo, description, uri);
         place = pf.addPlace(place);
 
         return Response

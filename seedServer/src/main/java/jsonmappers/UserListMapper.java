@@ -2,7 +2,7 @@ package jsonmappers;
 
 import java.util.ArrayList;
 import java.util.List;
-import security.IUser;
+import entity.IUser;
 
 public class UserListMapper {
 

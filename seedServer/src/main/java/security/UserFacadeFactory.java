@@ -1,5 +1,6 @@
 package security;
 
+import facades.IUserFacade;
 import facades.UserFacade;
 import javax.persistence.Persistence;
 

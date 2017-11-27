@@ -5,7 +5,7 @@ import auth from "../authorization/auth";
 class Login extends Component {
   constructor() {
     super();
-    this.state = { err: "", user: {username:"",password:""} }
+    this.state = { err: "", user: { username: "", password: "" } }
   }
 
   handleSubmit = (event) => {
@@ -26,7 +26,7 @@ class Login extends Component {
     const value = e.target.value;
     let user = this.state.user;
     user[propertyName] = value;
-    this.setState({user});
+    this.setState({ user });
   }
 
   render() {
@@ -41,12 +41,12 @@ class Login extends Component {
           <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           <br />
         </form>
-        { this.state.err && ( 
-          <div className="alert alert-danger errmsg"  role="alert"> 
+        {this.state.err && (
+          <div className="alert alert-danger errmsg" role="alert">
             {this.state.err}
           </div>
         )}
-       
+
       </div>
     )
   }

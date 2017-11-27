@@ -1,5 +1,6 @@
-package security;
+package facades;
 
+import entity.IUser;
 import java.util.List;
 
 /**
