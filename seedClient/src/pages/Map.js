@@ -25,12 +25,16 @@ const AnyReactComponent = ({ text, alerthis }) => (
 export default class Map extends Component {
     constructor(props) {
         super(props);
-        this.state = { city: "null", lat: 0.0, lng: 0.0}
+        this.state = { city: "null", lat: 0.0, lng: 0.0, cities : [], "dependencies": {
+            "testing" : 123
+          }}
         this.getCoords = this.getCoords.bind(this);
         this.goToPlace = this.goToPlace.bind(this);
         this.alerthis = this.alerthis.bind(this);
         this.testing = this.testing.bind(this);
         this.dataStuff = this.dataStuff.bind(this);
+        this.splitTest = this.splitTest.bind(this);
+        this.randomNum = this.randomNum.bind(this);
     }
 
     static defaultProps = {
@@ -89,14 +93,17 @@ export default class Map extends Component {
             })
     }
     splitTest(){
+        if(document.getElementById("cities").innerHTML !== null){
         var arr = document.getElementById("cities").innerHTML.split(",");
-        var mapped = arr.map(function(element){ return <AnyReactComponent lat="0.0" lng="0.0" text={arr[0].city}/> })
-        document.getElementById("yo").innerHTML = mapped;
+        this.setState({ cities : arr});
     }
-
+    }
+randomNum(){
+     return Math.random();
+}
     render() {
-
-
+        var num = this.randomNum();
+const mapped = this.state.cities.map(function(element){ return <AnyReactComponent lat={num} lng={num} text={element}/> })
         return (
             <div style={{ width: '100%', height: '500px' }}>
                 <h3>Hello, please enter a city, street or zip that exists in Denmark in order to pinpoint your destination</h3>
@@ -114,10 +121,12 @@ export default class Map extends Component {
                         alerthis={this.alerthis}
 
                     />
-                    <div id="yo"></div>
+                    {mapped}
+              
                   
                 </GoogleMapReact>
-                {this.state.coords}
+                {this.state.dependencies.testing}
+                {this.state.cities}
                 <button onClick={this.testing}>go to destination</button>
                 <input id="cityname" type="text" /><span id="msg"></span>
                 <input id="lat" type="hidden" value="55.41904033" />
@@ -126,6 +135,7 @@ export default class Map extends Component {
                 <button onClick={this.dataStuff}>here</button>
                 <button onClick={this.splitTest}>after</button>
                 <p id="cities"></p>
+                
 
             </div>
         );
