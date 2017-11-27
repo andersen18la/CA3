@@ -25,16 +25,14 @@ const AnyReactComponent = ({ text, alerthis }) => (
 export default class Map extends Component {
     constructor(props) {
         super(props);
-        this.state = { city: "null", lat: 0.0, lng: 0.0, cities : [], "dependencies": {
-            "testing" : 123
-          }}
+        this.state = { city: "null", lat: 0.0, lng: 0.0, cities: [], dependencies: [] }
         this.getCoords = this.getCoords.bind(this);
         this.goToPlace = this.goToPlace.bind(this);
         this.alerthis = this.alerthis.bind(this);
-        this.testing = this.testing.bind(this);
+        this.chooseLocation = this.chooseLocation.bind(this);
         this.dataStuff = this.dataStuff.bind(this);
         this.splitTest = this.splitTest.bind(this);
-        this.randomNum = this.randomNum.bind(this);
+        this.showLocations = this.showLocations.bind(this);
     }
 
     static defaultProps = {
@@ -44,13 +42,20 @@ export default class Map extends Component {
     alerthis() {
         alert("qwewq");
     }
-    testing() {
+    chooseLocation() {
         this.getCoords();
         setTimeout(() => {
             this.goToPlace();
-        }, 1000);
+        }, 700
+    );
     }
+showLocations(){
+    this.dataStuff();
 
+    setTimeout(() => {
+        this.splitTest();
+    }, 700);
+}
     getCoords() {
         try {
 
@@ -76,34 +81,49 @@ export default class Map extends Component {
     }
 
     dataStuff = () => {
-        
+
         fetch(URL + "api/location/all").then(res => {
-                return res.json();
-            }).then(data => {
-                var fill = "";
-                
-                for(var i = 0; i < data.length; i++){
-                    if(i == data.length -1){
-                        fill+=data[i].city
-                    } else {
-                    fill+=data[i].city + ",";
-                    }
-                    document.getElementById("cities").innerHTML =fill;
+            return res.json();
+        }).then(data => {
+            var fill = "";
+
+            for (var i = 0; i < data.length; i++) {
+                if (i == data.length - 1) {
+                    fill += data[i].city
+                } else {
+                    fill += data[i].city + ",";
                 }
-            })
+                document.getElementById("cities").innerHTML = fill;
+            }
+        })
     }
-    splitTest(){
-        if(document.getElementById("cities").innerHTML !== null){
-        var arr = document.getElementById("cities").innerHTML.split(",");
-        this.setState({ cities : arr});
+    splitTest() {
+        if (document.getElementById("cities").innerHTML !== null) {
+            var arr = document.getElementById("cities").innerHTML.split(",");
+            var arrayvar = this.state.dependencies.slice();
+            for (var i = 0; i < arr.length; i++) {
+                var lat = 0.0;
+                var lng = 0.0;
+                geocoder.geocode(arr[i] + ", DK", function (err, data) {
+                    try {
+                        lat = data.results[0].geometry.location.lat;
+                        lng = data.results[0].geometry.location.lng;
+                        arrayvar.push({ city: data.results[0].formatted_address, lat: lat, lng: lng });
+                    } catch (e) {
+                        alert("ERROR!!!!!!");
+                    }
+                });
+                    
+               
+            }
+            this.setState({ dependencies: arrayvar });
+            setTimeout(() => {
+                this.goToPlace();
+            }, 700);
+        }
     }
-    }
-randomNum(){
-     return Math.random();
-}
     render() {
-        var num = this.randomNum();
-const mapped = this.state.cities.map(function(element){ return <AnyReactComponent lat={num} lng={num} text={element}/> })
+        const mapped = this.state.dependencies.map(function (element) { return <AnyReactComponent lat={element.lat} lng={element.lng} text={element.city} /> })
         return (
             <div style={{ width: '100%', height: '500px' }}>
                 <h3>Hello, please enter a city, street or zip that exists in Denmark in order to pinpoint your destination</h3>
@@ -122,20 +142,18 @@ const mapped = this.state.cities.map(function(element){ return <AnyReactComponen
 
                     />
                     {mapped}
-              
-                  
+
+
                 </GoogleMapReact>
-                {this.state.dependencies.testing}
                 {this.state.cities}
-                <button onClick={this.testing}>go to destination</button>
+                <button onClick={this.chooseLocation}>go to destination</button>
                 <input id="cityname" type="text" /><span id="msg"></span>
                 <input id="lat" type="hidden" value="55.41904033" />
                 <input id="lng" type="hidden" value="10.33593535" />
                 <p>coordinates: city: {this.state.city}, lat:{this.state.lat}, lng:{this.state.lng}</p>
-                <button onClick={this.dataStuff}>here</button>
-                <button onClick={this.splitTest}>after</button>
+                <button onClick={this.showLocations}>make locations appear</button>
                 <p id="cities"></p>
-                
+
 
             </div>
         );
