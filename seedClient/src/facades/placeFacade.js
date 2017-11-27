@@ -14,7 +14,7 @@ class PlaceStore {
         this._messageFromServer = "";
         let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
         const options = fetchHelper.makeOptions("GET", false);
-        fetch(URL + "api/locations/all", options)
+        fetch(URL + "api/location/all", options)
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
