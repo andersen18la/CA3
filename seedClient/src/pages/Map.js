@@ -104,11 +104,13 @@ showLocations(){
             for (var i = 0; i < arr.length; i++) {
                 var lat = 0.0;
                 var lng = 0.0;
+                var id = 1;
                 geocoder.geocode(arr[i] + ", DK", function (err, data) {
                     try {
                         lat = data.results[0].geometry.location.lat;
                         lng = data.results[0].geometry.location.lng;
-                        arrayvar.push({ city: data.results[0].formatted_address, lat: lat, lng: lng });
+                        arrayvar.push({ id: id, city: data.results[0].formatted_address, lat: lat, lng: lng });
+                        id++;
                     } catch (e) {
                         alert("ERROR!!!!!!");
                     }
@@ -117,13 +119,14 @@ showLocations(){
                
             }
             this.setState({ dependencies: arrayvar });
+            console.log(this.state.dependencies);
             setTimeout(() => {
                 this.goToPlace();
             }, 700);
         }
     }
     render() {
-        const mapped = this.state.dependencies.map(function (element) { return <AnyReactComponent lat={element.lat} lng={element.lng} text={element.city} /> })
+        const mapped = this.state.dependencies.map(function (element) { return <AnyReactComponent lat={element.lat} lng={element.lng} text={element.city} key={element.id} /> })
         return (
             <div style={{ width: '100%', height: '500px' }}>
                 <h3>Hello, please enter a city, street or zip that exists in Denmark in order to pinpoint your destination</h3>
