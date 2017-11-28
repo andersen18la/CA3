@@ -60,8 +60,7 @@ public class RatingResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response putJson(String content)
-    {
-     
+    {     
         JsonObject json = new JsonParser().parse(content).getAsJsonObject();
         String userId = json.get("userId").getAsString();
         int ratingValue = json.get("ratingValue").getAsInt();

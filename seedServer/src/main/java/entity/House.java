@@ -6,56 +6,24 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity(name ="HOUSE")
-public class House implements Serializable {
+public class House extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Location location;
     
     public House() {
     }
 
-    
-    public House(Location location) {
-    this.location = location;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public House(String title, String city, String street, String zip, String geo, String description, String imageUri)
+    {
+        super(title, city, street, zip, geo, description, imageUri);
     }
     
-    
-    
-    
-
     @Override
     public String toString() {
-        return "entity.House[ id=" + id + " ]";
+        return "entity.House[ id=" + super.getId() + " ]";
     }
 
 }

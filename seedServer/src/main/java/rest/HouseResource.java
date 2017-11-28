@@ -54,7 +54,7 @@ public class HouseResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
-        House huset = new House(new Location("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg"));
+        House huset = new House("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg");
         hf.addHouse(huset);
         List<House> houses = hf.getHouses();
         List<HouseMapper> houseMappers = new ArrayList<>();
@@ -90,8 +90,8 @@ public class HouseResource {
         //vi burde måske binde filename til en user? /john
         String uri = fileName;
         //int rating = json.get("rating").getAsInt();
-        Location location = new Location(title, city, street, zip, geo, description, uri);
-        House house = hf.addHouse(new House(location));
+        House house = new House(title, city, street, zip, geo, description, uri);
+        house = hf.addHouse(house);
 
         return Response
                 .status(Response.Status.CREATED)
