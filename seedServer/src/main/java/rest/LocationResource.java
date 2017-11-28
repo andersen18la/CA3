@@ -36,12 +36,9 @@ public class LocationResource {
     //public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
    // public static final String FILE_LOCATION = "C:\\Users\\marik\\Desktop\\Ca3\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
-<<<<<<< HEAD
 
     public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-=======
-    public static final String FILE_LOCATION = "C:\\Users\\marik\\Desktop\\Ca3\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
->>>>>>> 44f678078067d2d2ed2b0d1ff177197835c266c9
+
 
     //public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\sem3projekt\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
