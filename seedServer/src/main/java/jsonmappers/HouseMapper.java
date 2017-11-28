@@ -27,20 +27,20 @@ public class HouseMapper {
     }
 
     public HouseMapper(House house) {
-        this.title = house.getLocation().getTitle();
+        this.title = house.getTitle();
         this.id = house.getId();
-        this.city = house.getLocation().getCity();
-        this.street = house.getLocation().getStreet();
-        this.zip = house.getLocation().getZip();
-        this.description = house.getLocation().getDescription();
-        this.imageUri = house.getLocation().getImageUri();
-        this.geo = house.getLocation().getGeo();
+        this.city = house.getCity();
+        this.street = house.getStreet();
+        this.zip = house.getZip();
+        this.description = house.getDescription();
+        this.imageUri = house.getImageUri();
+        this.geo = house.getGeo();
         this.ratings = new ArrayList<>();
-        if (!house.getLocation().getRatings().isEmpty()) {
-            for (Rating locationRating : house.getLocation().getRatings()) {
+        if (!house.getRatings().isEmpty()) {
+            for (Rating locationRating : house.getRatings()) {
                 this.ratings.add(new RatingMapper(locationRating));
             }
-            this.rating = house.getLocation().getAverageRating();
+            this.rating = house.getAverageRating();
         }
     }
 

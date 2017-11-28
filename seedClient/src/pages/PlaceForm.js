@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 const URL = require("../../package.json").serverURL;
 
 function handleErrors(response) {
@@ -22,7 +23,8 @@ export default class PlaceForm extends Component {
                 url: "",
                 geo: "",
                 rating: "",
-            }
+            },
+            test: "hey"
         };
     }
 
@@ -37,11 +39,20 @@ export default class PlaceForm extends Component {
             }
         ));
     }
+    
+    setGeo = geo => {
+        this.setState(prevState => (
+            {
+                place: { ...prevState.place, geo }
+            }
+        ))
+    }
 
     onSubmitHandler = e => {
         e.preventDefault();
         let place = this.state.place;
         let file = document.querySelector('input[type="file"]');
+        //console.log(this.state.place.geo);
         let data = new FormData();
         //det her må man kunne gøre mere smart...
         data.append("title", place.title);
@@ -49,7 +60,7 @@ export default class PlaceForm extends Component {
         data.append("description", place.description);
         data.append("street", place.street);
         data.append("zip", place.zip);
-        data.append("geo", place.geo);
+        data.append("geo", this.props.geo);
         data.append("user", 'WEB User');
         data.append('file', file.files[0]);
         console.log(data);
@@ -85,13 +96,14 @@ export default class PlaceForm extends Component {
         return (
             <div>
                 <center>
+
                     <form id="usrform" className="form-inline" onSubmit={this.onSubmitHandler}>
                         Title:<br /> <input name="title" className="form-control" type="text" onChange={this.onChangeHandler} value={this.state.place.title} required /><br />
-                        City:<br /> <input name="city" className="form-control" type="text" onChange={this.onChangeHandler} value={this.state.place.city} required /><br />
+                        City:<br /> <input id="getCity" name="city" className="form-control" type="text" onChange={this.onChangeHandler} value={this.state.place.city} required /><br />
                         Description:<br /><textarea className="form-control" style={{ height: 200, width: 300 }} onChange={this.onChangeHandler} name="description" form="usrform"></textarea><br />
                         Street:<br /> <input name="street" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.street} required /><br />
                         Zip:<br /> <input name="zip" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.zip} required /><br />
-                        Geo:<br /> <input name="geo" type="text" className="form-control" onChange={this.onChangeHandler} value={this.state.place.geo} required /><br />
+                        {/*Geo:<br /> <input id="getGeo" name="geo" type="text" className="form-control" onPaste={this.onChangeHandler} onCopy={this.onChangeHandler} onChange={this.onChangeHandler} value={this.state.place.geo} required /><br />*/}
                         <br /><input type="file" className="form-control" accept=".jpg,.png" name="file" required /><br />
                         <input className="btn btn-success" type="submit" value="Save the place" />
                     </form>

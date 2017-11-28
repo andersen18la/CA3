@@ -49,6 +49,7 @@ class PlaceStore {
     }
 
     createRating(rating, cb) {
+        console.log("create rating" + rating);
         this._errorMessage = "";
         this._messageFromServer = "";
         let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server

@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import entity.House;
 import entity.Location;
 import exceptions.FileTypeNotValidException;
+import exceptions.HouseNotFoundException;
 import facades.HouseFacade;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +29,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jsonmappers.HouseMapper;
@@ -54,7 +56,7 @@ public class HouseResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
-        House huset = new House(new Location("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg"));
+        House huset = new House("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg");
         hf.addHouse(huset);
         List<House> houses = hf.getHouses();
         List<HouseMapper> houseMappers = new ArrayList<>();
@@ -66,6 +68,19 @@ public class HouseResource {
                 .status(Response.Status.OK)
                 .entity(gson.toJson(houseMappers))
                 .build();
+    }
+    
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHouseById(@PathParam("id")int id){
+        House house = hf.getHouse(id);
+        if(house == null){
+            //return Response.status(Response.Status.GONE).build();
+            throw new HouseNotFoundException();
+        }
+        HouseMapper houseMapper = new HouseMapper(house);
+       return Response.status(Response.Status.OK).entity(gson.toJson(houseMapper)).build();
     }
 
     @POST
@@ -90,8 +105,8 @@ public class HouseResource {
         //vi burde måske binde filename til en user? /john
         String uri = fileName;
         //int rating = json.get("rating").getAsInt();
-        Location location = new Location(title, city, street, zip, geo, description, uri);
-        House house = hf.addHouse(new House(location));
+        House house = new House(title, city, street, zip, geo, description, uri);
+        house = hf.addHouse(house);
 
         return Response
                 .status(Response.Status.CREATED)

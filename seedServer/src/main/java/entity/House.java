@@ -6,56 +6,54 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-@Entity(name ="HOUSE")
-public class House implements Serializable {
+@Entity(name = "HOUSE")
+public class House extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Location location;
-    
+    @OneToMany(mappedBy = "house")
+    private List<Booking> bookingList;
+
     public House() {
+        this.bookingList = new ArrayList<>();
     }
 
-    
-    public House(Location location) {
-    this.location = location;
+    public House(String title, String city, String street, String zip, String geo, String description, String imageUri) {
+        super(title, city, street, zip, geo, description, imageUri);
+        this.bookingList = new ArrayList<>();
     }
 
-    public Location getLocation() {
-        return location;
+    public List<Booking> getBookingList() {
+        return bookingList;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
     }
 
-    public Long getId() {
-        return id;
+    public boolean addBooking(Booking booking) {
+        if (isDateTaken(booking) == true) {
+            return false;
+        }
+        return this.bookingList.add(booking);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public boolean isDateTaken(Booking booking) {
+        for (Booking bookingInList : this.bookingList) {
+            if (bookingInList.getStartDate().equals(booking.getStartDate())) {
+                return true;
+            }
+        }
+        return false;
     }
-    
-    
-    
-    
 
     @Override
     public String toString() {
-        return "entity.House[ id=" + id + " ]";
+        return "entity.House[ id=" + super.getId() + " ]";
     }
 
 }
