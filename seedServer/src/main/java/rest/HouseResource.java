@@ -51,7 +51,7 @@ public class HouseResource {
     }
 
     @GET
-    @Path("add")
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
         House huset = new House(new Location("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg"));
@@ -69,6 +69,7 @@ public class HouseResource {
     }
 
     @POST
+    @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response addHouse(@DefaultValue("") @FormDataParam("title") String title,
