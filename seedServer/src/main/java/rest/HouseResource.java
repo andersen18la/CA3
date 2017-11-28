@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import entity.House;
 import entity.Location;
 import exceptions.FileTypeNotValidException;
+import exceptions.HouseNotFoundException;
 import facades.HouseFacade;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +29,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jsonmappers.HouseMapper;
@@ -51,7 +53,6 @@ public class HouseResource {
     }
 
     @GET
-    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
         House huset = new House("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg");
@@ -66,6 +67,19 @@ public class HouseResource {
                 .status(Response.Status.OK)
                 .entity(gson.toJson(houseMappers))
                 .build();
+    }
+    
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHouseById(@PathParam("id")int id){
+        House house = hf.getHouse(id);
+        if(house == null){
+            //return Response.status(Response.Status.GONE).build();
+            throw new HouseNotFoundException();
+        }
+        HouseMapper houseMapper = new HouseMapper(house);
+       return Response.status(Response.Status.OK).entity(gson.toJson(houseMapper)).build();
     }
 
     @POST
