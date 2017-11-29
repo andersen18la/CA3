@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
+import MapTest from './MapTest'
 
 export default class PlacesHome extends Component {
   constructor(props) {
@@ -70,6 +71,9 @@ export default class PlacesHome extends Component {
     return (
 
       <div>
+        <div className="amapname">
+          <MapTest placeList={this.state.data} />
+        </div>
         <h1>Fetch data from Rest endpoint with all the places</h1>
         <div id="places">{this.genPlaceList()}</div>
       </div>

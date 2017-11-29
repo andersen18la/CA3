@@ -35,7 +35,7 @@ export default class App extends Component {
           <Route path="/admin" component={AdminPage} />
           <Route path="/users" component={AllUsers} />
           <Route path="/register" component={Register} />
-          <Route path="/map" component={Map}  />
+          <Route path="/map" component={Map}  />          
         </Switch>
 
       </div>
