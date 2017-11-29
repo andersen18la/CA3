@@ -3,6 +3,7 @@ import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 //fatter seriøst ikke det der compose pis.
+//link til guide tingest: https://tomchentw.github.io/react-google-maps/#introduction
 
 const MyMapComponent = compose(
     withProps({
