@@ -66,7 +66,7 @@ export default class Places extends Component {
     return (
       <div>        
        <div className="amapname">
-          <MapTest2 placeList={this.state.data} />
+          <MapTest2 placeList={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
         </div>        <div id="places"><div id="modal" className="container">
           <button className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add Location</button>
           <div className="modal fade" id="myModal" role="dialog">
@@ -90,6 +90,7 @@ export default class Places extends Component {
           </div>
         </div>
           <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
+
         </div> 
 
       </div>

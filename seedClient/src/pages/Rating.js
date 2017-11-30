@@ -27,6 +27,7 @@ export default class Rating extends Component {
     }
 
     onClickHandler = e => {
+        
         let value = e.target.value;
         console.log(this.state.rating);
         this.setState(prevState => (
@@ -41,6 +42,7 @@ export default class Rating extends Component {
     render() {
         return (
             <div>
+              
                 <form key={this.props.placeId} className="form-inline" onSubmit={this.submitHandler}>
                     <label><input className="form-inline" name="radio" type="radio" value="1" onClick={this.onClickHandler} required />1</label>
                     <label><input className="form-inline" name="radio" type="radio" value="2" onClick={this.onClickHandler} required />2</label>

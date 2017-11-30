@@ -1,6 +1,8 @@
 import React from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import placeFacade from '../facades/placeFacade'
+import placeFacade from '../facades/placeFacade';
+import Rating from './Rating';
+import auth from '../authorization/auth';
 
 export class MapTest2 extends React.Component {
     constructor(props) {
@@ -14,8 +16,21 @@ export class MapTest2 extends React.Component {
         }
     }
 
+    hasUserRated = (userId, ratings, placeId) => {
+        alert(ratings);
+        if (this.state.showingInfoWindow === true) {
+            let filterResult = ratings.filter(rating => {
+                return userId === rating.userId;
+            });
+            if (filterResult.length > 0) {
+                return "you have already rated";
+            }
+            return <Rating placeId={placeId} userId={this.props.userId} updateTable={this.props.updateTable} />
+        }
+    }
+
     onMapClickHandler = (x, y, lat, lng, event) => {
-        console.log(x, y, lat, lng, event);        
+        console.log(x, y, lat, lng, event);
     }
 
     onMarkerClickHandler = (markerProps, marker) => {
@@ -37,10 +52,11 @@ export class MapTest2 extends React.Component {
 
     render() {
         console.log(this.state);
+        const mapped = this.props.placeList.map(function(place){ return <p>place.id</p> });
         return (
             <div id="hvadfanden">
-                <Map id="thisIsMap"google={this.props.google}
-                    style={{left: '17%', top: 90, width: '65%', height: '65%'}}
+                <Map id="thisIsMap" google={this.props.google}
+                    style={{ left: '17%', top: 90, width: '65%', height: '65%' }}
                     zoom={8}
                     initialCenter={{
                         lat: 56,
@@ -57,16 +73,17 @@ export class MapTest2 extends React.Component {
                         />
                     ))}
 
-                    <InfoWindow 
+                    <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
                     >
                         <div>
                             <p>{this.state.selectedLocation.title}</p>
                             <p>{this.state.selectedLocation.description}</p>
+                            {mapped}
                         </div>
                     </InfoWindow>
-                    
+
                 </Map>
             </div>
 
