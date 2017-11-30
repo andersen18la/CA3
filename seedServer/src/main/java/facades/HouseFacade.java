@@ -9,6 +9,7 @@ import entity.House;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 public class HouseFacade implements IHouseFacade {
 
@@ -95,7 +96,7 @@ public class HouseFacade implements IHouseFacade {
         long lid = (long) id;
         try {
             House oldHouse = em.find(House.class, lid);
-            if(oldHouse == null) {
+            if (oldHouse == null) {
                 return null;
             }
             em.getTransaction().begin();
@@ -115,10 +116,37 @@ public class HouseFacade implements IHouseFacade {
             em.persist(house);
             em.getTransaction().commit();
             return house;
-            
+
         } finally {
             em.close();
         }
     }
 
+    @Override
+    public List<House> getHousesFromCity(String cityName) {
+        EntityManager em = getEntityManager();
+        String city = cityName;
+        try {
+            Query q = em.createNamedQuery("House.getHouseFromCity");
+            q.setParameter("city", city);
+            List<House> houses = q.getResultList();
+            return houses;
+
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<House> getHousesFromZip(String zip) {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNamedQuery("House.getHouseFromZip");
+            q.setParameter("zip", zip);
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -9,9 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity(name = "HOUSE")
+@NamedQueries(
+        {
+            @NamedQuery(name = "House.getHouseFromCity", query = "SELECT h FROM HOUSE h WHERE h.city = :city")
+            ,@NamedQuery(name = "House.getHouseFromZip", query = "SELECT h FROM HOUSE h WHERE h.zip = :zip")
+                
+        })
 public class House extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

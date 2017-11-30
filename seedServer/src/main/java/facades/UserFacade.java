@@ -1,5 +1,6 @@
 package facades;
 
+import entity.Booking;
 import entity.Role;
 import entity.User;
 import java.util.ArrayList;
@@ -16,54 +17,43 @@ public class UserFacade implements IUserFacade {
 
     EntityManagerFactory emf;
 
-    public UserFacade(EntityManagerFactory emf)
-    {
+    public UserFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    private EntityManager getEntityManager()
-    {
+    private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public List<IUser> getAllUsers()
-    {
+    public List<IUser> getAllUsers() {
         EntityManager em = getEntityManager();
         List<IUser> uList;
-        try
-        {
+        try {
             Query q = em.createNamedQuery("User.findAllUsers");
             uList = q.getResultList();
             return uList;
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ArrayList<>();
-        } finally
-        {
+        } finally {
             em.close();
         }
     }
 
     @Override
-    public IUser getUserByUserId(String id)
-    {
+    public IUser getUserByUserId(String id) {
         System.out.println(id);
         EntityManager em = getEntityManager();
-        try
-        {
+        try {
             IUser user = em.find(User.class, id);
             return user;
-        } finally
-        {
+        } finally {
             em.close();
         }
     }
 
-    public IUser addUser(String username, String password)
-    {
+    public IUser addUser(String username, String password) {
         EntityManager em = getEntityManager();
-        try
-        {
+        try {
             User user = new User(username, password);
             Role role = em.find(Role.class, "User");
             user.addRole(role);
@@ -71,11 +61,26 @@ public class UserFacade implements IUserFacade {
             em.persist(user);
             em.getTransaction().commit();
             return user;
-        } catch (PasswordStorage.CannotPerformOperationException e)
-        {
+        } catch (PasswordStorage.CannotPerformOperationException e) {
             return null;
-        } finally
-        {
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean addBookingToUser(Booking booking) {
+        EntityManager em = getEntityManager();
+        try {
+            User user = em.find(User.class, booking.getUser().getUserName());
+            if (user == null) {
+                return false;
+            }
+            user.addBooking(booking);
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+            return true;
+        } finally {
             em.close();
         }
     }
@@ -83,11 +88,9 @@ public class UserFacade implements IUserFacade {
     /*
     solved: change user-role
      */
-    public User editUser(String newRole, String oldusername)
-    {
+    public User editUser(String newRole, String oldusername) {
         EntityManager em = getEntityManager();
-        try
-        {
+        try {
             User u = em.find(User.class, oldusername);
             System.out.println(u.getUserName());
             em.getTransaction().begin();
@@ -97,29 +100,24 @@ public class UserFacade implements IUserFacade {
 
             em.getTransaction().commit();
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally
-        {
+        } finally {
             em.close();
         }
         return null;
     }
 
-    public User deleteUser(String name)
-    {
+    public User deleteUser(String name) {
         EntityManager em = emf.createEntityManager();
 
-        try
-        {
+        try {
             em.getTransaction().begin();
             User p = em.find(User.class, name);
             em.remove(p);
             em.getTransaction().commit();
             return p;
-        } finally
-        {
+        } finally {
             em.close();
         }
     }
@@ -128,16 +126,13 @@ public class UserFacade implements IUserFacade {
   Return the Roles if users could be authenticated, otherwise null
      */
     @Override
-    public List<String> authenticateUser(String userName, String password)
-    {
-        try
-        {
+    public List<String> authenticateUser(String userName, String password) {
+        try {
             System.out.println("User Before:" + userName + ", " + password);
             IUser user = getUserByUserId(userName);
             System.out.println("User After:" + user.getUserName() + ", " + user.getPasswordHash());
             return user != null && PasswordStorage.verifyPassword(password, user.getPasswordHash()) ? user.getRolesAsStrings() : null;
-        } catch (PasswordStorage.CannotPerformOperationException | PasswordStorage.InvalidHashException ex)
-        {
+        } catch (PasswordStorage.CannotPerformOperationException | PasswordStorage.InvalidHashException ex) {
             throw new NotAuthorizedException("Invalid username or password", Response.Status.FORBIDDEN);
         }
     }
