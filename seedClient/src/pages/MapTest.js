@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
@@ -28,7 +28,7 @@ const MyMapComponent = compose(
     </GoogleMap>
     )
 
-export default class MapTest extends React.PureComponent {
+export default class MapTest extends Component {
     constructor(props) {
         super(props);
         this.state = { isMarkerShown: true }
@@ -44,8 +44,9 @@ export default class MapTest extends React.PureComponent {
         }, 3000)
     }
 
-    handleMarkerClick = () => {
-        console.log()
+    handleMarkerClick = position => {
+        console.log("hmmm" + JSON.stringify(position));
+        console.log(this.props);
         this.setState({ isMarkerShown: false })
         this.delayedShowMarker()
     }
