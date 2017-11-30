@@ -24,7 +24,7 @@ public class UploadResource {
 
     //public static final String FILE_LOCATION = "/var/www/images/";
     //public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Documents\\";
-    public String file_location = "C:\\Users\\Bloch\\Desktop\\imgs\\";
+    public String file_location = "C:\\Users\\Hallur\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
     @Context
     private UriInfo context;
