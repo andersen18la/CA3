@@ -39,8 +39,8 @@ export class MapTest2 extends React.Component {
         console.log(this.state);
         return (
             <div id="hvadfanden">
-                <Map google={this.props.google}
-                    style={{ width: '75%', height: '65%', position: 'absolute' }}
+                <Map id="thisIsMap"google={this.props.google}
+                    style={{left: '17%', top: 90, width: '65%', height: '65%'}}
                     zoom={8}
                     initialCenter={{
                         lat: 56,
@@ -57,7 +57,7 @@ export class MapTest2 extends React.Component {
                         />
                     ))}
 
-                    <InfoWindow
+                    <InfoWindow 
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
                     >
@@ -66,6 +66,7 @@ export class MapTest2 extends React.Component {
                             <p>{this.state.selectedLocation.description}</p>
                         </div>
                     </InfoWindow>
+                    
                 </Map>
             </div>
 

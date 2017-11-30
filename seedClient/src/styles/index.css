@@ -10,7 +10,19 @@
       list-style-type: none;
       margin: 0;
     }
-    
+    #places{
+      margin-top: 45%;
+    }
+    #hvadfanden{
+      width: 5px;
+    }
+    #hvadfanden>div{
+      display: 'inline-block';
+      position: static !important;
+
+      }
+
+
     ul.header {
       /*background-color: #0000A0;*/
       background-color: lightgray;
