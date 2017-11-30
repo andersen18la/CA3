@@ -24,5 +24,9 @@ public interface IHouseFacade {
     House deleteHouse(House house);
 
     House deleteHouse(int id);
+    
+    List<House> getHousesFromCity(String cityName);
+    
+    List<House> getHousesFromZip(String zip);
 
 }

@@ -25,8 +25,11 @@ public class ApplicationConfig extends Application {
     {
         resources.add(cors.CorsRequestFilter.class);
         resources.add(cors.CorsResponseFilter.class);
+        resources.add(exceptionmappers.BookingListWasNotUpdatedExceptionMapper.class);
+        resources.add(exceptionmappers.DateIsNotAvailableExceptionMapper.class);
         resources.add(exceptionmappers.FileTypeNotValidExceptionMapper.class);
         resources.add(exceptionmappers.GenericExceptionMapper.class);
+        resources.add(exceptionmappers.HouseDoesNotExistExceptionMapper.class);
         resources.add(exceptionmappers.HouseNotFoundExceptionMapper.class);
         resources.add(exceptionmappers.LocationDoesNotExistExceptionMapper.class);
         resources.add(exceptionmappers.NotAuthorizedExceptionMapper.class);

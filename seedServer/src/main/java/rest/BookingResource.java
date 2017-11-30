@@ -5,8 +5,19 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import entity.Booking;
+import entity.House;
+import entity.IUser;
+import entity.User;
+import exceptions.DateIsNotAvailableException;
+import exceptions.HouseDoesNotExistException;
+import exceptions.UserDoesNotExistException;
 import facades.BookingFacade;
+import facades.HouseFacade;
 import facades.LocationFacade;
 import facades.UserFacade;
 import java.util.ArrayList;
@@ -16,8 +27,8 @@ import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jsonmappers.BookingMapper;
@@ -30,16 +41,18 @@ import jsonmappers.BookingMapper;
 @Path("booking")
 public class BookingResource {
 
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private BookingFacade bf;
+    private HouseFacade hf;
     private UserFacade uf;
     private LocationFacade lf;
 
-    /**
-     * Creates a new instance of BookingResource
-     */
     public BookingResource() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         this.bf = new BookingFacade(emf);
+        this.hf = new HouseFacade(emf);
+        this.uf = new UserFacade(emf);
+        this.lf = new LocationFacade(emf);
     }
 
     /**
@@ -58,13 +71,35 @@ public class BookingResource {
         return Response.status(Response.Status.OK).entity(bMappers).build();
     }
 
-    /**
-     * PUT method for updating or creating an instance of BookingResource
-     *
-     * @param content representation for the resource
-     */
-    @PUT
+    @POST
+    @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response putJson(String content) {
+        JsonObject json = new JsonParser().parse(content).getAsJsonObject();
+        String userId = json.get("userId").getAsString();
+        int houseId = json.get("houseId").getAsInt();
+        String startDate = json.get("startDate").getAsString();
+        String endDate = json.get("endDate").getAsString();
+        IUser user = uf.getUserByUserId(userId);
+        if (user == null) {
+            throw new UserDoesNotExistException();
+        }
+        House house = hf.getHouse(houseId);
+        if (house == null) {
+            throw new HouseDoesNotExistException();
+        }
+        Booking booking = new Booking((User) user, house, startDate, endDate);
+        if (house.isDateTaken(booking)) {
+            throw new DateIsNotAvailableException();
+        }
+        booking = bf.addBooking(booking);
+        uf.addBookingToUser(booking);
+        house.addBooking(booking);
+        hf.editHouse(house);
+
+        BookingMapper bookingMapper = new BookingMapper(booking);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(bookingMapper)).build();
+
     }
 }

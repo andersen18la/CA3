@@ -8,7 +8,6 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.House;
-import entity.Location;
 import exceptions.FileTypeNotValidException;
 import exceptions.HouseNotFoundException;
 import facades.HouseFacade;
@@ -56,7 +55,7 @@ public class HouseResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
-        House huset = new House("Det lille hus på dammen", "hillerød", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg");
+        House huset = new House("Det lille hus på dammen", "hillerod", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg");
         hf.addHouse(huset);
         List<House> houses = hf.getHouses();
         List<HouseMapper> houseMappers = new ArrayList<>();
@@ -69,18 +68,49 @@ public class HouseResource {
                 .entity(gson.toJson(houseMappers))
                 .build();
     }
-    
+
+    @GET
+    @Path("city/{city}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHouseInCity(@PathParam("city") String city) {
+        List<House> houseList = hf.getHousesFromCity(city);
+        System.out.println(houseList.size());
+        List<HouseMapper> houseMappers = new ArrayList<>();
+        for (House house : houseList) {
+            houseMappers.add(new HouseMapper(house));
+        }
+        return Response
+                .status(Response.Status.OK)
+                .entity(gson.toJson(houseMappers))
+                .build();
+    }
+
+    @GET
+    @Path("zip/{zip}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHouseInZip(@PathParam("zip") String zip) {
+        List<House> houseList = hf.getHousesFromZip(zip);
+        List<HouseMapper> houseMappers = new ArrayList<>();
+        for (House house : houseList) {
+            houseMappers.add(new HouseMapper(house));
+        }
+        return Response
+                .status(Response.Status.OK)
+                .entity(gson.toJson(houseMappers))
+                .build();
+    }
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHouseById(@PathParam("id")int id){
+    public Response getHouseById(@PathParam("id") int id) {
         House house = hf.getHouse(id);
-        if(house == null){
+        if (house == null) {
             //return Response.status(Response.Status.GONE).build();
             throw new HouseNotFoundException();
         }
         HouseMapper houseMapper = new HouseMapper(house);
-       return Response.status(Response.Status.OK).entity(gson.toJson(houseMapper)).build();
+        return Response.status(Response.Status.OK).entity(gson.toJson(houseMapper)).build();
     }
 
     @POST

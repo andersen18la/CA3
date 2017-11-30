@@ -82,6 +82,11 @@ public class User implements IUser, Serializable {
         return rolesAsStrings;
     }
 
+    public boolean addBooking(Booking booking) {
+        return this.bookingList.add(booking);
+
+    }
+
     @Override
     public String getPasswordHash() {
         return passwordHash;
