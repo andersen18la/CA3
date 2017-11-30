@@ -87,12 +87,10 @@ export default class Places extends Component {
                 </Modal>
               </div>
             </div>
-          </div>
+          </div><p>here: {this.state.places}</p>
         </div>
           <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
-
         </div> 
-
       </div>
     )
 

@@ -3,6 +3,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import placeFacade from '../facades/placeFacade';
 import Rating from './Rating';
 import auth from '../authorization/auth';
+import placeData from '../facades/placeFacade';
 
 export class MapTest2 extends React.Component {
     constructor(props) {
@@ -13,22 +14,30 @@ export class MapTest2 extends React.Component {
             showingInfoWindow: false,
             activeMarker: {},
             selectedLocation: {},
-        }
+            rating: { userId: this.props.userId, ratingValue: "0", locationId: this.props.placeId }
+        };
+
     }
 
-    hasUserRated = (userId, ratings, placeId) => {
-        alert(ratings);
-        if (this.state.showingInfoWindow === true) {
-            let filterResult = ratings.filter(rating => {
-                return userId === rating.userId;
-            });
-            if (filterResult.length > 0) {
-                return "you have already rated";
+    submitHandler = e => {
+        e.preventDefault();
+        let rating = this.state.rating;
+        placeData.createRating(rating, this.props.updateTable);
+        this.setState({
+            rating: { userId: this.props.userId, ratingValue: "0", locationId: this.props.placeId }
+        });
+    }
+
+    onClickHandler = e => {
+        
+        let value = e.target.value;
+        console.log(this.state.rating);
+        this.setState(prevState => (
+            {
+                rating: { ...prevState.rating, ratingValue: value },
             }
-            return <Rating placeId={placeId} userId={this.props.userId} updateTable={this.props.updateTable} />
-        }
+        ));
     }
-
     onMapClickHandler = (x, y, lat, lng, event) => {
         console.log(x, y, lat, lng, event);
     }
@@ -49,10 +58,28 @@ export class MapTest2 extends React.Component {
         let geoArr = geo.split(',');
         return { lat: geoArr[0], lng: geoArr[1] };
     }
+    hasUserRated = (userId, ratings, placeId) => {
+        console.log(userId + "," + ratings + "," + placeId);
+        if (this.state.showingInfoWindow === true) {
+            let filterResult = ratings.filter(rating => {
+                return userId === rating.userId;
+            });
+            if (filterResult.length > 0) {
+                return "you have already rated";
+            }
+            return (<div>               <form key={this.props.placeId} className="form-inline" onSubmit={this.thisOne}>
+                <label><input className="form-inline" name="radio" type="radio" value="1" onClick={this.thisOne} required />1</label>
+                <label><input className="form-inline" name="radio" type="radio" value="2" onClick={this.onClickHandler} required />2</label>
+                <label><input className="form-inline" name="radio" type="radio" value="3" onClick={this.onClickHandler} required />3</label>
+                <label><input className="form-inline" name="radio" type="radio" value="4" onClick={this.onClickHandler} required />4</label>
+                <label><input className="form-inline" name="radio" type="radio" value="5" onClick={this.onClickHandler} required />5</label>
+                <input type="submit" className="btn btn-default" id="btn" value="Save the rating" />
 
+            </form></div>);
+        }
+    }
     render() {
         console.log(this.state);
-        const mapped = this.props.placeList.map(function(place){ return <p>place.id</p> });
         return (
             <div id="hvadfanden">
                 <Map id="thisIsMap" google={this.props.google}
@@ -77,17 +104,20 @@ export class MapTest2 extends React.Component {
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
                     >
-                        <div>
-                            <p>{this.state.selectedLocation.title}</p>
-                            <p>{this.state.selectedLocation.description}</p>
-                            {mapped}
-                        </div>
+                        <p onClick={this.thisOne}>{this.state.selectedLocation.title}</p>
+                        <p>{this.state.selectedLocation.description}</p>
+                        <p>correct city? {this.state.selectedLocation.city}</p>
+                        {this.hasUserRated(this.props.userId, this.state.selectedLocation.ratings, this.state.selectedLocation.id)}
+                        <button onClick={this.helloWorld}>Why Doesn't Hello World Alert Work!?</button>
                     </InfoWindow>
 
                 </Map>
             </div>
 
         )
+    }
+    helloWorld(){
+        alert('Hello World');
     }
 };
 

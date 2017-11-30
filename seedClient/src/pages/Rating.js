@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MapTest2 from './MapTest2';
 import placeData from '../facades/placeFacade';
 
 //props: 
@@ -36,13 +37,16 @@ export default class Rating extends Component {
             }
         ));
     }
+    sub(){
+        alert("hey");
+    }
 
     //<input name={this.props.placeId} className="form-control" type="number" onChange={this.onChangeHandler} value={this.state.rating.ratingValue} min="1" max="5" required />
     // <span><input type="radio" name="rating" id="str5" value="5"/><label for="str5"></label></span>
     render() {
         return (
             <div>
-              
+                        
                 <form key={this.props.placeId} className="form-inline" onSubmit={this.submitHandler}>
                     <label><input className="form-inline" name="radio" type="radio" value="1" onClick={this.onClickHandler} required />1</label>
                     <label><input className="form-inline" name="radio" type="radio" value="2" onClick={this.onClickHandler} required />2</label>
