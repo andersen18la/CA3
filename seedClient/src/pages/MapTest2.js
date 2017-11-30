@@ -14,15 +14,6 @@ export class MapTest2 extends React.Component {
         }
     }
 
-    componentWillMount() {
-        placeFacade.getData((e, data) => {
-            if (e) {
-                return this.setState({ err: e.err })
-            }
-            this.setState({ err: "", data });
-        });
-    }
-
     onMapClickHandler = (x, y, lat, lng, event) => {
         console.log(x, y, lat, lng, event);        
     }
@@ -57,7 +48,7 @@ export class MapTest2 extends React.Component {
                     }}
                     onClick={this.onMapClickHandler}
                 >
-                    {this.state.data.map(location => (
+                    {this.props.placeList.map(location => (
                         <Marker key={location.id}
                             loc={location}
                             id={location.id}

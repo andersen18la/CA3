@@ -4,7 +4,7 @@ import PlaceForm from "./PlaceForm";
 import Modal from 'react-modal';
 import auth from '../authorization/auth';
 import PlaceList from './PlaceList';
-import MapTest from './MapTest';
+import MapTest2 from './MapTest2';
 
 
 const customStyles = {
@@ -67,7 +67,7 @@ export default class Places extends Component {
       <div>
         <h1>Fetch data from Rest endpoint with all the places</h1>
         <div className="amapname">
-          <MapTest placeList={this.state.data} />
+          <MapTest2 placeList={this.state.data} />
         </div>
         <div id="modal" className="container">
           <button className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add Location</button>

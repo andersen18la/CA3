@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
-import MapTest from './MapTest';
+import MapTest2 from './MapTest2';
 
 export default class PlacesHome extends Component {
   constructor(props) {
@@ -71,7 +71,7 @@ export default class PlacesHome extends Component {
     return (
 
       <div>
-        <MapTest placeList={this.state.data} />
+        <MapTest2 placeList={this.state.data} />
         <div id="places">{this.genPlaceList()}</div>
       </div>
     )
