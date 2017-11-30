@@ -47,6 +47,7 @@ public class InfoEntity implements Serializable {
 
     public InfoEntity(String title, String city, String street, String zip, String geo, String description, String imageUri)
     {
+        this.title = title;
         this.city = city;
         this.street = street;
         this.zip = zip;

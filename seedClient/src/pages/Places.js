@@ -6,6 +6,7 @@ import auth from '../authorization/auth';
 import PlaceList from './PlaceList';
 import MapTest from './MapTest';
 
+
 const customStyles = {
   content: {
     top: '50%',
@@ -21,9 +22,6 @@ export default class Places extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [], err: "", isOpen: false, modalIsOpen: false }
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillMount() {
@@ -39,16 +37,20 @@ export default class Places extends Component {
     });
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
+  openModal = () => {
+    this.setState(prevState => ({
+      ...prevState, modalIsOpen: true
+    }));
   }
-  afterOpenModal() {
+  afterOpenModal = () => {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#f00';
   }
 
-  closeModal() {
-    this.setState({ modalIsOpen: false });
+  closeModal = () => {
+    this.setState(prevState => ({
+      ...prevState, modalIsOpen: false
+    }));
   }
 
   updateTable = () => {
