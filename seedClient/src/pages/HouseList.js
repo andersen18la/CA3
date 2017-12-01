@@ -61,7 +61,7 @@ export default class HouseList extends Component {
         console.log(this.state.data);
         return (
 
-            <div>                
+            <div>
                 {this.genPlaceList()}
             </div>
         )
