@@ -18,7 +18,7 @@ class PlaceStore {
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
-            }).then((data) => {                
+            }).then((data) => {
                 errorChecker(resFromFirstPromise, data);
                 if (cb) {
                     cb(null, data)
@@ -40,7 +40,7 @@ class PlaceStore {
                 return res.json();
             }).then((data) => {
                 errorChecker(resFromFirstPromise, data);
-                if (cb) {                    
+                if (cb) {
                     cb(null, data);
                 }
             }).catch(err => {
@@ -58,7 +58,7 @@ class PlaceStore {
             .then((res) => {
                 resFromFirstPromise = res;
                 return res.json();
-            }).then((data) => {                
+            }).then((data) => {
                 errorChecker(resFromFirstPromise, data);
                 if (cb) {
                     cb(null, data);
@@ -67,7 +67,32 @@ class PlaceStore {
                 console.log(JSON.stringify(err))
             })
     }
+    
+    getLocation = (id, cb) => {
+        this._errorMessage = "";
+        this._messageFromServer = "";
+        let resFromFirstPromise = null;  //Pass on response the "second" promise so we can read errors from server
+        const options = fetchHelper.makeOptions("GET", false);
+        fetch(URL + "api/location/" + id, options)
+            .then((res) => {
+                resFromFirstPromise = res;
+                return res.json();
+            }).then((data) => {
+                errorChecker(resFromFirstPromise, data);
+                if (cb) {
+                    cb(null, data)
+                }
+            }).catch(err => {
+                if (cb) {
+                    cb({ err: fetchHelper.addJustErrorMessage(err) })
+                }
+            })
+    }
+
 }
+
+
+
 
 let placeStore = new PlaceStore();
 

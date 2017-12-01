@@ -2,8 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.House;
 import entity.Location;
 import exceptions.FileTypeNotValidException;
+import exceptions.LocationDoesNotExistsException;
+import facades.HouseFacade;
 import facades.LocationFacade;
 import jsonmappers.LocationMapper;
 import java.io.File;
@@ -21,8 +24,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import jsonmappers.HouseMapper;
+import jsonmappers.LocationWithHousesMapper;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
@@ -31,28 +37,20 @@ public class LocationResource {
 
     private LocationFacade lf;
     private EntityManagerFactory emf;
+    private HouseFacade hf;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     //public static final String FILE_LOCATION = "/var/www/images/";
     //public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-   // public static final String FILE_LOCATION = "C:\\Users\\marik\\Desktop\\Ca3\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-
+    // public static final String FILE_LOCATION = "C:\\Users\\marik\\Desktop\\Ca3\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
     //public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-
-
-
-    public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-
-
-
-
-    
-
+    public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\0111projekt\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
     public LocationResource()
     {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
         this.lf = new LocationFacade(emf);
+        this.hf = new HouseFacade(emf);
     }
 
     @GET
@@ -77,6 +75,32 @@ public class LocationResource {
         }
         String result = gson.toJson(jsonList);
         return result;
+    }
+
+    @Path("{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSingleLocation(@PathParam("id") int id)
+    {
+        Location location = lf.getLocation(id);
+        if (location == null)
+        {
+            throw new LocationDoesNotExistsException();
+        }
+
+        List<House> houses = hf.getHousesFromCity(location.getCity());
+        List<HouseMapper> hms = new ArrayList<>();
+        for (House house : houses)
+        {
+            hms.add(new HouseMapper(house));
+        }
+
+        LocationWithHousesMapper lh = new LocationWithHousesMapper(location, hms);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(gson.toJson(lh))
+                .build();
     }
 
     //RolesAllowed("User")

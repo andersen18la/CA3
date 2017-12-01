@@ -55,6 +55,10 @@ export const errorChecker = function (res, data) {
   if (res.status === 403) {
 
   }
+
+  if(res.status === 409){
+    throw new Error(makeErrorMsg(data, "date is not available on this house"));
+  }
   if (res.status > 200 || !res.ok) {
     throw new Error(makeErrorMsg(data, "Sorry, you could not be authenticated"));
   }

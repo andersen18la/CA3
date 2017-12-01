@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jsonmappers;
 
-import entity.Booking;
-import entity.House;
+import entity.Location;
 import entity.Rating;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HouseMapper {
+public class LocationWithHousesMapper {
 
     private Long id;
     private String title;
@@ -23,40 +17,35 @@ public class HouseMapper {
     private String geo;
     private List<RatingMapper> ratings;
     private double rating = 0;
-    private List<BookingMapper> bookings;
+    private List<HouseMapper> houses;
 
-    public HouseMapper()
+    public LocationWithHousesMapper()
     {
     }
 
-    public HouseMapper(House house)
+    public LocationWithHousesMapper(Location loc, List<HouseMapper> houseMappers)
     {
-        this.title = house.getTitle();
-        this.id = house.getId();
-        this.city = house.getCity();
-        this.street = house.getStreet();
-        this.zip = house.getZip();
-        this.description = house.getDescription();
-        this.imageUri = house.getImageUri();
-        this.geo = house.getGeo();
+        this.title = loc.getTitle();
+        this.id = loc.getId();
+        this.city = loc.getCity();
+        this.street = loc.getStreet();
+        this.zip = loc.getZip();
+        this.description = loc.getDescription();
+        this.imageUri = loc.getImageUri();
+        this.geo = loc.getGeo();
         this.ratings = new ArrayList<>();
-        this.bookings = new ArrayList<>();
-        if (!house.getRatings().isEmpty())
+        if (!loc.getRatings().isEmpty())
         {
-            for (Rating locationRating : house.getRatings())
+            for (Rating locationRating : loc.getRatings())
             {
                 this.ratings.add(new RatingMapper(locationRating));
             }
-            this.rating = house.getAverageRating();
+            this.rating = loc.getAverageRating();
         }
-        if (!house.getBookingList().isEmpty())
+        if (!houseMappers.isEmpty())
         {
-            for (Booking booking : house.getBookingList())
-            {
-                bookings.add(new BookingMapper(booking));
-            }
+            this.houses = houseMappers;
         }
-
     }
 
     public Long getId()
@@ -67,6 +56,16 @@ public class HouseMapper {
     public void setId(Long id)
     {
         this.id = id;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public String getCity()
@@ -139,16 +138,6 @@ public class HouseMapper {
         this.ratings = ratings;
     }
 
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
     public double getRating()
     {
         return rating;
@@ -157,6 +146,16 @@ public class HouseMapper {
     public void setRating(double rating)
     {
         this.rating = rating;
+    }
+
+    public List<HouseMapper> getHouses()
+    {
+        return houses;
+    }
+
+    public void setHouses(List<HouseMapper> houses)
+    {
+        this.houses = houses;
     }
 
 }

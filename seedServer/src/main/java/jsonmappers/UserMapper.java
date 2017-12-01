@@ -5,7 +5,7 @@ import java.util.List;
 public class UserMapper {
 
     private String username;
-    private List<String> roles;
+    private List<String> roles;    
 
     public UserMapper(String username, List<String> roles)
     {

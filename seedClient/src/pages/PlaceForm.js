@@ -89,18 +89,6 @@ export default class PlaceForm extends Component {
                 console.log("hello from add place " + data);
                 this.props.onCloseModal();
                 this.props.updateTable();
-                this.setState({
-                    place: {
-                        title: "",
-                        city: "",
-                        street: "",
-                        zip: "",
-                        description: "",
-                        url: "",
-                        geo: "",
-                        rating: ""
-                    }
-                })
             }).catch(error => {
                 alert("imagetype is wrong");
             });

@@ -25,10 +25,6 @@ export default class Places extends Component {
   }
 
   componentWillMount() {
-    /*
-    This will fetch data each time you navigate to this route
-    If only required once, add "logic" to determine when data should be "refetched"
-    */
     placeData.getData((e, data) => {
       if (e) {
         return this.setState({ err: e.err })
@@ -64,10 +60,11 @@ export default class Places extends Component {
 
   render() {
     return (
-      <div>        
-       <div className="amapname">
-          <MapTest2 placeList={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
-        </div>        <div id="places"><div id="modal" className="container">
+      <div>
+        <div className="amapname">
+          <MapTest2 placeList={this.state.data} />
+        </div>
+        <div id="places"><div id="modal" className="container">
           <button className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add Location</button>
           <div className="modal fade" id="myModal" role="dialog">
             <div className="modal-dialog">
@@ -87,10 +84,10 @@ export default class Places extends Component {
                 </Modal>
               </div>
             </div>
-          </div><p>here: {this.state.places}</p>
+          </div>
         </div>
           <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
-        </div> 
+        </div>
       </div>
     )
 

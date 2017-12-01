@@ -46,7 +46,8 @@ public class HouseResource {
     @Context
     private UriInfo context;
 
-    public HouseResource() {
+    public HouseResource()
+    {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
         this.hf = new HouseFacade(emf);
     }
@@ -54,13 +55,15 @@ public class HouseResource {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson() {
-        House huset = new House("Det lille hus på dammen", "hillerod", "3400", "hej-huset", "454545,343433", "hej-huset", "bob.jpg");
+    public Response getJson()
+    {
+        House huset = new House("Guldboligen", "Herlev", "Sandbyvej 45", "2730", "55.7283006,12.4336299", "Dette er et meget godt hus", "bob.jpg");
         hf.addHouse(huset);
         List<House> houses = hf.getHouses();
         List<HouseMapper> houseMappers = new ArrayList<>();
         // Vi konverterer houses om til housemappers, som er POJOs. 
-        for (House house : houses) {
+        for (House house : houses)
+        {
             houseMappers.add(new HouseMapper(house));
         }
         return Response
@@ -72,11 +75,13 @@ public class HouseResource {
     @GET
     @Path("city/{city}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHouseInCity(@PathParam("city") String city) {
+    public Response getHouseInCity(@PathParam("city") String city)
+    {
         List<House> houseList = hf.getHousesFromCity(city);
         System.out.println(houseList.size());
         List<HouseMapper> houseMappers = new ArrayList<>();
-        for (House house : houseList) {
+        for (House house : houseList)
+        {
             houseMappers.add(new HouseMapper(house));
         }
         return Response
@@ -88,10 +93,12 @@ public class HouseResource {
     @GET
     @Path("zip/{zip}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHouseInZip(@PathParam("zip") String zip) {
+    public Response getHouseInZip(@PathParam("zip") String zip)
+    {
         List<House> houseList = hf.getHousesFromZip(zip);
         List<HouseMapper> houseMappers = new ArrayList<>();
-        for (House house : houseList) {
+        for (House house : houseList)
+        {
             houseMappers.add(new HouseMapper(house));
         }
         return Response
@@ -103,9 +110,11 @@ public class HouseResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHouseById(@PathParam("id") int id) {
+    public Response getHouseById(@PathParam("id") int id)
+    {
         House house = hf.getHouse(id);
-        if (house == null) {
+        if (house == null)
+        {
             //return Response.status(Response.Status.GONE).build();
             throw new HouseNotFoundException();
         }
@@ -125,9 +134,11 @@ public class HouseResource {
             @FormDataParam("geo") String geo,
             @FormDataParam("user") String user,
             @FormDataParam("file") InputStream file,
-            @FormDataParam("file") FormDataContentDisposition fileDisposition) throws IOException {
+            @FormDataParam("file") FormDataContentDisposition fileDisposition) throws IOException
+    {
         String fileName = fileDisposition.getFileName();
-        if (isFileTypeValid(fileName) == false) {
+        if (isFileTypeValid(fileName) == false)
+        {
             throw new FileTypeNotValidException("Accepted file types are jpg and png");
         }
 
@@ -144,31 +155,39 @@ public class HouseResource {
                 .build();
     }
 
-    private boolean isFileTypeValid(String fileName) {
+    private boolean isFileTypeValid(String fileName)
+    {
         String[] validFileTypes
-                = {
+                =
+                {
                     "jpeg", "jpg", "png"
                 };
 
-        if (fileName.contains(".") == false) {
+        if (fileName.contains(".") == false)
+        {
             return false;
         }
 
         String[] splitOnDot = fileName.split("\\.");
-        for (String validFileType : validFileTypes) {
-            if (splitOnDot[splitOnDot.length - 1].equals(validFileType)) {
+        for (String validFileType : validFileTypes)
+        {
+            if (splitOnDot[splitOnDot.length - 1].equals(validFileType))
+            {
                 return true;
             }
         }
         return false;
     }
 
-    private void saveFile(InputStream is, String fileLocation) throws IOException {
+    private void saveFile(InputStream is, String fileLocation) throws IOException
+    {
         String location = FILE_LOCATION + fileLocation;
-        try (OutputStream os = new FileOutputStream(new File(location))) {
+        try (OutputStream os = new FileOutputStream(new File(location)))
+        {
             byte[] buffer = new byte[256];
             int bytes = 0;
-            while ((bytes = is.read(buffer)) != -1) {
+            while ((bytes = is.read(buffer)) != -1)
+            {
                 os.write(buffer, 0, bytes);
             }
         }
