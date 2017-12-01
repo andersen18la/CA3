@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import placeData from '../facades/placeFacade';
 import houseFacade from '../facades/houseFacade';
 
 const locationurl = "/location/";
@@ -15,6 +14,7 @@ export class MapTest2 extends Component {
             showingInfoWindow: false,
             activeMarker: {},
             selectedLocation: {},
+            selectedHouse: {},
             houses: []
         };
     }
@@ -28,15 +28,15 @@ export class MapTest2 extends Component {
         });
     }
 
-    onHouseClickHandler = () => {
-
+    onHouseClickHandler = (markerProps, marker) => {
+        console.log("bob");
     }
 
     onMarkerClickHandler = (markerProps, marker) => {
         let selectedLocation = markerProps.loc;
         let activeMarker = marker;
         this.setState({
-            activeMarker, selectedLocation, showingInfoWindow: true
+            activeMarker, selectedLocation, showingInfoWindow: true, selectedHouse: {}
         });
     }
 
@@ -73,7 +73,7 @@ export class MapTest2 extends Component {
                             url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 
                         }} key={house.id}
-                            loc={house.geo}
+                            loc={house}
                             id={house.id}
 
                             position={this.splitGeo(house)}
