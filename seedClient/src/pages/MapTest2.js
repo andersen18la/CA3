@@ -14,17 +14,6 @@ export class MapTest2 extends Component {
             showingInfoWindow: false,
             activeMarker: {},
             selectedLocation: {},
-<<<<<<< HEAD
-=======
-            rating: { userId: this.props.userId, ratingValue: "0", locationId: this.props.placeId},
-            dummyHouses: [
-                {id: 1, city: "Slagelse", geo: "55.403692,11.355257", description : "det er jo et flot hus nr 1"},
-                {id: 2, city: "Næstved", geo: "55.224613,11.759207", description : "det er jo et flot hus nr 2"},
-                {id: 3, city: "Ribe", geo: "55.326936,8.774665", description : "det er jo et flot hus nr 3"},
-                {id: 4, city: "Pedersker", geo: "55.030893,14.992430", description : "det er jo et flot hus nr 4"},
-                {id: 5, city: "Holstebro", geo: "56.361534,8.621727", description : "det er jo et flot hus nr 5"},
-                {id: 6, city: "Grindsted", geo: "55.758322,8.924949", description : "det er jo et flot hus nr 6"}]
->>>>>>> 46756861c9ba503cda2d46702db2c89716130a80
         };
     }
 
