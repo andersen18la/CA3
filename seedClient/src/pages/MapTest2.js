@@ -61,18 +61,6 @@ export class MapTest2 extends Component {
                             onClick={this.onMarkerClickHandler}
                         />
                     ))}
-                    {this.state.dummyHouses.map(location => (
-                        <Marker icon={{
-                            url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-     
-                        }} key={location.id}
-                            loc={location.geo}
-                            id={location.id}
-
-                            position={this.splitGeo(location)}
-                            onClick={this.onMarkerClickHandler}
-                        />
-                    ))}
 
                     <InfoWindow
                         marker={this.state.activeMarker}

@@ -57,8 +57,12 @@ public class HouseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson()
     {
-        House huset = new House("Guldboligen", "Herlev", "Sandbyvej 45", "2730", "55.7283006,12.4336299", "Dette er et meget godt hus", "bob.jpg");
-        hf.addHouse(huset);
+        /*
+        55.7268594,12.4330393
+        */
+        //House huset = new House("Guldboligen", "Herlev", "Sandbyvej 45", "2730", "55.7283006,12.4336299", "Dette er et meget godt hus", "bob.jpg");
+        //House huset = new House("Fynbohuset", "Herlev", "Højbjerg Vænge 24", "2730", "55.7268594,12.4330393", "God udsigt til et træ", "billede1.jpg");
+        //hf.addHouse(huset);
         List<House> houses = hf.getHouses();
         List<HouseMapper> houseMappers = new ArrayList<>();
         // Vi konverterer houses om til housemappers, som er POJOs. 

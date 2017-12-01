@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import auth from '../authorization/auth';
 import Location from './Location';
 import Bookings from './Bookings';
+import HouseList from './HouseList';
 
 
 export default class App extends Component {
@@ -31,6 +32,7 @@ export default class App extends Component {
           <Route path="/users" component={AllUsers} />
           <Route path="/register" component={Register} />
           <Route path="/location/:id" component={Location} />
+          <Route path="/houses" component={HouseList} />
         </Switch>
 
       </div>

@@ -5,7 +5,7 @@ export default class Bookings extends Component {
     render() {
         return (
             <div>
-                Hello.
+                <p>Hello.</p>
             </div>
         )
     }
