@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import placeData from '../facades/placeFacade';
+import houseFacade from '../facades/houseFacade';
 
 const locationurl = "/location/";
 
@@ -14,16 +15,21 @@ export class MapTest2 extends Component {
             showingInfoWindow: false,
             activeMarker: {},
             selectedLocation: {},
+            houses: []
         };
     }
 
     componentWillMount() {
-        placeData.getData((e, data) => {
+        houseFacade.getData((e, houses) => {
             if (e) {
                 return this.setState({ err: e.err })
             }
-            this.setState({ err: "", data });
+            this.setState({ err: "", houses });
         });
+    }
+
+    onHouseClickHandler = () => {
+
     }
 
     onMarkerClickHandler = (markerProps, marker) => {
@@ -41,9 +47,9 @@ export class MapTest2 extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <div id="hvadfanden">
-                
                 <Map id="thisIsMap" google={this.props.google}
                     style={{ left: '17%', top: 90, width: '65%', height: '65%' }}
                     zoom={7}
@@ -59,6 +65,19 @@ export class MapTest2 extends Component {
                             id={location.id}
                             position={this.splitGeo(location)}
                             onClick={this.onMarkerClickHandler}
+                        />
+                    ))}
+
+                    {this.state.houses.map(house => (
+                        <Marker icon={{
+                            url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+
+                        }} key={house.id}
+                            loc={house.geo}
+                            id={house.id}
+
+                            position={this.splitGeo(house)}
+                            onClick={this.onHouseClickHandler}
                         />
                     ))}
 

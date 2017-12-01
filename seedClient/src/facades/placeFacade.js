@@ -67,7 +67,7 @@ class PlaceStore {
                 console.log(JSON.stringify(err))
             })
     }
-    
+
     getLocation = (id, cb) => {
         this._errorMessage = "";
         this._messageFromServer = "";
