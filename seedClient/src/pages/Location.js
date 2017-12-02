@@ -102,7 +102,7 @@ export default class Location extends Component {
                     return auth.userName === rating.userId;
                 });
                 if (filterResult.length > 0) {
-                    return "you have already rated";
+                    return "You have already rated";
                 }
                 return <Rating placeId={this.props.match.params.id} userId={auth.userName} updateTable={this.updateMyState} />
             }
