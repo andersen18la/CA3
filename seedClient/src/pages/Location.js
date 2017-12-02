@@ -3,8 +3,7 @@ import placeFacade from '../facades/placeFacade';
 import auth from '../authorization/auth';
 import House from './House';
 import Rating from './Rating';
-
-const imageurl = "http://localhost:8084/seedMaven/imgs/"
+const imageURL = require("../../package.json").imageURL;
 
 export default class Location extends Component {
     constructor(props) {
@@ -72,7 +71,7 @@ export default class Location extends Component {
                                 house={house}
                                 isloggedIn={this.state.isloggedIn}
                                 userId={auth.userName}
-                                imageurl={imageurl + house.imageUri}
+                                imageurl={imageURL + house.imageUri}
                                 updateLocationState={this.updateMyState}
                             />
                         ))}
@@ -126,7 +125,7 @@ export default class Location extends Component {
                 </div>
 
                 <div id={"locationImage"}>
-                    <img src={imageurl + this.state.location.imageUri} alt={this.state.imageUri} className="img-thumbnail" />
+                    <img src={imageURL + this.state.location.imageUri} alt={this.state.imageUri} className="img-thumbnail" />
                 </div>
                 <hr />
                 <h3 className="text-center">Description</h3>

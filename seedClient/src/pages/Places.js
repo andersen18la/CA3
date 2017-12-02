@@ -6,7 +6,6 @@ import auth from '../authorization/auth';
 import PlaceList from './PlaceList';
 import MapTest2 from './MapTest2';
 
-
 const customStyles = {
   content: {
     top: '50%',

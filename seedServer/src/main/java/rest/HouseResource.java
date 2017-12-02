@@ -8,14 +8,11 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.House;
-import exceptions.FileTypeNotValidException;
 import exceptions.HouseNotFoundException;
 import facades.HouseFacade;
-import java.io.File;
-import java.io.FileOutputStream;
+import filehandlers.FileUpload;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -34,13 +31,13 @@ import javax.ws.rs.core.Response;
 import jsonmappers.HouseMapper;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import static rest.LocationResource.FILE_LOCATION;
 
 @Path("house")
 public class HouseResource {
 
     private HouseFacade hf;
     private EntityManagerFactory emf;
+    private FileUpload fileUpload;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Context
@@ -50,6 +47,7 @@ public class HouseResource {
     {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
         this.hf = new HouseFacade(emf);
+        this.fileUpload = new FileUpload();
     }
 
     @GET
@@ -59,7 +57,7 @@ public class HouseResource {
     {
         /*
         55.7268594,12.4330393
-        */
+         */
         //House huset = new House("Guldboligen", "Herlev", "Sandbyvej 45", "2730", "55.7283006,12.4336299", "Dette er et meget godt hus", "bob.jpg");
         //House huset = new House("Fynbohuset", "Herlev", "Højbjerg Vænge 24", "2730", "55.7268594,12.4330393", "God udsigt til et træ", "billede1.jpg");
         //hf.addHouse(huset);
@@ -141,16 +139,9 @@ public class HouseResource {
             @FormDataParam("file") FormDataContentDisposition fileDisposition) throws IOException
     {
         String fileName = fileDisposition.getFileName();
-        if (isFileTypeValid(fileName) == false)
-        {
-            throw new FileTypeNotValidException("Accepted file types are jpg and png");
-        }
-
-        saveFile(file, fileName);
-        //vi burde måske binde filename til en user? /john
-        String uri = fileName;
-        //int rating = json.get("rating").getAsInt();
-        House house = new House(title, city, street, zip, geo, description, uri);
+        fileUpload.saveFile(file, fileName);
+        //vi burde måske binde filename til en user? /john                
+        House house = new House(title, city, street, zip, geo, description, fileName);
         house = hf.addHouse(house);
 
         return Response
@@ -158,43 +149,4 @@ public class HouseResource {
                 .entity(gson.toJson(new HouseMapper(house)))
                 .build();
     }
-
-    private boolean isFileTypeValid(String fileName)
-    {
-        String[] validFileTypes
-                =
-                {
-                    "jpeg", "jpg", "png"
-                };
-
-        if (fileName.contains(".") == false)
-        {
-            return false;
-        }
-
-        String[] splitOnDot = fileName.split("\\.");
-        for (String validFileType : validFileTypes)
-        {
-            if (splitOnDot[splitOnDot.length - 1].equals(validFileType))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void saveFile(InputStream is, String fileLocation) throws IOException
-    {
-        String location = FILE_LOCATION + fileLocation;
-        try (OutputStream os = new FileOutputStream(new File(location)))
-        {
-            byte[] buffer = new byte[256];
-            int bytes = 0;
-            while ((bytes = is.read(buffer)) != -1)
-            {
-                os.write(buffer, 0, bytes);
-            }
-        }
-    }
-
 }

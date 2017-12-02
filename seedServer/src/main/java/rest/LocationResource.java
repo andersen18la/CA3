@@ -4,16 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.House;
 import entity.Location;
-import exceptions.FileTypeNotValidException;
-import exceptions.LocationDoesNotExistsException;
 import facades.HouseFacade;
 import facades.LocationFacade;
+import filehandlers.FileUpload;
 import jsonmappers.LocationMapper;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -38,19 +34,15 @@ public class LocationResource {
     private LocationFacade lf;
     private EntityManagerFactory emf;
     private HouseFacade hf;
+    private FileUpload fileUpload;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    //public static final String FILE_LOCATION = "/var/www/images/";
-    //public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-    // public static final String FILE_LOCATION = "C:\\Users\\marik\\Desktop\\Ca3\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-
-    //public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-    public static final String FILE_LOCATION = "C:\\Users\\Bloch\\Desktop\\0111projekt\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
     public LocationResource()
     {
         this.emf = Persistence.createEntityManagerFactory("pu_development");
         this.lf = new LocationFacade(emf);
         this.hf = new HouseFacade(emf);
+        this.fileUpload = new FileUpload();
     }
 
     @GET
@@ -83,20 +75,13 @@ public class LocationResource {
     public Response getSingleLocation(@PathParam("id") int id)
     {
         Location location = lf.getLocation(id);
-        if (location == null)
-        {
-            throw new LocationDoesNotExistsException();
-        }
-
         List<House> houses = hf.getHousesFromCity(location.getCity());
         List<HouseMapper> hms = new ArrayList<>();
         for (House house : houses)
         {
             hms.add(new HouseMapper(house));
         }
-
         LocationWithHousesMapper lh = new LocationWithHousesMapper(location, hms);
-
         return Response
                 .status(Response.Status.OK)
                 .entity(gson.toJson(lh))
@@ -120,59 +105,14 @@ public class LocationResource {
             @FormDataParam("file") FormDataContentDisposition fileDisposition) throws IOException
     {
         String fileName = fileDisposition.getFileName();
-        if (isFileTypeValid(fileName) == false)
-        {
-            throw new FileTypeNotValidException("Accepted file types are jpg and png");
-        }
-
-        saveFile(file, fileName);
+        fileUpload.saveFile(file, fileName);
         //vi burde måske binde filename til en user? /john
-        String uri = fileName;
-        //int rating = json.get("rating").getAsInt();
-        Location location = new Location(title, city, street, zip, geo, description, uri);
+        Location location = new Location(title, city, street, zip, geo, description, fileName);
         location = lf.addLocation(location);
-
         return Response
                 .status(Response.Status.CREATED)
                 .entity(gson.toJson(new LocationMapper(location)))
                 .build();
-    }
-
-    private boolean isFileTypeValid(String fileName)
-    {
-        String[] validFileTypes =
-        {
-            "jpeg", "jpg", "png"
-        };
-
-        if (fileName.contains(".") == false)
-        {
-            return false;
-        }
-
-        String[] splitOnDot = fileName.split("\\.");
-        for (String validFileType : validFileTypes)
-        {
-            if (splitOnDot[splitOnDot.length - 1].equals(validFileType))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void saveFile(InputStream is, String fileLocation) throws IOException
-    {
-        String location = FILE_LOCATION + fileLocation;
-        try (OutputStream os = new FileOutputStream(new File(location)))
-        {
-            byte[] buffer = new byte[256];
-            int bytes = 0;
-            while ((bytes = is.read(buffer)) != -1)
-            {
-                os.write(buffer, 0, bytes);
-            }
-        }
     }
 
 }

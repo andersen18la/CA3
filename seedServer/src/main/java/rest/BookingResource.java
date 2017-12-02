@@ -55,11 +55,6 @@ public class BookingResource {
         this.lf = new LocationFacade(emf);
     }
 
-    /**
-     * Retrieves representation of an instance of rest.BookingResource
-     *
-     * @return an instance of java.lang.String
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
@@ -81,21 +76,15 @@ public class BookingResource {
         int houseId = json.get("houseId").getAsInt();
         String startDate = json.get("startDate").getAsString();
         String endDate = json.get("endDate").getAsString();
+        
         IUser user = uf.getUserByUserId(userId);
-        if (user == null) {
-            throw new UserDoesNotExistException();
-        }
         House house = hf.getHouse(houseId);
-        if (house == null) {
-            throw new HouseDoesNotExistException();
-        }
         Booking booking = new Booking((User) user, house, startDate, endDate);
-        if (house.isDateTaken(booking)) {
-            throw new DateIsNotAvailableException();
-        }
+        
+        //rækkefølgen er vigtig.
+        house.addBooking(booking);
         booking = bf.addBooking(booking);
         uf.addBookingToUser(booking);
-        house.addBooking(booking);
         hf.editHouse(house);
 
         BookingMapper bookingMapper = new BookingMapper(booking);

@@ -6,6 +6,7 @@
 package facades;
 
 import entity.House;
+import exceptions.HouseDoesNotExistException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,13 +29,11 @@ public class HouseFacade implements IHouseFacade {
         EntityManager em = getEntityManager();
         long lid = (long) id;
         try {
-            em.getTransaction().begin();
             House house = em.find(House.class, lid);
-            em.getTransaction().commit();
+            if(house == null){
+                throw new HouseDoesNotExistException();
+            }
             return house;
-
-        } catch (Exception e) {
-            return null;
         } finally {
             em.close();
         }
@@ -59,7 +58,7 @@ public class HouseFacade implements IHouseFacade {
         try {
             House oldHouse = em.find(House.class, house.getId());
             if (oldHouse == null) {
-                return null;
+                throw new HouseDoesNotExistException();
             }
             em.getTransaction().begin();
             em.merge(house);
@@ -79,7 +78,7 @@ public class HouseFacade implements IHouseFacade {
         try {
             House oldHouse = em.find(House.class, house);
             if (oldHouse == null) {
-                return null;
+                throw new HouseDoesNotExistException();
             }
             em.getTransaction().begin();
             em.remove(house);
@@ -97,7 +96,7 @@ public class HouseFacade implements IHouseFacade {
         try {
             House oldHouse = em.find(House.class, lid);
             if (oldHouse == null) {
-                return null;
+                throw new HouseDoesNotExistException();
             }
             em.getTransaction().begin();
             em.remove(oldHouse);

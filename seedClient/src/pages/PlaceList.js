@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Rating from './Rating';
+const imageURL = require("../../package.json").imageURL;
 export default class PlaceList extends Component {
 
     hasUserRated = (userId, ratings, placeId) => {
@@ -36,7 +37,7 @@ export default class PlaceList extends Component {
                                 <td>{place.street}</td>
                                 <td>{place.zip}</td>
                                 <td>{place.description}</td>
-                                <td><img src={"http://localhost:8084/seedMaven/imgs/" + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
+                                <td><img src={imageURL + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
                                 <td>{place.rating}</td>
                                 <td>
                                     {this.hasUserRated(this.props.userId, place.ratings, place.id)}
