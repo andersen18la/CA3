@@ -5,7 +5,6 @@
  */
 package entity;
 
-import exceptions.UserHaveAlreadyRatedException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +76,7 @@ public class InfoEntity implements Serializable {
     {
         if (hasUserRated(rating) == true)
         {
-            throw new UserHaveAlreadyRatedException();
+            return false;
         }
 
         return this.ratings.add(rating);

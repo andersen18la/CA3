@@ -12,8 +12,6 @@ import com.google.gson.JsonParser;
 import entity.Location;
 import entity.Rating;
 import entity.User;
-import exceptions.LocationDoesNotExistsException;
-import exceptions.UserDoesNotExistException;
 import exceptions.UserHaveAlreadyRatedException;
 import facades.LocationFacade;
 import facades.RatingFacade;
@@ -68,7 +66,10 @@ public class RatingResource {
         IUser user = uf.getUserByUserId(userId);
         System.out.println("ratingResource " + userId);
         Location location = pf.getLocation(locationId);
-        Rating rating = new Rating(ratingValue, (User) user, location);        
+        Rating rating = new Rating(ratingValue, (User) user, location);
+        if(location.hasUserRated(user)){
+            throw new UserHaveAlreadyRatedException();
+        }
         location.addRating(rating);
         pf.editLocation(location);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(new RatingMapper(rating))).build();
