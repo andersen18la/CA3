@@ -67,21 +67,7 @@ public class RatingResource {
         int locationId = json.get("locationId").getAsInt();
         IUser user = uf.getUserByUserId(userId);
         System.out.println("ratingResource " + userId);
-        if (user == null)
-        {            
-            throw new UserDoesNotExistException();
-        }
         Location location = pf.getLocation(locationId);
-        if (location == null)
-        {
-            throw new LocationDoesNotExistsException();
-        }
-
-        if (location.hasUserRated(user) == true)
-        {
-            throw new UserHaveAlreadyRatedException();
-        }
-
         Rating rating = new Rating(ratingValue, (User) user, location);        
         location.addRating(rating);
         pf.editLocation(location);
