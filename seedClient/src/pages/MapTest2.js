@@ -50,7 +50,7 @@ export class MapTest2 extends Component {
     render() {
         console.log(this.state);
         var houeArray = [];
-        if(this.props.houseList.length !== 0){
+        if(typeof this.props.houseList !== "undefined" && this.props.houseList.length !== 0){
             houeArray = this.props.houseList;
         } else {
             houeArray = this.state.houses;

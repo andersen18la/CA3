@@ -51,7 +51,7 @@ export default class LocationModal extends Component {
       }
     render(){
         return (<div id="modal" className="container">
-        <button id="locationModalB" className="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add Location</button>
+        <button id="locationModalB" className="btn btn-danger" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add Location</button>
         <div className="modal fade" id="myModal" role="dialog">
           <div className="modal-dialog">
             <div className="modal-content">

@@ -52,7 +52,7 @@ export default class HouseModal extends Component {
 
     render(){
         return (<div id="modal" className="container">
-        <button id="houseModalB" className="btn btn-danger" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add House</button>
+        <button id="houseModalB" className="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick={this.openModal}>Add House</button>
         <div className="modal fade" id="myModal" role="dialog">
           <div className="modal-dialog">
             <div className="modal-content">
