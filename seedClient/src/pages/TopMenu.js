@@ -24,13 +24,6 @@ class TopMenu extends Component {
     auth.setLoginObserver(this.loginStatus);
   }
 
-  renderWhatInMain = () => {
-    if (this.state.loggedIn) {
-      return <Places />
-    }
-    if (!this.state.loggedIn)
-      return <PlacesHome />
-  }
 
 
   render() {

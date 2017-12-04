@@ -62,6 +62,7 @@ public class HouseResource {
         */
         //House huset = new House("Guldboligen", "Herlev", "Sandbyvej 45", "2730", "55.7283006,12.4336299", "Dette er et meget godt hus", "bob.jpg");
         //House huset = new House("Fynbohuset", "Herlev", "Højbjerg Vænge 24", "2730", "55.7268594,12.4330393", "God udsigt til et træ", "billede1.jpg");
+        //House huset = new House("Fynbohuset", "Copenhagen", "Grønjordskollegiet", "2300", "55.6541078,12.5921368", "God udsigt til et træ", "billede1.jpg");
         //hf.addHouse(huset);
         List<House> houses = hf.getHouses();
         List<HouseMapper> houseMappers = new ArrayList<>();
