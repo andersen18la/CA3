@@ -49,7 +49,12 @@ export class MapTest2 extends Component {
 
     render() {
         console.log(this.state);
-        
+        var houeArray = [];
+        if(this.props.houseList.length !== 0){
+            houeArray = this.props.houseList;
+        } else {
+            houeArray = this.state.houses;
+        }//this.props.houselist = works only if house has been added, else use this.state.houses
         return (
             <div id="hvadfanden">
                 <Map id="thisIsMap" google={this.props.google}
@@ -70,7 +75,7 @@ export class MapTest2 extends Component {
                         />
                     ))}
 
-                    {this.state.houses.map(house => (
+                    {houeArray.map(house => (
                         <Marker icon={{
                             url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 

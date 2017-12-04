@@ -45,7 +45,7 @@ export default class HouseModal extends Component {
         this.setState(prevState => ({
           ...prevState, modalIsOpen: false
         }));
-        this.props.update1();
+        this.props.update();
  
       }
 
@@ -66,7 +66,7 @@ export default class HouseModal extends Component {
                 <div>
                   <div className="modal-header"><h2 ref={subtitle => this.subtitle = subtitle}>Example Text For Add House</h2></div>
                   <div className="modal-body">
-                    <HouseForm onAddPlace={this.onAddPlace} onCloseModal={this.closeModal} updateTable={this.props.update1} /></div>
+                    <HouseForm onAddPlace={this.onAddPlace} onCloseModal={this.closeModal}/></div>
                   <div className="modal-footer"><button className="btn btn-danger" onClick={this.closeModal}>close</button></div></div>
               </Modal>
             </div>

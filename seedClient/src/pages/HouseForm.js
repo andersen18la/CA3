@@ -89,7 +89,8 @@ export default class HouseForm extends Component {
                 this.props.onCloseModal();
                 this.props.updateTable();
             }).catch(error => {
-                alert("imagetype is wrong");
+                //alert("imagetype is wrong");
+                console.log(error);
             });
 
     }

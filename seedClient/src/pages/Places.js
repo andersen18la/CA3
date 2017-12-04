@@ -24,7 +24,7 @@ const customStyles = {
 export default class Places extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], err: "", isOpen: false, modalIsOpen: false }
+    this.state = { data: [], houses : [], err: "", isOpen: false, modalIsOpen: false }
   }
 
   componentWillMount() {
@@ -44,34 +44,34 @@ export default class Places extends Component {
       this.setState({ err: "", data, modalIsOpen: false });
     });
   }
-  updateTable1 = () => {
+  updateHouseTable = () => {
     houseData.getData((e, data) => {
       if (e) {
         return this.setState({ err: e.err })
       }
-      this.setState({ err: "", data, modalIsOpen: false });
+      this.setState({ err: "", houses : data, modalIsOpen: false });
+      console.log("this here: " + this.state.houses[0].city);
     });
   }
-  
+
 
   render() {
     return (
       <div>
         <div className="amapname">
-          <MapTest2 placeList={this.state.data} />
+          <MapTest2 placeList={this.state.data} houseList={this.state.houses} />
         </div>
-    {/*location-modal*/}
-          <div id="places"><div id="modals" >
+        {/*location-modal*/}
+        <div id="places"><div id="modals" >
           <div class="row">
-   
-</div>
+
+          </div>
 
 
-<HouseModal update1={this.updateTable1}/>
-          <LocationModal update={this.updateTable}/>
-          
+          <HouseModal update={this.updateHouseTable}/>
+          <LocationModal update={this.updateTable} />
+
           <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
-          <HouseList places={this.state.data} userId={auth._userName} updateTable={this.updateTable1}/>
 
         </div></div>
         {/*house-modal*/}
