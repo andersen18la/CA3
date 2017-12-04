@@ -63,15 +63,18 @@ export default class Places extends Component {
         </div>
         {/*location-modal*/}
         <div id="places"><div id="modals" >
-          <div class="row">
+          <div id="modalsGo">
 
-          </div>
+         
+   
+    <HouseModal  update={this.updateHouseTable}/>
+    <LocationModal update={this.updateTable} /> 
+  
+</div>
 
 
-          <HouseModal update={this.updateHouseTable}/>
-          <LocationModal update={this.updateTable} />
 
-          <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} />
+          <PlaceList places={this.state.data} userId={auth._userName} updateTable={this.updateTable} /> 
 
         </div></div>
         {/*house-modal*/}
