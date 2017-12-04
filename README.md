@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/andersen18la/CA3.svg?branch=master)](https://travis-ci.org/andersen18la/CA3)
 # CA3 Group 4 DAT
 
 ### Link to Google Docs - User-stories & Accept-critia:
