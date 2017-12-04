@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import houseFacade from '../facades/houseFacade';
+import HouseList from './HouseList';
 
 const locationurl = "/location/";
 
@@ -47,7 +48,8 @@ export class MapTest2 extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log(this.state);
+        
         return (
             <div id="hvadfanden">
                 <Map id="thisIsMap" google={this.props.google}

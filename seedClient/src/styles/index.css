@@ -22,7 +22,6 @@
 
       }
 
-
     ul.header {
       /*background-color: #0000A0;*/
       background-color: lightgray;
@@ -36,12 +35,16 @@
       padding: 10px;
       display: inline-block;
     }
-    
+
+
     .content {
       background-color: #EEEEEE;
       padding: 20px;
     }
-    
+    .btn.btn-primary{
+      display: inline-block;
+      vertical-align: top;
+    }
     .content h2 {
       padding: 0;
       margin: 0;
