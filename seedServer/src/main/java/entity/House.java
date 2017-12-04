@@ -5,6 +5,7 @@
  */
 package entity;
 
+import exceptions.DateIsNotAvailableException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import javax.persistence.OneToMany;
         {
             @NamedQuery(name = "House.getHouseFromCity", query = "SELECT h FROM HOUSE h WHERE h.city = :city")
             ,@NamedQuery(name = "House.getHouseFromZip", query = "SELECT h FROM HOUSE h WHERE h.zip = :zip")
-                
+
         })
 public class House extends InfoEntity implements Serializable {
 
@@ -26,33 +27,42 @@ public class House extends InfoEntity implements Serializable {
     @OneToMany(mappedBy = "house")
     private List<Booking> bookingList;
 
-    public House() {
+    public House()
+    {
         this.bookingList = new ArrayList<>();
     }
 
-    public House(String title, String city, String street, String zip, String geo, String description, String imageUri) {
+    public House(String title, String city, String street, String zip, String geo, String description, String imageUri)
+    {
         super(title, city, street, zip, geo, description, imageUri);
         this.bookingList = new ArrayList<>();
     }
 
-    public List<Booking> getBookingList() {
+    public List<Booking> getBookingList()
+    {
         return bookingList;
     }
 
-    public void setBookingList(List<Booking> bookingList) {
+    public void setBookingList(List<Booking> bookingList)
+    {
         this.bookingList = bookingList;
     }
 
-    public boolean addBooking(Booking booking) {
-        if (isDateTaken(booking) == true) {
-            return false;
+    public boolean addBooking(Booking booking)
+    {
+        if (isDateTaken(booking) == true)
+        {
+            throw new DateIsNotAvailableException();
         }
         return this.bookingList.add(booking);
     }
 
-    public boolean isDateTaken(Booking booking) {
-        for (Booking bookingInList : this.bookingList) {
-            if (bookingInList.getStartDate().equals(booking.getStartDate())) {
+    public boolean isDateTaken(Booking booking)
+    {
+        for (Booking bookingInList : this.bookingList)
+        {
+            if (bookingInList.getStartDate().equals(booking.getStartDate()))
+            {
                 return true;
             }
         }
@@ -60,7 +70,8 @@ public class House extends InfoEntity implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "entity.House[ id=" + super.getId() + " ]";
     }
 

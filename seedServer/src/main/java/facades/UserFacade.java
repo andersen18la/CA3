@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.core.Response;
 import entity.IUser;
+import exceptions.UserDoesNotExistException;
 import security.PasswordStorage;
 
 public class UserFacade implements IUserFacade {
@@ -45,6 +46,9 @@ public class UserFacade implements IUserFacade {
         EntityManager em = getEntityManager();
         try {
             IUser user = em.find(User.class, id);
+            if(user == null){
+                throw new UserDoesNotExistException();
+            }
             return user;
         } finally {
             em.close();
@@ -73,7 +77,7 @@ public class UserFacade implements IUserFacade {
         try {
             User user = em.find(User.class, booking.getUser().getUserName());
             if (user == null) {
-                return false;
+                throw new UserDoesNotExistException();
             }
             user.addBooking(booking);
             em.getTransaction().begin();

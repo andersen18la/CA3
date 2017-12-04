@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
 import MapTest2 from './MapTest2';
+const imageURL = require("../../package.json").imageURL;
 
 export default class PlacesHome extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ export default class PlacesHome extends Component {
                 <td>{place.street}</td>
                 <td>{place.zip}</td>
                 <td>{place.description}</td>
-                <td><img src={"http://localhost:8084/seedMaven/imgs/" + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
+                <td><img src={imageURL + place.imageUri} className="img-thumbnail" alt={place.imageUri} /></td>
                 <td>{place.rating}</td>
               </tr>
             )

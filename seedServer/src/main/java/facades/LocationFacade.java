@@ -1,6 +1,7 @@
 package facades;
 
 import entity.Location;
+import exceptions.LocationDoesNotExistsException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,6 +50,10 @@ public class LocationFacade implements ILocationFacade {
         try
         {
             location = em.find(Location.class, lid);
+            if (location == null)
+            {
+                throw new LocationDoesNotExistsException();
+            }
             return location;
         } finally
         {
@@ -82,15 +87,14 @@ public class LocationFacade implements ILocationFacade {
         EntityManager em = getEntityManager();
         try
         {
+            if (em.find(Location.class, location.getId()) == null)
+            {
+                throw new LocationDoesNotExistsException();
+            }
             em.getTransaction().begin();
             em.merge(location);
             em.getTransaction().commit();
             return location;
-
-        } catch (Exception e)
-        {
-            em.getTransaction().rollback();
-            return null;
         } finally
         {
             em.close();
@@ -105,14 +109,15 @@ public class LocationFacade implements ILocationFacade {
         try
         {
             Location location = em.find(Location.class, lid);
-            if (location != null)
+            if (location == null)
             {
-                em.getTransaction().begin();
-                em.remove(location);
-                em.getTransaction().commit();
-                return true;
+                throw new LocationDoesNotExistsException();
             }
-            return false;
+            em.getTransaction().begin();
+            em.remove(location);
+            em.getTransaction().commit();
+            return true;
+
         } finally
         {
             em.close();

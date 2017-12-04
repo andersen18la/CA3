@@ -1,6 +1,7 @@
 {
   "name": "seedclient",
   "serverURL": "http://localhost:8084/seedMaven/",
+  "imageURL": "http://localhost:8084/seedMaven/imgs/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
