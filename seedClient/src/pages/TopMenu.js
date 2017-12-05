@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import auth from '../authorization/auth';
-import Places from "./Places";
-import PlacesHome from "./PlacesHome";
 
 class TopMenu extends Component {
 
