@@ -20,6 +20,7 @@ export default class PlaceList extends Component {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>title</th>
                         <th>CITY</th>
                         <th>STREET</th>
                         <th>ZIP</th>
@@ -33,6 +34,7 @@ export default class PlaceList extends Component {
                         return (
                             <tr key={place.id}>
                                 <td>{place.id}</td>
+                                <td>{place.title}</td>
                                 <td>{place.city}</td>
                                 <td>{place.street}</td>
                                 <td>{place.zip}</td>

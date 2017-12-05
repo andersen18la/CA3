@@ -12,6 +12,7 @@ import auth from '../authorization/auth';
 import Location from './Location';
 import Bookings from './Bookings';
 import HouseList from './HouseList';
+import Search from './Search';
 
 
 export default class App extends Component {
@@ -33,6 +34,7 @@ export default class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/location/:id" component={Location} />
           <Route path="/houses" component={HouseList} />
+          <Route path="/search" component={Search} />
         </Switch>
 
       </div>
