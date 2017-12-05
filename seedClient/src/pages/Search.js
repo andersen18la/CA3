@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import placeFacade from '../facades/placeFacade';
 const imageURL = require("../../package.json").imageURL;
 const locationurl = "/location/";
@@ -70,7 +71,7 @@ export default class Search extends Component {
                                 return (
                                     <tr key={location.id}>
                                         <td>{location.id}</td>
-                                        <td><a href={locationurl + location.id}>{location.title}</a></td>
+                                        <td><Link to={locationurl + location.id}>{location.title}</Link></td>
                                         <td>{location.city}</td>
                                         <td>{location.street}</td>
                                         <td>{location.zip}</td>
