@@ -12,7 +12,7 @@ import HouseList from './HouseList';
 
 const customStyles = {
   content: {
-    top: '51%',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
