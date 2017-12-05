@@ -31,7 +31,7 @@ export default class PlacesHome extends Component {
   genPlaceList = () => {
     let places = this.state.data;
     return (
-      <table className="table">
+      <table className="tabddle">
         <thead>
           <tr>
             <th>ID</th>

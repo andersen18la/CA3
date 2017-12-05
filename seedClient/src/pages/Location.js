@@ -78,7 +78,7 @@ export default class Location extends Component {
                     </div>
                 )
             }
-            return "No houses in the city of this location";
+            return "No houses in the fdcity of this location";
         }
     }
 
