@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
 import PlaceForm from "./PlaceForm";
 import Modal from 'react-modal';
-import auth from '../authorization/auth';
-import PlaceList from './PlaceList';
-import MapTest2 from './MapTest2';
-import LocModal from './LocationModal'
 const customStyles = {
     content: {
       top: '50%',

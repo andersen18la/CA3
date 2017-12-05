@@ -44,7 +44,7 @@ export default class PlaceForm extends Component {
         //kan være den driller når man deployer...
         //fetch string for addresser og zip: "https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.place.street + "+zip=" + this.state.place.zip + "country=dk"
         //fetch string for kun byer: ""https://maps.googleapis.com/maps/api/geocode/json?address=''+zip=" + this.state.place.city + "country=dk""
-        fetch("https://maps.googleapis.com/maps/api/geocode/json?address=''+city=" + this.state.place.city + " " + this.state.place.street +  "country=dk")
+        fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.place.street + "+city=" + this.state.place.city + "+country=dk")
             .then(res => res.json())
             .then(data => {
                 console.log("forhelve" + data.results[0])
