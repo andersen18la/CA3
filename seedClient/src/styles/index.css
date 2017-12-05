@@ -1,3 +1,6 @@
+    
+    
+    
     body {
       background-color: white;
       padding: 20px;
@@ -13,15 +16,33 @@
     #places{
       margin-top: 75%;
     }
-    #hvadfanden{
-      width: 5px;
+    btn.btn-primary{
+
+      color: black;
+    }
+    btn.btn-danger{
+
+      color: black;
+    }
+    #houseModalB{
+      color: black;
+      position: absolute;
+      margin: 0 auto;
+      top: 71%;  
+      left: 17%;    
+    }
+   #locationModalB{
+      color: black;
+      position: absolute;
+      margin: 0 auto;
+      top: 71%;  
+      left: 22.3%;
     }
     #hvadfanden>div{
       display: 'inline-block';
       position: static !important;
 
       }
-
 
     ul.header {
       /*background-color: #0000A0;*/
@@ -36,12 +57,19 @@
       padding: 10px;
       display: inline-block;
     }
-    
+
+    #btnClear{
+      display: inline-block;
+      vertical-align: top;
+  }
     .content {
       background-color: #EEEEEE;
       padding: 20px;
     }
-    
+    .btn.btn-primary{
+      display: inline-block;
+      vertical-align: top;
+    }
     .content h2 {
       padding: 0;
       margin: 0;

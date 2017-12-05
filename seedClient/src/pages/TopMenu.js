@@ -44,7 +44,7 @@ class TopMenu extends Component {
               {this.state.isAdmin && (<li><Link to="/admin">Page for Admins</Link></li>)}
               {this.state.isAdmin && (<li><Link to="/users">See all users</Link></li>)}
               {this.state.loggedIn && (<li><Link to="/bookings">Bookings</Link></li>)}
-              <li><Link to="/houses">all houses</Link></li>
+              <li><Link to="/search">Search</Link></li>
 
             </ul>
             <ul className="nav navbar-nav navbar-right">

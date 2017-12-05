@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import houseFacade from '../facades/houseFacade';
+import HouseList from './HouseList';
 
 const locationurl = "/location/";
 
@@ -47,7 +48,13 @@ export class MapTest2 extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log(this.state);
+        var houeArray = [];
+        if(typeof this.props.houseList !== "undefined" && this.props.houseList.length !== 0){
+            houeArray = this.props.houseList;
+        } else {
+            houeArray = this.state.houses;
+        }//this.props.houselist = works only if house has been added, else use this.state.houses
         return (
             <div id="hvadfanden">
                 <Map id="thisIsMap" google={this.props.google}
@@ -68,7 +75,7 @@ export class MapTest2 extends Component {
                         />
                     ))}
 
-                    {this.state.houses.map(house => (
+                    {houeArray.map(house => (
                         <Marker icon={{
                             url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 

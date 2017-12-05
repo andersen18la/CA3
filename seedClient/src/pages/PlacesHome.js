@@ -35,6 +35,7 @@ export default class PlacesHome extends Component {
         <thead>
           <tr>
             <th>ID</th>
+            <th>TITLE</th>
             <th>CITY</th>
             <th>STREET</th>
             <th>ZIP</th>
@@ -49,6 +50,7 @@ export default class PlacesHome extends Component {
             return (
               <tr key={place.id}>
                 <td>{place.id}</td>
+                <td>{place.title}</td>
                 <td>{place.city}</td>
                 <td>{place.street}</td>
                 <td>{place.zip}</td>

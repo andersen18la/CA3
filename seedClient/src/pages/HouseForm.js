@@ -9,7 +9,7 @@ function handleErrors(response) {
     return response.json();
 }
 
-export default class PlaceForm extends Component {
+export default class HouseForm extends Component {
     //skal have auth user med?
     constructor(props) {
         super(props);
@@ -23,8 +23,7 @@ export default class PlaceForm extends Component {
                 url: "",
                 geo: "",
                 rating: "",
-            },
-            test: "hey"
+            }
         };
     }
     onChangeHandler = e => {
@@ -79,18 +78,19 @@ export default class PlaceForm extends Component {
         data.append("geo", place.geo);
         data.append("user", 'WEB User');
         data.append('file', file.files[0]);
-        fetch(URL + "api/location/add",
+        fetch(URL + "api/house/add",
             {
                 method: "POST",
                 body: data,
             })
             .then(handleErrors)
             .then(data => {
-                console.log("hello from add place " + data);
+                console.log("hello from add house " + data);
                 this.props.onCloseModal();
                 this.props.updateTable();
             }).catch(error => {
-                alert("imagetype is wrong");
+                //alert("imagetype is wrong");
+                console.log(error);
             });
 
     }
