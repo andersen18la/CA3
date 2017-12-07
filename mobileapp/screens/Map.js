@@ -1,7 +1,7 @@
 import React from 'react';
 import MapView from 'react-native-maps';
 const url = require('../package.json').serverURL;
-import { Button, View } from 'react-native';
+import { Text, Image, Button, View,WebView } from 'react-native';
  
 export default class App extends React.Component {
   constructor(props) {
@@ -64,10 +64,23 @@ export default class App extends React.Component {
           <MapView.Marker
             coordinate={this.splitGeo(location)}
             key={location.id}
-            title={location.title}
-            description={location.description}
-            pinColor='#FC0000'
-          />
+          
+            pinColor='#FC0000'>
+
+<MapView.Callout>
+    <View>  
+    <Text>Title: {location.title}</Text>    
+      <Image source={{uri: "https://jdbh.dk/images/" + location.imageUri}} style={{height: 60, width: 60}} />
+      
+      <Text>description : {location.description}</Text>
+    </View>
+  </MapView.Callout>
+        
+          
+
+          
+      </MapView.Marker>
+          
         ))}
         {this.state.houses.map(house => (
           <MapView.Marker key={house.id}
