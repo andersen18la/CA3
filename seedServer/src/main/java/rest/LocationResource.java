@@ -36,12 +36,7 @@ public class LocationResource {
     private HouseFacade hf;
     private FileUpload fileUpload;
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    //public static final String FILE_LOCATION = "/var/www/images/";
-    //public static final String FILE_LOCATION = "C:\\Users\\hvn15\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-    // public static final String FILE_LOCATION = "C:\\Users\\marik\\Desktop\\Ca3\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
-    //public static final String FILE_LOCATION = "C:\\Users\\Hallur\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
-    public static final String FILE_LOCATION = "C:\\Users\\Mk\\Desktop\\Sem3\\ca3\\seedServer\\src\\main\\webapp\\imgs\\";
 
 
     public LocationResource()
