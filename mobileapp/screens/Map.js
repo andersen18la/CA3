@@ -69,7 +69,7 @@ export default class App extends React.Component {
 
 <MapView.Callout>
     <View><Text> Title: {location.title}</Text>    
-      <Image source={{uri: "https://jdbh.dk/images/" + location.imageUri}} style={{height: 60, width: 60}} />
+      <Image source={{uri: "https://jdbh.dk/images/" + location.imageUri}} style={{height: 100, width: 200}} />
       
       <Text> description : {location.description} </Text>
     </View>
