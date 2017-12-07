@@ -12,7 +12,7 @@ export default class Location extends Component {
         const uri = "https://jdbh.dk/images/" + location.imageUri;
         console.log("bommelum" + uri);
         return (
-            <View style={{  flex: 1, alignItems: 'center', justifyContent: 'center' }}>>
+            <View style={{  flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Image
                     style={{ width: 200, height: 200 }}
                     source={{ uri: uri }}

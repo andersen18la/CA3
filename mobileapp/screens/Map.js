@@ -68,11 +68,10 @@ export default class App extends React.Component {
             pinColor='#FC0000'>
 
 <MapView.Callout>
-    <View>  
-    <Text>Title: {location.title}</Text>    
+    <View><Text> Title: {location.title}</Text>    
       <Image source={{uri: "https://jdbh.dk/images/" + location.imageUri}} style={{height: 60, width: 60}} />
       
-      <Text>description : {location.description}</Text>
+      <Text> description : {location.description} </Text>
     </View>
   </MapView.Callout>
         
