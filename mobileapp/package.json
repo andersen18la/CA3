@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "serverURL": "http://c27f2271.ngrok.io/seedMaven/",
-  "imageURL": "http://c27f2271.ngrok.io/seedMaven/imgs/",
+  "serverURL": "Lav det her om til det rigtige",
+  "imageURL": "Lav det her om til det rigtige",
   "private": true,
   "dependencies": {
     "expo": "^23.0.0",
@@ -14,5 +14,5 @@
   "name": "seedapp",
   "version": "0.0.0",
   "description": "Hello Expo!",
-  "author": null
+  "author": "Mo, Lasse, Hallur, John"
 }

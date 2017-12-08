@@ -35,14 +35,14 @@ export default class App extends React.Component {
 
   splitGeo = (location) => {
     let geo = location.geo;
-    if (geo) {      
+    if (geo) {
       let geoArr = geo.split(',');
       return { latitude: parseFloat(geoArr[0]), longitude: parseFloat(geoArr[1]) };
     }
     return { latitude: 50, longitude: 50 }
   }
 
-  render() {    
+  render() {
     return (
 
       <MapView
@@ -69,12 +69,7 @@ export default class App extends React.Component {
                 <Text> description : {location.description} </Text>
               </View>
             </MapView.Callout>
-
-
-
-
           </MapView.Marker>
-
         ))}
         {this.state.houses.map(house => (
           <MapView.Marker key={house.id}

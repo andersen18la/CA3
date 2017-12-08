@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Alert, Text, TextInput, Button, Image } from 'react-native';
-import { ImagePicker, Location } from 'expo';
+import { StyleSheet, ScrollView, View, Alert, Text, TextInput, Button, Image, Platform } from 'react-native';
+import { ImagePicker, Location, Constants, Permissions } from 'expo';
 const URL = require('../package.json').serverURL;
 
 export default class AddPlace extends Component {
@@ -18,17 +18,32 @@ export default class AddPlace extends Component {
             uploading: false
         }
     }
+
     componentWillMount() {
-        this._getLocation();
+        if (Platform.OS === 'android' && !Constants.isDevice) {
+            this.setState({
+                errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+            });
+        } else {
+            this._getLocation();
+        }
     }
 
     _getLocation = async () => {
-        let geoFromPhone = await Location.getCurrentPositionAsync({});
-        let geo = geoFromPhone.coords.latitude + "," + geoFromPhone.coords.longitude;
-        this.setState({
-            geo
-        })
-        this._getAddress();
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        console.log(status);
+        if (status !== 'granted') {
+            this.setState({
+                errorMessage: 'Permission to access location was denied',
+            });
+        } else {
+            let geoFromPhone = await Location.getCurrentPositionAsync({});
+            let geo = geoFromPhone.coords.latitude + "," + geoFromPhone.coords.longitude;
+            this.setState({
+                geo
+            })
+            this._getAddress();
+        }
     }
 
     _getAddress = async () => {
