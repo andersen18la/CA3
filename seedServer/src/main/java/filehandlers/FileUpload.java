@@ -11,7 +11,7 @@ public class FileUpload {
 
     //private final String pathToFile = "/var/www/images/";
 
-    private final String pathToFile = "C:\\Users\\Hallur\\Desktop\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
+    private final String pathToFile = "C:\\Users\\Bloch\\Desktop\\08122017\\CA3\\seedServer\\src\\main\\webapp\\imgs\\";
 
 
     public void saveFile(InputStream is, String fileName) throws IOException

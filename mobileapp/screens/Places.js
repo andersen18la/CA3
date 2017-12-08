@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Header, StyleSheet, Text, View, ScrollView, Button, Alert } from 'react-native';
+import { Image, Header, StyleSheet, Text, View, ScrollView, Button, Alert, RefreshControl } from 'react-native';
 import Location from './Location';
 const URL = require('../package.json').serverURL;
 const imageURL = require('../package.json').imageURL;
@@ -7,12 +7,17 @@ export default class Places extends React.Component {
 
     constructor() {
         super();
-        this.state = { data: [] };
-        this.getAll = this.getAll.bind(this);
-        this.getAll();
+        this.state = {
+            data: [],
+            refreshing: false,
+        };
     }
 
-    getAll() {
+    static navigationOptions = {
+        tabBarLabel: 'Places',
+    };
+
+    componentWillMount() {
         fetch(URL + "api/location/all")
             .then((response) => {
                 return response.json()
@@ -27,12 +32,35 @@ export default class Places extends React.Component {
             });
     }
 
+    _onRefresh = () => {
+        this.setState({ refreshing: true });
+        fetch(URL + "api/location/all")
+            .then((response) => {
+                return response.json()
+            })
+            .then((responseJson) => {
+                var arr = responseJson;
+                this.setState({ data: responseJson, refreshing: false });
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     render() {
 
 
         return (
 
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}
+                    />
+                }
+            >
                 {this.state.data.map(location => {
                     return <Location key={location.id} location={location} />
                 })}

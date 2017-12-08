@@ -117,7 +117,7 @@ export default class Home extends React.Component {
     };
     render() {
         let { image } = this.state;
-        return (<View style={{  flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text>title</Text><TextInput style={styles.input}
+        return (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text>title</Text><TextInput style={styles.input}
             title="title"
             onChangeText={element => this.setState({ title: element })}
         />

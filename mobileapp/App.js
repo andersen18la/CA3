@@ -5,6 +5,7 @@ import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './screens/Home';
 import Places from './screens/Places';
+import AddPlace from './screens/AddPlace';
 import Map from './screens/Map';
 
 const RootNavigator = TabNavigator({
@@ -23,7 +24,7 @@ const RootNavigator = TabNavigator({
   },
   Places: {
     screen: Places,
-    navigationOptions: {      
+    navigationOptions: {
       tabBarLabel: 'Places',
       tabBarIcon: ({ tintColor, focused }) => (
         <Ionicons
@@ -38,16 +39,30 @@ const RootNavigator = TabNavigator({
     screen: Map,
     navigationOptions: {
       tabBarLabel: 'Map',
-      marginTop:100,
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-person' : 'ios-person-outline'}
-            size={26}
-            style={{ color: tintColor }}
-          />
-        ),
-      }
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? 'ios-person' : 'ios-person-outline'}
+          size={26}
+          style={{ color: tintColor }}
+        />
+      ),
     }
+  },
+  AddPlace: {
+    screen: AddPlace,
+    navigationOptions: {
+      tabBarLabel: 'Add Place',
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? 'ios-person' : 'ios-person-outline'}
+          size={26}
+          style={{ color: tintColor }}
+        />
+      ),
+    }
+  }
+}, {
+    tabBarPosition: 'bottom',
   })
 
 export default RootNavigator;

@@ -9,8 +9,7 @@ export default class Location extends Component {
 
     render() {
         const location = this.props.location;
-        const uri = "https://jdbh.dk/images/" + location.imageUri;
-        console.log("bommelum" + uri);
+        const uri = "http://c27f2271.ngrok.io/seedMaven/imgs/" + location.imageUri;        
         return (
             <View style={{  flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Image
