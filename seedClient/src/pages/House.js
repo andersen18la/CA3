@@ -6,8 +6,6 @@ export default class House extends Component {
         super(props);
     }
 
-
-
     showStars = () => {
         let rating = this.props.house.rating;
         console.log("house rating" + rating);
@@ -37,8 +35,6 @@ export default class House extends Component {
     tryToUpdate = () => {
         this.forceUpdate()
     }
-
-
 
     render() {
         return (

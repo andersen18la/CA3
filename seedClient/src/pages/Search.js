@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import placeFacade from '../facades/placeFacade';
+import houseFacade from '../facades/houseFacade';
 const imageURL = require("../../package.json").imageURL;
 const locationurl = "/location/";
 export default class Search extends Component {
@@ -10,7 +11,8 @@ export default class Search extends Component {
             locations: [],
             view: [],
             city: "",
-            week: ""
+            week: "",
+            searchHouses: false
         }
     }
 
@@ -28,10 +30,45 @@ export default class Search extends Component {
         let value = e.target.value;
         this.setState(prevState => (
             {
-                ...prevState, [name]:value
+                ...prevState, [name]: value
             }
         ))
         this.updateView();
+    }
+
+    getHouses = () => {
+        houseFacade.getData((e, locations) => {
+            if (e) {
+                return this.setState({ err: e.err })
+            }
+            this.setState({ err: "", locations, view: locations });
+        });
+    }
+
+    getLocations = () => {
+        placeFacade.getData((e, locations) => {
+            if (e) {
+                return this.setState({ err: e.err })
+            }
+            this.setState({ err: "", locations, view: locations });
+        });
+    }
+
+
+    handleSearch = () => {
+        let searching = this.state.searchHouses;
+        if (searching == false) {
+            this.setState({
+                searchHouses: true
+            })
+            this.getHouses();
+        } else {
+            this.setState({
+                searchHouses: false
+            })
+            this.getLocations();
+        }
+
     }
 
     updateView = () => {
@@ -50,6 +87,7 @@ export default class Search extends Component {
         return (
             <div>
                 <div>
+                    <button name="search for houses" onClick={this.handleSearch}>{this.state.searchHouses ? "search for locations" : "search for houses"} </button>
                     <input className="form-control" type="text" placeholder="enter city name" name="city" value={this.state.city} onChange={this.onChangeHandler} />
                 </div>
                 <div>

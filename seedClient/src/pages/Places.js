@@ -1,25 +1,11 @@
 import React, { Component } from "react";
 import placeData from '../facades/placeFacade';
 import houseData from '../facades/houseFacade';
-import PlaceForm from "./PlaceForm";
-import Modal from 'react-modal';
 import auth from '../authorization/auth';
 import PlaceList from './PlaceList';
 import MapTest2 from './MapTest2';
 import LocationModal from './LocationModal';
 import HouseModal from './HouseModal';
-import HouseList from './HouseList';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
 
 export default class Places extends Component {
   constructor(props) {
