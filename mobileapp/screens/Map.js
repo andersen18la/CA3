@@ -13,26 +13,26 @@ export default class App extends React.Component {
   };
 
   componentWillMount() {
-    fetch(url + "api/location/all")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          locations: data
-        });
-      })
-    this.getHouses();
+    this.getLocations();
+    this.getAllHouses();
   }
 
-  getHouses = () => {
-    fetch(url + "api/house/all")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          houses: data
-        })
-      })
+  getLocations = async () => {
+    let response = await fetch(url + "api/location/all");
+    let locations = await response.json();
+    this.setState({
+      locations
+    });
   }
 
+  getAllHouses = async () => {
+    let response = await fetch(url + "api/house/all");
+    let houses = await response.json();
+    this.setState({
+      houses
+    });
+  }
+  
   splitGeo = (location) => {
     let geo = location.geo;
     if (geo) {

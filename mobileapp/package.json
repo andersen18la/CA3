@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "serverURL": "Lav det her om til det rigtige",
-  "imageURL": "Lav det her om til det rigtige",
+  "serverURL": "https://jdbh.dk/backend/seedMaven/",
+  "imageURL": "https://jdbh.dk/images/",
   "private": true,
   "dependencies": {
     "expo": "^23.0.0",
