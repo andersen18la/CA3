@@ -6,7 +6,7 @@ import App from "./pages/App"
 
 
 ReactDOM.render((
-  <BrowserRouter>
+  <HashRouter>
   <App />
-  </BrowserRouter>
+  </HashRouter>
 ), document.getElementById('root'))

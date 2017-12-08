@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import houseFacade from '../facades/houseFacade';
 
-const locationurl = "/location/";
+const locationurl = "#/location/";
 
 
 export class MapTest2 extends Component {
